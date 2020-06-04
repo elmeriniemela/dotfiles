@@ -50,3 +50,4 @@ git filter-branch --index-filter 'git rm --cached --ignore-unmatch -rf l10n_fi_r
 rsync -avzz uusioaines.sprintit.fi:/opt/odoo/addons/sprintit/* .
 rsync -avz -e "ssh -p 30333" odoo@sunhouse.sprintit.fi:/opt/odoo/.local/share/Odoo/filestore/sunhouse/* /opt/odoo/.local/share/Odoo/filestore/sunhouse13e-test/
 
+xinput set-int-prop "Synaptics TM3276-022" 311 8 1
