@@ -3,10 +3,10 @@
     "python.venvPath": "/home/elmeri/.venv",
     "window.zoomLevel": 0,
     "terminal.integrated.fontSize": 13,
-    "terminal.integrated.shell.osx": "/home/elmeri/.config/bootstrap-linux/files/tmux-vscode.sh",
 	"terminal.integrated.scrollback": 10000,
-	"terminal.integrated.allowChords": false,
-    "terminal.integrated.shell.linux": "/bin/bash",
+    "terminal.integrated.allowChords": false,
+	// The path of the shell that the terminal uses on Linux (default: /bin/bash). [Read more about configuring the shell](https://code.visualstudio.com/docs/editor/integrated-terminal#_configuration).
+    "terminal.integrated.shell.linux": "/home/elmeri/.config/bootstrap-linux/files/tmux-vscode.sh",
     "breadcrumbs.enabled": true,
     "[javascript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
@@ -35,8 +35,9 @@
         "editor.defaultFormatter": "vscode.html-language-features"
     },
     "search.exclude": {
-        // "**/.git": true,
-        "**/sprintit_accounting_official/*": true
+        "**/.git": true,
+        "**/sprintit_accounting_official/*": true,
+        "**/innotiimi_addons/*": true
     },
     "minify.html": {
         "caseSensitive": false,
