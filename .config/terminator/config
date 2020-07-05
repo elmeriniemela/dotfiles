@@ -3,20 +3,20 @@
 [keybindings]
 [profiles]
   [[default]]
-    background_color = "#323232"
-    cursor_color = "#d6d6d6"
+    background_color = "#1e1f29"
+    cursor_color = "#aaaaaa"
     font = Monospace 12
-    foreground_color = "#ffffff"
+    foreground_color = "#f8f8f2"
     scrollback_infinite = True
-    palette = "#353535:#d25252:#a5c261:#ffc66d:#6c99bb:#d197d9:#bed6ff:#eeeeec:#535353:#f00c0c:#c2e075:#e1e48b:#8ab7d9:#efb5f7:#dcf4ff:#ffffff"
+    palette = "#44475a:#ff5555:#50fa7b:#f1fa8c:#8be9fd:#bd93f9:#ff79c6:#94a3a5:#ad7fa8:#ff5555:#50fa7b:#f1fa8c:#8be9fd:#bd93f9:#ff79c6:#ffffff"
     use_system_font = False
-  [[Espresso]]
-    background_color = "#323232"
-    cursor_color = "#d6d6d6"
+  [[Dracula]]
+    background_color = "#1e1f29"
+    cursor_color = "#aaaaaa"
     font = Monospace 12
-    foreground_color = "#ffffff"
+    foreground_color = "#f8f8f2"
     scrollback_infinite = True
-    palette = "#353535:#d25252:#a5c261:#ffc66d:#6c99bb:#d197d9:#bed6ff:#eeeeec:#535353:#f00c0c:#c2e075:#e1e48b:#8ab7d9:#efb5f7:#dcf4ff:#ffffff"
+    palette = "#44475a:#ff5555:#50fa7b:#f1fa8c:#8be9fd:#bd93f9:#ff79c6:#94a3a5:#ad7fa8:#ff5555:#50fa7b:#f1fa8c:#8be9fd:#bd93f9:#ff79c6:#ffffff"
     use_system_font = False
 [layouts]
   [[default]]
