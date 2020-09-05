@@ -15,4 +15,8 @@
         "command": "editor.action.moveLinesUpAction",
         "when": "editorTextFocus && !editorReadonly"
     },
+    // Remove sidebar toggle
+    {   "key": "ctrl+b",
+        "command": "-workbench.action.toggleSidebarVisibility"
+    },
 ]

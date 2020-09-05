@@ -1,6 +1,9 @@
 
 " VUNDLE SETTINGS "
 
+" working directory is always the same as the file you are editing
+set autochdir
+
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
