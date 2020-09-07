@@ -1,5 +1,5 @@
 configuration {
-    modi: "window,run,ssh,drun";
+    modi: "drun,calc,window,ssh";
 /*	width: 50;*/
 /*	lines: 15;*/
 /*	columns: 1;*/
@@ -28,8 +28,8 @@ configuration {
 /*	sort: false;*/
 /*	sorting-method: ;*/
 /*	case-sensitive: false;*/
-/*	cycle: true;*/
-/*	sidebar-mode: false;*/
+	cycle: true;
+	sidebar-mode: true;
 /*	eh: 1;*/
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
@@ -77,8 +77,8 @@ configuration {
 /*	kb-move-end: "Control+e";*/
 /*	kb-move-word-back: "Alt+b,Control+Left";*/
 /*	kb-move-word-forward: "Alt+f,Control+Right";*/
-/*	kb-move-char-back: "Left,Control+b";*/
-/*	kb-move-char-forward: "Right,Control+f";*/
+	kb-move-char-back: "Shift+Left,Control+b";
+	kb-move-char-forward: "Shift+Right,Control+f";
 /*	kb-remove-word-back: "Control+Alt+h,Control+BackSpace";*/
 /*	kb-remove-word-forward: "Control+Alt+d";*/
 /*	kb-remove-char-forward: "Delete,Control+d";*/
@@ -89,8 +89,8 @@ configuration {
 /*	kb-accept-custom: "Control+Return";*/
 /*	kb-accept-alt: "Shift+Return";*/
 /*	kb-delete-entry: "Shift+Delete";*/
-/*	kb-mode-next: "Shift+Right,Control+Tab";*/
-/*	kb-mode-previous: "Shift+Left,Control+ISO_Left_Tab";*/
+	kb-mode-next: "Right,Control+Tab";
+	kb-mode-previous: "Left,Control+ISO_Left_Tab";
 /*	kb-row-left: "Control+Page_Up";*/
 /*	kb-row-right: "Control+Page_Down";*/
 /*	kb-row-up: "Up,Control+p,ISO_Left_Tab";*/
