@@ -10,7 +10,7 @@ configuration {
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
-/*	show-icons: false;*/
+	show-icons: true;
 	terminal: "terminator";
 /*	ssh-client: "ssh";*/
 	ssh-command: "{terminal} --new-tab -e '{ssh-client} {host}'";
