@@ -21,7 +21,9 @@
 
     // https://stackoverflow.com/questions/30884131/remove-trailing-spaces-automatically-or-with-a-shortcut
     "files.trimTrailingWhitespace": true,
+
     "latex-workshop.chktex.enabled": true,
+    "latex-workshop.view.pdf.viewer": "tab",
 
 
     // When opening a file, `editor.tabSize` and `editor.insertSpaces`
@@ -78,5 +80,4 @@
         "useShortDoctype": false
     },
     "csv-preview.separator": ";",
-    "latex-workshop.view.pdf.viewer": "browser",
 }
