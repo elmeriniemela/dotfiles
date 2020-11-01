@@ -19,4 +19,9 @@
     {   "key": "ctrl+b",
         "command": "-workbench.action.toggleSidebarVisibility"
     },
+
+    {
+        "key": "ctrl+shift+[Equal]",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
 ]

@@ -7,11 +7,13 @@ application/wsdl+xml=code-oss.desktop;
 application/octet-stream=veracrypt.desktop;
 image/png=org.nomacs.ImageLounge.desktop;
 image/jpeg=org.nomacs.ImageLounge.desktop;
+image/gif=org.nomacs.ImageLounge.desktop;
 
 [Default Applications]
 text/plain=code-oss.desktop
 x-scheme-handler/msteams=teams.desktop
 image/png=org.nomacs.ImageLounge.desktop
 image/jpeg=org.nomacs.ImageLounge.desktop
+image/gif=org.nomacs.ImageLounge.desktop
 
 [Removed Associations]
