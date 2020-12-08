@@ -24,4 +24,16 @@
         "key": "ctrl+shift+[Equal]",
         "command": "workbench.action.terminal.toggleTerminal"
     },
+
+    {
+        "key": "ctrl+shift+up",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus"
+
+    },
+    {
+        "key": "ctrl+shift+down",
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus"
+    },
 ]
