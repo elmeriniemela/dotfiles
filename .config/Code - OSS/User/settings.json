@@ -29,7 +29,8 @@
     // When opening a file, `editor.tabSize` and `editor.insertSpaces`
     // will be detected based on the file contents. Set to false to keep
     // the values you've explicitly set, above.
-    "editor.detectIndentation": false,
+    "editor.detectIndentation": true,
+
     "C_Cpp.updateChannel": "Insiders",
     "[javascriptreact]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
