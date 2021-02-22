@@ -49,6 +49,6 @@ sed -i 's/\/opt\/odoo/\/opt\/test-odoo/g' odoo-server-test.conf
 git filter-branch --index-filter 'git rm --cached --ignore-unmatch -rf l10n_fi_reports_enterprise sprintit_account_financial_report_modifications' --prune-empty -f HEAD
 rsync -avzz uusioaines.sprintit.fi:/opt/odoo/addons/sprintit/* .
 rsync -avz -e "ssh -p 30333" odoo@sunhouse.sprintit.fi:/opt/odoo/.local/share/Odoo/filestore/sunhouse/* /opt/odoo/.local/share/Odoo/filestore/sunhouse13e-test/
-
 xinput set-int-prop "Synaptics TM3276-022" 311 8 1
 strace -p21270 -s9999 -e write
+GIT_MERGE_AUTOEDIT=no bash -c 'git submodule foreach "git merge origin/13.0 || :"'
