@@ -2,14 +2,17 @@
 application/pkix-cert=code-oss.desktop;
 application/xml=code-oss.desktop;
 image/svg+xml=code-oss.desktop;
-text/plain=libreoffice-calc.desktop;code-oss.desktop;
+text/plain=libreoffice-writer.desktop;libreoffice-calc.desktop;code-oss.desktop;
 application/wsdl+xml=code-oss.desktop;
-application/octet-stream=veracrypt.desktop;
+application/octet-stream=code-oss.desktop;veracrypt.desktop;
 image/png=org.nomacs.ImageLounge.desktop;
 image/jpeg=org.nomacs.ImageLounge.desktop;
 image/gif=org.nomacs.ImageLounge.desktop;
 x-scheme-handler/tg=userapp-Telegram Desktop-2LNFX0.desktop;
-application/pdf=firefox.desktop;
+application/pdf=org.gnome.Evince.desktop;firefox.desktop;
+video/mp4=mplayer.desktop;
+video/x-matroska=mplayer.desktop;
+text/x-csrc=code-oss.desktop;
 
 [Default Applications]
 text/plain=code-oss.desktop
@@ -18,5 +21,8 @@ image/png=org.nomacs.ImageLounge.desktop
 image/jpeg=org.nomacs.ImageLounge.desktop
 image/gif=org.nomacs.ImageLounge.desktop
 x-scheme-handler/tg=userapp-Telegram Desktop-2LNFX0.desktop
+video/mp4=mplayer.desktop
+video/x-matroska=mplayer.desktop
+application/pdf=org.gnome.Evince.desktop
 
 [Removed Associations]

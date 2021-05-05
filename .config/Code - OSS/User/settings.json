@@ -1,7 +1,6 @@
 {
     "sync.gist": "6a94a46a1693597a85edfa8cae68c70021488840",
     "python.venvPath": "/home/elmeri/.venv",
-    "window.zoomLevel": 0,
     "terminal.integrated.fontSize": 13,
 	"terminal.integrated.scrollback": 10000,
     "terminal.integrated.allowChords": false,
@@ -29,7 +28,7 @@
     // When opening a file, `editor.tabSize` and `editor.insertSpaces`
     // will be detected based on the file contents. Set to false to keep
     // the values you've explicitly set, above.
-    "editor.detectIndentation": true,
+    "editor.detectIndentation": false,
 
     "C_Cpp.updateChannel": "Insiders",
     "[javascriptreact]": {
@@ -178,4 +177,10 @@
         "useShortDoctype": false
     },
     "csv-preview.separator": ";",
+    "[xml]": {
+
+        "editor.autoClosingBrackets": "never",
+        "files.trimFinalNewlines": true,
+        "files.trimTrailingWhitespace": true
+    },
 }
