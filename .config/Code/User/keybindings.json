@@ -1,0 +1,49 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+'",
+        "command": "editor.action.commentLine",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+down",
+        "command": "editor.action.moveLinesDownAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+up",
+        "command": "editor.action.moveLinesUpAction",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    // Remove sidebar toggle
+    {   "key": "ctrl+b",
+        "command": "-workbench.action.toggleSidebarVisibility"
+    },
+
+    {
+        "key": "ctrl+shift+[Equal]",
+        "command": "workbench.action.terminal.toggleTerminal"
+    },
+
+    {
+        "key": "ctrl+shift+up",
+        "command": "workbench.action.terminal.focusNext",
+        "when": "terminalFocus"
+
+    },
+    {
+        "key": "ctrl+shift+down",
+        "command": "workbench.action.terminal.focusPrevious",
+        "when": "terminalFocus"
+    },
+    {
+        "command": "deleteAllRight",
+        "key": "ctrl+k",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "command": "deleteAllLeft",
+        "key": "ctrl+u",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+]
