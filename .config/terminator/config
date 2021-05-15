@@ -11,7 +11,7 @@
     font = Monospace 12
     foreground_color = "#f8f8f2"
     scrollback_infinite = True
-    palette = "#44475a:#ff5555:#50fa7b:#f1fa8c:#8be9fd:#bd93f9:#ff79c6:#94a3a5:#ad7fa8:#ff5555:#50fa7b:#f1fa8c:#8be9fd:#bd93f9:#ff79c6:#ffffff"
+    palette = "#44475a:#ff5555:#50fa7b:#f1fa8c:#3584e4:#bd93f9:#ff79c6:#94a3a5:#ad7fa8:#ff5555:#50fa7b:#f1fa8c:#3584e4:#bd93f9:#ff79c6:#ffffff"
     use_system_font = False
   [[Dracula]]
     background_color = "#1e1f29"

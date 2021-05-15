@@ -2,7 +2,7 @@
 application/pkix-cert=code-oss.desktop;
 application/xml=code-oss.desktop;
 image/svg+xml=code-oss.desktop;
-text/plain=libreoffice-writer.desktop;libreoffice-calc.desktop;code-oss.desktop;
+text/plain=visual-studio-code.desktop;libreoffice-writer.desktop;libreoffice-calc.desktop;code-oss.desktop;
 application/wsdl+xml=code-oss.desktop;
 application/octet-stream=code-oss.desktop;veracrypt.desktop;
 image/png=org.nomacs.ImageLounge.desktop;
