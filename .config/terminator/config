@@ -1,4 +1,5 @@
 [global_config]
+  title_transmit_bg_color = "#77767b"
   inactive_color_offset = 0.9094076655052264
   enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, TerminatorThemes
 [keybindings]
@@ -11,7 +12,7 @@
     font = Monospace 12
     foreground_color = "#f8f8f2"
     scrollback_infinite = True
-    palette = "#44475a:#ff5555:#50fa7b:#f1fa8c:#3584e4:#bd93f9:#ff79c6:#94a3a5:#ad7fa8:#ff5555:#50fa7b:#f1fa8c:#3584e4:#bd93f9:#ff79c6:#ffffff"
+    palette = "#44475a:#a51d2d:#50fa7b:#f1fa8c:#3584e4:#bd93f9:#ff79c6:#94a3a5:#ad7fa8:#a51d2d:#50fa7b:#f1fa8c:#3584e4:#bd93f9:#ff79c6:#ffffff"
     use_system_font = False
   [[Dracula]]
     background_color = "#1e1f29"

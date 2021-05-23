@@ -5,8 +5,8 @@
 	"terminal.integrated.scrollback": 10000,
     "terminal.integrated.allowChords": false,
 	// The path of the shell that the terminal uses on Linux (default: /bin/bash). [Read more about configuring the shell](https://code.visualstudio.com/docs/editor/integrated-terminal#_configuration).
-    "terminal.integrated.defaultProfile.linux": "/home/elmeri/.config/bootstrap-linux/files/tmux-vscode.sh",
-    // "terminal.integrated.shell.linux": "/home/elmeri/.config/bootstrap-linux/files/tmux-vscode.sh",
+    // "terminal.integrated.defaultProfile.linux": "/home/elmeri/.config/bootstrap-linux/files/tmux-vscode.sh",
+    "terminal.integrated.shell.linux": "/home/elmeri/.config/bootstrap-linux/files/tmux-vscode.sh",
     "breadcrumbs.enabled": true,
     "[javascript]": {
         "editor.defaultFormatter": "vscode.typescript-language-features"
@@ -46,6 +46,7 @@
         "**/.git": true,
         "**/sprintit_accounting_official/*": true,
         "**/innotiimi_addons/*": true,
+        "**/tek_addons/*": true,
         // "**/tests/*": true
     },
     "latex-workshop.latex.magic.args": [

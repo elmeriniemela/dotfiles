@@ -10,9 +10,10 @@ image/jpeg=org.nomacs.ImageLounge.desktop;
 image/gif=org.nomacs.ImageLounge.desktop;
 x-scheme-handler/tg=userapp-Telegram Desktop-2LNFX0.desktop;
 application/pdf=org.gnome.Evince.desktop;firefox.desktop;
-video/mp4=mplayer.desktop;
-video/x-matroska=mplayer.desktop;
+video/mp4=vlc.desktop;
+video/x-matroska=vlc.desktop;
 text/x-csrc=code-oss.desktop;
+audio/mpeg=vlc.desktop;
 
 [Default Applications]
 text/plain=code-oss.desktop
@@ -21,8 +22,9 @@ image/png=org.nomacs.ImageLounge.desktop
 image/jpeg=org.nomacs.ImageLounge.desktop
 image/gif=org.nomacs.ImageLounge.desktop
 x-scheme-handler/tg=userapp-Telegram Desktop-2LNFX0.desktop
-video/mp4=mplayer.desktop
-video/x-matroska=mplayer.desktop
+video/mp4=vlc.desktop
+video/x-matroska=vlc.desktop
 application/pdf=org.gnome.Evince.desktop
+audio/mpeg=vlc.desktop
 
 [Removed Associations]
