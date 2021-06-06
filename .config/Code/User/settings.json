@@ -191,5 +191,5 @@
             "filenamePattern": "*.pdf"
         }
     ],
-    "window.zoomLevel": 1,
+    "window.zoomLevel": -0.1,
 }
