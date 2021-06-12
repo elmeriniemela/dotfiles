@@ -2,3 +2,4 @@
 xset -dpms
 # disable screensaver
 xset s off
+
