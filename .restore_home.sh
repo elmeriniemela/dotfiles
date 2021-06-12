@@ -6,6 +6,7 @@ rsync -avz elmeri.asuscomm.com:School/ School
 rsync -avz elmeri.asuscomm.com:Projects/ Projects
 rsync -avz elmeri.asuscomm.com:Videos/ Videos
 rsync -avz elmeri.asuscomm.com:Documents/ Documents
+rsync -avz elmeri.asuscomm.com:Work/ Work
 
 rsync -avz elmeri.asuscomm.com:*.ovpn .
 rsync -avz elmeri.asuscomm.com:.bash_eternal_history .
