@@ -47,6 +47,8 @@
         "**/sprintit_accounting_official/*": true,
         "**/innotiimi_addons/*": true,
         "**/tek_addons/*": true,
+        "**/sprintit_odoosh/*": true,
+        "**/vividi_addons/*": true,
         // "**/tests/*": true
     },
     "latex-workshop.latex.magic.args": [
@@ -185,11 +187,7 @@
         "files.trimFinalNewlines": true,
         "files.trimTrailingWhitespace": true
     },
-    "workbench.editorAssociations": [
-        {
-            "viewType": "default",
-            "filenamePattern": "*.pdf"
-        }
-    ],
-    "window.zoomLevel": -0.1,
+    "workbench.editorAssociations": {
+        "*.pdf": "default"
+    },
 }

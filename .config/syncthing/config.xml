@@ -287,7 +287,79 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
+    <folder id="wwipk-mmf9e" label="odoo_backups" path="/home/elmeri/Portable4T/odoo_backups" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+        <filesystemType>basic</filesystemType>
+        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
+        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
+        <minDiskFree unit="%">1</minDiskFree>
+        <versioning>
+            <cleanupIntervalS>0</cleanupIntervalS>
+            <fsPath></fsPath>
+            <fsType>basic</fsType>
+        </versioning>
+        <copiers>0</copiers>
+        <pullerMaxPendingKiB>0</pullerMaxPendingKiB>
+        <hashers>0</hashers>
+        <order>random</order>
+        <ignoreDelete>false</ignoreDelete>
+        <scanProgressIntervalS>0</scanProgressIntervalS>
+        <pullerPauseS>0</pullerPauseS>
+        <maxConflicts>10</maxConflicts>
+        <disableSparseFiles>false</disableSparseFiles>
+        <disableTempIndexes>false</disableTempIndexes>
+        <paused>false</paused>
+        <weakHashThresholdPct>25</weakHashThresholdPct>
+        <markerName>.stfolder</markerName>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
+        <maxConcurrentWrites>2</maxConcurrentWrites>
+        <disableFsync>false</disableFsync>
+        <blockPullOrder>standard</blockPullOrder>
+        <copyRangeMethod>standard</copyRangeMethod>
+        <caseSensitiveFS>false</caseSensitiveFS>
+        <junctionsAsDirs>false</junctionsAsDirs>
+    </folder>
     <folder id="ywtm5-tzmar" label="GoPro" path="/home/elmeri/Portable4T/GoPro" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+        <filesystemType>basic</filesystemType>
+        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
+        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
+        <minDiskFree unit="%">1</minDiskFree>
+        <versioning>
+            <cleanupIntervalS>0</cleanupIntervalS>
+            <fsPath></fsPath>
+            <fsType>basic</fsType>
+        </versioning>
+        <copiers>0</copiers>
+        <pullerMaxPendingKiB>0</pullerMaxPendingKiB>
+        <hashers>0</hashers>
+        <order>random</order>
+        <ignoreDelete>false</ignoreDelete>
+        <scanProgressIntervalS>0</scanProgressIntervalS>
+        <pullerPauseS>0</pullerPauseS>
+        <maxConflicts>10</maxConflicts>
+        <disableSparseFiles>false</disableSparseFiles>
+        <disableTempIndexes>false</disableTempIndexes>
+        <paused>false</paused>
+        <weakHashThresholdPct>25</weakHashThresholdPct>
+        <markerName>.stfolder</markerName>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
+        <maxConcurrentWrites>2</maxConcurrentWrites>
+        <disableFsync>false</disableFsync>
+        <blockPullOrder>standard</blockPullOrder>
+        <copyRangeMethod>standard</copyRangeMethod>
+        <caseSensitiveFS>false</caseSensitiveFS>
+        <junctionsAsDirs>false</junctionsAsDirs>
+    </folder>
+    <folder id="yx2k5-fpxjq" label="Movies" path="/home/elmeri/Portable4T/Movies" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
             <encryptionPassword></encryptionPassword>

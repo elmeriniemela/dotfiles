@@ -14,6 +14,8 @@ video/mp4=vlc.desktop;
 video/x-matroska=vlc.desktop;
 text/x-csrc=code-oss.desktop;
 audio/mpeg=vlc.desktop;
+text/xml=visual-studio-code-url-handler.desktop;
+application/x-x509-ca-cert=visual-studio-code.desktop;
 
 [Default Applications]
 text/plain=code-oss.desktop

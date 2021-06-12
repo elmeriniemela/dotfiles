@@ -53,3 +53,4 @@ xinput set-int-prop "Synaptics TM3276-022" 311 8 1
 strace -p21270 -s9999 -e write
 GIT_MERGE_AUTOEDIT=no bash -c 'git submodule foreach "git merge origin/13.0 || :"'
 docker images | grep "<none>" | awk '{print $3}' | xargs docker image rm -f
+pg_dump --no-owner --format=d --jobs=4 --file 11.dump 11
