@@ -49,7 +49,7 @@
         "**/tek_addons/*": true,
         "**/sprintit_odoosh/*": true,
         "**/vividi_addons/*": true,
-        // "**/tests/*": true
+        "**/tests/*": true
     },
     "latex-workshop.latex.magic.args": [
 		"-synctex=1",
