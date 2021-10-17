@@ -1,6 +1,9 @@
 <configuration version="35">
     <folder id="bnack-uam2p" label="Audiobooks" path="/home/elmeri/Portable4T/Audiobooks" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
+        <device id="EE2HOKT-NQODGMW-XRXCJLT-RINLYJP-JYEKEI7-SAEAUCD-AI5QBOF-QDPKFA2" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
         <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
@@ -479,6 +482,7 @@
         <sendFullIndexOnUpgrade>false</sendFullIndexOnUpgrade>
         <connectionLimitEnough>0</connectionLimitEnough>
         <connectionLimitMax>0</connectionLimitMax>
+        <insecureAllowOldTLSVersions>false</insecureAllowOldTLSVersions>
     </options>
     <defaults>
         <folder id="" label="" path="/home/elmeri/Portable4T" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">

@@ -1,32 +1,41 @@
 [Added Associations]
-application/pkix-cert=code-oss.desktop;
-application/xml=code-oss.desktop;
-image/svg+xml=code-oss.desktop;
-text/plain=visual-studio-code.desktop;libreoffice-writer.desktop;libreoffice-calc.desktop;code-oss.desktop;
-application/wsdl+xml=code-oss.desktop;
-application/octet-stream=code-oss.desktop;veracrypt.desktop;
+application/pkix-cert=visual-studio-code.desktop;
+application/xml=visual-studio-code.desktop;
+image/svg+xml=visual-studio-code.desktop;visual-studio-code.desktop;
+text/plain=visual-studio-code.desktop;visual-studio-code.desktop;
+application/wsdl+xml=visual-studio-code.desktop;
+application/octet-stream=visual-studio-code.desktop;veracrypt.desktop;
 image/png=org.nomacs.ImageLounge.desktop;
 image/jpeg=org.nomacs.ImageLounge.desktop;
 image/gif=org.nomacs.ImageLounge.desktop;
-x-scheme-handler/tg=userapp-Telegram Desktop-2LNFX0.desktop;userapp-Telegram Desktop-W28K40.desktop;
-application/pdf=org.gnome.Evince.desktop;firefox.desktop;
+x-scheme-handler/tg=userapp-Telegram Desktop-2LNFX0.desktop;userapp-Telegram Desktop-W28K40.desktop;userapp-Telegram Desktop-B9FIA1.desktop;
+application/pdf=org.gnome.Evince.desktop;brave.desktop;brave-browser.desktop;
 video/mp4=vlc.desktop;
 video/x-matroska=vlc.desktop;
-text/x-csrc=code-oss.desktop;
+text/x-csrc=visual-studio-code.desktop;
 audio/mpeg=vlc.desktop;
-text/xml=visual-studio-code-url-handler.desktop;
 application/x-x509-ca-cert=visual-studio-code.desktop;
+application/json=visual-studio-code.desktop;
 
 [Default Applications]
-text/plain=code-oss.desktop
+text/plain=visual-studio-code.desktop
+text/csv=visual-studio-code.desktop;
+text/xml=visual-studio-code.desktop;
 x-scheme-handler/msteams=teams.desktop
 image/png=org.nomacs.ImageLounge.desktop
 image/jpeg=org.nomacs.ImageLounge.desktop
 image/gif=org.nomacs.ImageLounge.desktop
-x-scheme-handler/tg=userapp-Telegram Desktop-W28K40.desktop
+x-scheme-handler/tg=userapp-Telegram Desktop-B9FIA1.desktop
 video/mp4=vlc.desktop
 video/x-matroska=vlc.desktop
-application/pdf=org.gnome.Evince.desktop
+application/pdf=brave-browser.desktop
 audio/mpeg=vlc.desktop
+text/html=brave-browser.desktop
+x-scheme-handler/http=brave-browser.desktop
+x-scheme-handler/https=brave-browser.desktop
+x-scheme-handler/about=brave-browser.desktop
+x-scheme-handler/unknown=brave-browser.desktop
+application/json=visual-studio-code.desktop
+x-scheme-handler/webcal=brave-browser.desktop
 
 [Removed Associations]
