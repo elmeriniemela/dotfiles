@@ -1,13 +1,13 @@
 <configuration version="35">
-    <folder id="bnack-uam2p" label="Audiobooks" path="/home/elmeri/Portable4T/Audiobooks" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="bnack-uam2p" label="Audiobooks" path="/run/media/elmeri/Portable4T/Audiobooks" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="EE2HOKT-NQODGMW-XRXCJLT-RINLYJP-JYEKEI7-SAEAUCD-AI5QBOF-QDPKFA2" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
+        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -38,12 +38,12 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="drgzh-rqn4t" label="Media" path="/home/elmeri/Portable4T/Media" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="drgzh-rqn4t" label="Media" path="/run/media/elmeri/Portable4T/Media" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
-        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
+        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -74,12 +74,12 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="il9w5-md2bm" label="gocryptfs" path="/home/elmeri/Portable4T/gocryptfs" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="il9w5-md2bm" label="gocryptfs" path="/run/media/elmeri/Portable4T/gocryptfs" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
-        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
+        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -110,12 +110,12 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="in2023_wf9b-photos" label="Camera" path="/home/elmeri/Portable4T/Camera" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="in2023_wf9b-photos" label="Camera" path="/run/media/elmeri/Portable4T/Camera" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="EE2HOKT-NQODGMW-XRXCJLT-RINLYJP-JYEKEI7-SAEAUCD-AI5QBOF-QDPKFA2" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -146,12 +146,12 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="ixt6f-2qb5g" label="PhonePictures" path="/home/elmeri/Portable4T/PhonePictures" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="ixt6f-2qb5g" label="PhonePictures" path="/run/media/elmeri/Portable4T/PhonePictures" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="EE2HOKT-NQODGMW-XRXCJLT-RINLYJP-JYEKEI7-SAEAUCD-AI5QBOF-QDPKFA2" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -182,12 +182,12 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="qg6ha-zm6tx" label="Tyllero" path="/home/elmeri/Portable4T/Tyllero" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="qg6ha-zm6tx" label="Tyllero" path="/run/media/elmeri/Portable4T/Tyllero" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
-        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
+        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -220,10 +220,10 @@
     </folder>
     <folder id="ru9y2-diehk" label="Documents" path="/home/elmeri/Documents" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
-        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
+        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -254,12 +254,12 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="ubket-7crfs" label="Essi" path="/home/elmeri/Portable4T/Essi" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="ubket-7crfs" label="Essi" path="/run/media/elmeri/Portable4T/Essi" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
-        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
+        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -290,12 +290,48 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="wwipk-mmf9e" label="odoo_backups" path="/home/elmeri/Portable4T/odoo_backups" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="wwipk-mmf9e" label="odoo_backups" path="/run/media/elmeri/Portable4T/odoo_backups" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
         <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
+        <minDiskFree unit="%">1</minDiskFree>
+        <versioning>
+            <cleanupIntervalS>3600</cleanupIntervalS>
+            <fsPath></fsPath>
+            <fsType>basic</fsType>
+        </versioning>
+        <copiers>0</copiers>
+        <pullerMaxPendingKiB>0</pullerMaxPendingKiB>
+        <hashers>0</hashers>
+        <order>random</order>
+        <ignoreDelete>false</ignoreDelete>
+        <scanProgressIntervalS>0</scanProgressIntervalS>
+        <pullerPauseS>0</pullerPauseS>
+        <maxConflicts>10</maxConflicts>
+        <disableSparseFiles>false</disableSparseFiles>
+        <disableTempIndexes>false</disableTempIndexes>
+        <paused>false</paused>
+        <weakHashThresholdPct>25</weakHashThresholdPct>
+        <markerName>.stfolder</markerName>
+        <copyOwnershipFromParent>false</copyOwnershipFromParent>
+        <modTimeWindowS>0</modTimeWindowS>
+        <maxConcurrentWrites>2</maxConcurrentWrites>
+        <disableFsync>false</disableFsync>
+        <blockPullOrder>standard</blockPullOrder>
+        <copyRangeMethod>standard</copyRangeMethod>
+        <caseSensitiveFS>false</caseSensitiveFS>
+        <junctionsAsDirs>false</junctionsAsDirs>
+    </folder>
+    <folder id="ywtm5-tzmar" label="GoPro" path="/run/media/elmeri/Portable4T/GoPro" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+        <filesystemType>basic</filesystemType>
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
+        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -326,48 +362,12 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="ywtm5-tzmar" label="GoPro" path="/home/elmeri/Portable4T/GoPro" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="yx2k5-fpxjq" label="Movies" path="/run/media/elmeri/Portable4T/Movies" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
         <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
-            <encryptionPassword></encryptionPassword>
-        </device>
-        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
-            <encryptionPassword></encryptionPassword>
-        </device>
-        <minDiskFree unit="%">1</minDiskFree>
-        <versioning>
-            <cleanupIntervalS>0</cleanupIntervalS>
-            <fsPath></fsPath>
-            <fsType>basic</fsType>
-        </versioning>
-        <copiers>0</copiers>
-        <pullerMaxPendingKiB>0</pullerMaxPendingKiB>
-        <hashers>0</hashers>
-        <order>random</order>
-        <ignoreDelete>false</ignoreDelete>
-        <scanProgressIntervalS>0</scanProgressIntervalS>
-        <pullerPauseS>0</pullerPauseS>
-        <maxConflicts>10</maxConflicts>
-        <disableSparseFiles>false</disableSparseFiles>
-        <disableTempIndexes>false</disableTempIndexes>
-        <paused>false</paused>
-        <weakHashThresholdPct>25</weakHashThresholdPct>
-        <markerName>.stfolder</markerName>
-        <copyOwnershipFromParent>false</copyOwnershipFromParent>
-        <modTimeWindowS>0</modTimeWindowS>
-        <maxConcurrentWrites>2</maxConcurrentWrites>
-        <disableFsync>false</disableFsync>
-        <blockPullOrder>standard</blockPullOrder>
-        <copyRangeMethod>standard</copyRangeMethod>
-        <caseSensitiveFS>false</caseSensitiveFS>
-        <junctionsAsDirs>false</junctionsAsDirs>
-    </folder>
-    <folder id="yx2k5-fpxjq" label="Movies" path="/home/elmeri/Portable4T/Movies" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
-        <filesystemType>basic</filesystemType>
-        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
-            <encryptionPassword></encryptionPassword>
-        </device>
-        <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -400,7 +400,7 @@
     </folder>
     <device id="EE2HOKT-NQODGMW-XRXCJLT-RINLYJP-JYEKEI7-SAEAUCD-AI5QBOF-QDPKFA2" name="OnePlus8" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
-        <paused>false</paused>
+        <paused>true</paused>
         <autoAcceptFolders>false</autoAcceptFolders>
         <maxSendKbps>0</maxSendKbps>
         <maxRecvKbps>0</maxRecvKbps>
@@ -408,7 +408,7 @@
         <untrusted>false</untrusted>
         <remoteGUIPort>0</remoteGUIPort>
     </device>
-    <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" name="Homeserver" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
+    <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" name="archlinux" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
         <paused>false</paused>
         <autoAcceptFolders>false</autoAcceptFolders>
@@ -418,7 +418,7 @@
         <untrusted>false</untrusted>
         <remoteGUIPort>0</remoteGUIPort>
     </device>
-    <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" name="archlinux" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
+    <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" name="Homeserver" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
         <paused>false</paused>
         <autoAcceptFolders>false</autoAcceptFolders>
@@ -485,9 +485,9 @@
         <insecureAllowOldTLSVersions>false</insecureAllowOldTLSVersions>
     </options>
     <defaults>
-        <folder id="" label="" path="/home/elmeri/Portable4T" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+        <folder id="" label="" path="/run/media/elmeri/Portable4T" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
             <filesystemType>basic</filesystemType>
-            <device id="ZKHMGPQ-HL2IYBY-3AS6TVD-NA36BDB-B6IJTFM-VQWJFCC-4BEBP3L-6HDYFQP" introducedBy="">
+            <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
                 <encryptionPassword></encryptionPassword>
             </device>
             <minDiskFree unit="%">1</minDiskFree>

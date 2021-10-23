@@ -67,6 +67,7 @@
         "**/innotiimi_addons/*": true,
         "**/tek_addons/*": true,
         "**/vividi_addons/*": true,
+        "**/sprintit_contract_distribution/*": true,
         "**/tests/*": true
     },
     "latex-workshop.latex.magic.args": [
