@@ -400,7 +400,7 @@
     </folder>
     <device id="EE2HOKT-NQODGMW-XRXCJLT-RINLYJP-JYEKEI7-SAEAUCD-AI5QBOF-QDPKFA2" name="OnePlus8" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
-        <paused>true</paused>
+        <paused>false</paused>
         <autoAcceptFolders>false</autoAcceptFolders>
         <maxSendKbps>0</maxSendKbps>
         <maxRecvKbps>0</maxRecvKbps>

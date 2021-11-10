@@ -24,6 +24,7 @@
             //   "args": ["-l"]
         }
     },
+    "workbench.editor.wrapTabs": true,
     "editor.semanticHighlighting.enabled": false,
     "glsllint.glslangValidatorArgs": "-V",
     "terminal.integrated.defaultProfile.linux": "tmux (session based on directory)",
