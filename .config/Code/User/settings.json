@@ -61,7 +61,7 @@
     },
     "git.autofetch": false,
     // Controls whether to enable automatic GitHub authentication for git commands within VS Code.
-    "github.gitAuthentication": false,
+    // "github.gitAuthentication": false,
     "search.exclude": {
         "**/.git": true,
         "**/sprintit_accounting_official/*": true,
@@ -220,5 +220,13 @@
     },
     "[python]": {
         "editor.defaultFormatter": "ms-python.python"
+    },
+    "editor.inlineSuggest.enabled": true,
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": false,
+        "plaintext": true,
+        "markdown": false,
+        "latex": false
     },
 }
