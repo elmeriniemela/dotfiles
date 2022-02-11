@@ -55,3 +55,4 @@ GIT_MERGE_AUTOEDIT=no bash -c 'git submodule foreach "git merge origin/13.0 || :
 docker images | grep "<none>" | awk '{print $3}' | xargs docker image rm -f
 pg_dump --no-owner --format=d --jobs=4 --file 11.dump 11
 syncronized = syncronization of execution time and mutually excluded data access 
+git rebase --interactive HEAD~2

@@ -146,7 +146,7 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="in2023_wf9b-photos" label="Camera" path="/run/media/elmeri/Portable4T/Camera" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="in2023_wf9b-photos" label="Camera" path="/run/media/elmeri/Portable4T/Camera" type="receiveonly" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="EE2HOKT-NQODGMW-XRXCJLT-RINLYJP-JYEKEI7-SAEAUCD-AI5QBOF-QDPKFA2" introducedBy="">
             <encryptionPassword></encryptionPassword>
@@ -156,7 +156,7 @@
         </device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning>
-            <cleanupIntervalS>0</cleanupIntervalS>
+            <cleanupIntervalS>3600</cleanupIntervalS>
             <fsPath></fsPath>
             <fsType>basic</fsType>
         </versioning>
@@ -182,7 +182,7 @@
         <caseSensitiveFS>false</caseSensitiveFS>
         <junctionsAsDirs>false</junctionsAsDirs>
     </folder>
-    <folder id="ixt6f-2qb5g" label="PhonePictures" path="/run/media/elmeri/Portable4T/PhonePictures" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
+    <folder id="ixt6f-2qb5g" label="PhonePictures" path="/run/media/elmeri/Portable4T/PhonePictures" type="receiveonly" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="EE2HOKT-NQODGMW-XRXCJLT-RINLYJP-JYEKEI7-SAEAUCD-AI5QBOF-QDPKFA2" introducedBy="">
             <encryptionPassword></encryptionPassword>
@@ -192,7 +192,7 @@
         </device>
         <minDiskFree unit="%">1</minDiskFree>
         <versioning>
-            <cleanupIntervalS>0</cleanupIntervalS>
+            <cleanupIntervalS>3600</cleanupIntervalS>
             <fsPath></fsPath>
             <fsType>basic</fsType>
         </versioning>

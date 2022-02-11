@@ -1,6 +1,7 @@
 {
     "sync.gist": "6a94a46a1693597a85edfa8cae68c70021488840",
     "python.venvPath": "/home/elmeri/.venv",
+    "python.analysis.autoImportCompletions": false,
     // "python.formatting.autopep8Path": "/usr/bin/autopep8",
     // "python.linting.pylintPath": "/usr/bin/pylint",
     "python.linting.enabled": true,
@@ -37,7 +38,8 @@
     "editor.tabSize": 4,
     "remote.SSH.useLocalServer": false,
     "remote.SSH.remotePlatform": {
-        "sprintit14-stage-3088451.dev.odoo.com": "linux"
+        "sprintit14-stage-3088451.dev.odoo.com": "linux",
+        "recommender.sprintit.fi": "linux"
     },
     // Insert spaces when pressing Tab. This setting is overriden
     // based on the file contents when `editor.detectIndentation` is true.
@@ -61,7 +63,7 @@
     },
     "git.autofetch": false,
     // Controls whether to enable automatic GitHub authentication for git commands within VS Code.
-    // "github.gitAuthentication": false,
+    "github.gitAuthentication": false,
     "search.exclude": {
         "**/.git": true,
         "**/sprintit_accounting_official/*": true,
@@ -69,100 +71,100 @@
         "**/tek_addons/*": true,
         "**/vividi_addons/*": true,
         "**/sprintit_contract_distribution/*": true,
-        "**/tests/*": true
+        // "**/tests/*": true
     },
-    "latex-workshop.latex.magic.args": [
-        "-synctex=1",
-        "-interaction=nonstopmode",
-        "-file-line-error",
-        "--shell-escape",
-        "%DOC%"
-    ],
-    "latex-workshop.latex.tools": [
-        {
-            "name": "latexmk",
-            "command": "latexmk",
-            "args": [
-                "-xelatex",
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "-pdf",
-                "-outdir=%OUTDIR%",
-                "--shell-escape",
-                "%DOC%"
-            ],
-            "env": {}
-        },
-        // {
-        // 	"name": "lualatexmk",
-        // 	"command": "latexmk",
-        // 	"args": [
-        // 		"-synctex=1",
-        // 		"-interaction=nonstopmode",
-        // 		"-file-line-error",
-        // 		"-lualatex",
-        //         "-outdir=%OUTDIR%",
-        // 		"%DOC%"
-        // 	],
-        // 	"env": {}
-        // },
-        // {
-        // 	"name": "latexmk_rconly",
-        // 	"command": "latexmk",
-        // 	"args": [
-        // 		"%DOC%"
-        // 	],
-        // 	"env": {}
-        // },
-        // {
-        // 	"name": "pdflatex",
-        // 	"command": "pdflatex",
-        // 	"args": [
-        // 		"-synctex=1",
-        // 		"-interaction=nonstopmode",
-        //         "-file-line-error",
-        //         "--shell-escape",
-        // 		"%DOC%"
-        // 	],
-        // 	"env": {}
-        // },
-        // {
-        // 	"name": "bibtex",
-        // 	"command": "bibtex",
-        // 	"args": [
-        // 		"%DOCFILE%"
-        // 	],
-        // 	"env": {}
-        // },
-        // {
-        // 	"name": "rnw2tex",
-        // 	"command": "Rscript",
-        // 	"args": [
-        // 		"-e",
-        // 		"knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
-        // 	],
-        // 	"env": {}
-        // },
-        // {
-        // 	"name": "jnw2tex",
-        // 	"command": "julia",
-        // 	"args": [
-        // 		"-e",
-        // 		"using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"
-        // 	],
-        // 	"env": {}
-        // },
-        // {
-        // 	"name": "jnw2texmintex",
-        // 	"command": "julia",
-        // 	"args": [
-        // 		"-e",
-        // 		"using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"
-        // 	],
-        // 	"env": {}
-        // }
-    ],
+    // "latex-workshop.latex.magic.args": [
+    //     "-synctex=1",
+    //     "-interaction=nonstopmode",
+    //     "-file-line-error",
+    //     "--shell-escape",
+    //     "%DOC%"
+    // ],
+    // "latex-workshop.latex.tools": [
+    //     {
+    //         "name": "latexmk",
+    //         "command": "latexmk",
+    //         "args": [
+    //             "-xelatex",
+    //             "-synctex=1",
+    //             "-interaction=nonstopmode",
+    //             "-file-line-error",
+    //             "-pdf",
+    //             "-outdir=%OUTDIR%",
+    //             "--shell-escape",
+    //             "%DOC%"
+    //         ],
+    //         "env": {}
+    //     },
+    //     // {
+    //     // 	"name": "lualatexmk",
+    //     // 	"command": "latexmk",
+    //     // 	"args": [
+    //     // 		"-synctex=1",
+    //     // 		"-interaction=nonstopmode",
+    //     // 		"-file-line-error",
+    //     // 		"-lualatex",
+    //     //         "-outdir=%OUTDIR%",
+    //     // 		"%DOC%"
+    //     // 	],
+    //     // 	"env": {}
+    //     // },
+    //     // {
+    //     // 	"name": "latexmk_rconly",
+    //     // 	"command": "latexmk",
+    //     // 	"args": [
+    //     // 		"%DOC%"
+    //     // 	],
+    //     // 	"env": {}
+    //     // },
+    //     // {
+    //     // 	"name": "pdflatex",
+    //     // 	"command": "pdflatex",
+    //     // 	"args": [
+    //     // 		"-synctex=1",
+    //     // 		"-interaction=nonstopmode",
+    //     //         "-file-line-error",
+    //     //         "--shell-escape",
+    //     // 		"%DOC%"
+    //     // 	],
+    //     // 	"env": {}
+    //     // },
+    //     // {
+    //     // 	"name": "bibtex",
+    //     // 	"command": "bibtex",
+    //     // 	"args": [
+    //     // 		"%DOCFILE%"
+    //     // 	],
+    //     // 	"env": {}
+    //     // },
+    //     // {
+    //     // 	"name": "rnw2tex",
+    //     // 	"command": "Rscript",
+    //     // 	"args": [
+    //     // 		"-e",
+    //     // 		"knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
+    //     // 	],
+    //     // 	"env": {}
+    //     // },
+    //     // {
+    //     // 	"name": "jnw2tex",
+    //     // 	"command": "julia",
+    //     // 	"args": [
+    //     // 		"-e",
+    //     // 		"using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"
+    //     // 	],
+    //     // 	"env": {}
+    //     // },
+    //     // {
+    //     // 	"name": "jnw2texmintex",
+    //     // 	"command": "julia",
+    //     // 	"args": [
+    //     // 		"-e",
+    //     // 		"using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"
+    //     // 	],
+    //     // 	"env": {}
+    //     // }
+    // ],
     "minify.html": {
         "caseSensitive": false,
         "collapseBooleanAttributes": true,
@@ -212,6 +214,14 @@
         "files.trimFinalNewlines": true,
         "files.trimTrailingWhitespace": true
     },
+    // "files.autoGuessEncoding":true,
+
+    "[latex]": {
+        "editor.formatOnPaste": false,
+        "editor.suggestSelection": "recentlyUsedByPrefix",
+        "files.encoding": "iso88591",
+    },
+
     "workbench.editorAssociations": {
         "*.pdf": "latex-workshop-pdf-hook"
     },
