@@ -1,9 +1,0 @@
-@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-
-/* Enabling this file requires about:config change ´toolkit.legacyUserProfileCustomizations.stylesheets = True´ */
-
-/* Remove 'Your microphone is being shared' indicator */
-
-#webrtcIndicator {
-    display: none;
-}
