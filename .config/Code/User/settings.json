@@ -239,4 +239,5 @@
         "markdown": false,
         "latex": false
     },
+    "terminal.integrated.enableMultiLinePasteWarning": false,
 }

@@ -1,4 +1,4 @@
-<configuration version="35">
+<configuration version="36">
     <folder id="2g9uh-acrpp" label="Videos" path="/home/elmeri/Videos" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
         <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
@@ -567,5 +567,6 @@
             <untrusted>false</untrusted>
             <remoteGUIPort>0</remoteGUIPort>
         </device>
+        <ignores></ignores>
     </defaults>
 </configuration>
