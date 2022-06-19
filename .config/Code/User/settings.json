@@ -66,11 +66,17 @@
     "github.gitAuthentication": false,
     "search.exclude": {
         "**/.git": true,
-        "**/sprintit_accounting_official/*": true,
+        "**/sprintit_accounting_official": true,
         "**/innotiimi_addons/*": true,
         "**/tek_addons/*": true,
         "**/vividi_addons/*": true,
         "**/sprintit_contract_distribution/*": true,
+        "**/*.svg": true,
+        "**/*.log": true,
+        "**/*.bbl": true,
+        "**/*.blg": true,
+        "**/*.fdb_latexmk": true,
+        "**/*.aux": true,
         // "**/tests/*": true
     },
     // "latex-workshop.latex.magic.args": [
@@ -80,22 +86,23 @@
     //     "--shell-escape",
     //     "%DOC%"
     // ],
-    // "latex-workshop.latex.tools": [
-    //     {
-    //         "name": "latexmk",
-    //         "command": "latexmk",
-    //         "args": [
-    //             "-xelatex",
-    //             "-synctex=1",
-    //             "-interaction=nonstopmode",
-    //             "-file-line-error",
-    //             "-pdf",
-    //             "-outdir=%OUTDIR%",
-    //             "--shell-escape",
-    //             "%DOC%"
-    //         ],
-    //         "env": {}
-    //     },
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-xelatex",
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=%OUTDIR%",
+                "--shell-escape",
+                "%DOC%"
+            ],
+            "env": {}
+        },
+    ],
     //     // {
     //     // 	"name": "lualatexmk",
     //     // 	"command": "latexmk",

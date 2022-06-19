@@ -580,7 +580,7 @@
     </folder>
     <device id="H3BYI27-ZZQX46Z-M6V6A7H-34H2NWU-BXKM5BR-LIO6RE7-CVEBNXJ-TUCROA4" name="Windows Desktop" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
-        <paused>true</paused>
+        <paused>false</paused>
         <autoAcceptFolders>false</autoAcceptFolders>
         <maxSendKbps>0</maxSendKbps>
         <maxRecvKbps>0</maxRecvKbps>
@@ -590,7 +590,7 @@
     </device>
     <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" name="archlinux" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
-        <paused>true</paused>
+        <paused>false</paused>
         <autoAcceptFolders>false</autoAcceptFolders>
         <maxSendKbps>0</maxSendKbps>
         <maxRecvKbps>0</maxRecvKbps>
