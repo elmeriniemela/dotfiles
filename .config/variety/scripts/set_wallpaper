@@ -167,6 +167,7 @@ fi
 
 # Gnome 3, Unity
 gsettings set org.gnome.desktop.background picture-uri "file://$WP" 2> /dev/null
+gsettings set org.gnome.desktop.background picture-uri-dark "file://$WP" 2> /dev/null
 if [ "$(gsettings get org.gnome.desktop.background picture-options)" == "'none'" ]; then
     gsettings set org.gnome.desktop.background picture-options 'zoom'
 fi
@@ -210,8 +211,7 @@ fi
 # For simple WMs, use either feh or nitrogen
 # Implementation note: this uses spaces around list items to enforce matching whole words.
 # This also means that an empty variable won't cause false positives, since it expands to "  "
-# FOR SDDM
-SIMPLE_WMS=("/usr/share/xsessions/awesome" "/usr/share/xsessions/bspwm" "/usr/share/xsessions/cwm" "/usr/share/xsessions/dusk" "/usr/share/xsessions/dwm" "/usr/share/xsessions/fvwm3" "/usr/share/xsessions/herbstluftwm" "/usr/share/xsessions/i3" "/usr/share/xsessions/i3-with-shmlog" "/usr/share/xsessions/icewm" "/usr/share/xsessions/icewm-session" "/usr/share/xsessions/jwm" "/usr/share/xsessions/leftwm" "/usr/share/xsessions/openbox" "/usr/share/xsessions/qtile" "/usr/share/xsessions/spectrwm" "/usr/share/xsessions/wmderland" "/usr/share/xsessions/xmonad")
+SIMPLE_WMS=("bspwm" "dwm" "herbstluftwm" "i3" "i3-with-shmlog" "jwm" "LeftWM" "openbox" "qtile" "qtile-venv" "xmonad")
 if [[ " ${SIMPLE_WMS[*]} " = *" $XDG_CURRENT_DESKTOP "* || " ${SIMPLE_WMS[*]} " = *" $XDG_SESSION_DESKTOP "* ||
       " ${SIMPLE_WMS[*]} " = *" $DESKTOP_SESSION "* ]]; then
 	if command -v "feh" >/dev/null 2>&1; then
@@ -220,19 +220,22 @@ if [[ " ${SIMPLE_WMS[*]} " = *" $XDG_CURRENT_DESKTOP "* || " ${SIMPLE_WMS[*]} " 
         nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
     fi
 fi
-#FOR LIGHTDM
-SIMPLE_WMS=("awesome" "berry" "bspwm" "cwm" "dusk" "dwm" "fvwm3" "herbstluftwm" "i3" "i3-with-shmlog" "icewm" "icewm-session" "jwm" "leftwm" "openbox" "qtile" "spectrwm" "worm" "wmderland" "xmonad")
-if [[ " ${SIMPLE_WMS[*]} " = *" $XDG_CURRENT_DESKTOP "* || " ${SIMPLE_WMS[*]} " = *" $XDG_SESSION_DESKTOP "* ||
-      " ${SIMPLE_WMS[*]} " = *" $DESKTOP_SESSION "* ]]; then
-    if command -v "feh" >/dev/null 2>&1; then
-        feh --bg-fill "$WP" 2> /dev/null
-    elif command -v "nitrogen" >/dev/null 2>&1; then
-        nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
-    fi
-fi
 
 if [[ -n $SWAYSOCK ]]; then
-    swaymsg output "*" bg "$WP" fill 2> /dev/null
+    # If swaybg is available, use it as prevents system freeze.
+    # See https://github.com/swaywm/sway/issues/5606
+    if command -v "swaybg" >/dev/null 2>&1; then
+        # Grey background flicker is prevented by killing old swaybg process after new one.
+        # See https://github.com/swaywm/swaybg/issues/17#issuecomment-851680720
+        PID=`pidof swaybg`
+        swaybg -i "$WP" -m fill &
+        if [ ! -z "$PID" ]; then
+            sleep 1
+            kill $PID 2>/dev/null
+        fi
+    else
+        swaymsg output "*" bg "$WP" fill 2> /dev/null
+    fi
 fi
 
 # trinity
@@ -250,13 +253,12 @@ if [ "$(gsettings get org.cinnamon.desktop.background picture-options 2>/dev/nul
 	gsettings set org.cinnamon.desktop.background picture-options 'zoom'
 fi
 
-
 # Awesome Window Manager
 # Be sure to start variety when you start awesome, such as by adding it to ~/.xinitrc
 # NOTE: This config will change the wallpaper after your current awesome theme sets it.
 # As such, the theme's wallpaper will briefly appear before being replaced with Variety's wallpaper.
 if [[ "$XDG_SESSION_DESKTOP $DESKTOP_STARTUP_ID $DESKTOP_SESSION $XDG_CURRENT_DESKTOP" == *"awesome"* ]]; then
-    echo "for s in screen do require(\"gears\").wallpaper.maximized(\"$1\", s) end"
+	echo "for s in screen do require(\"gears\").wallpaper.maximized(\"$1\", s) end" | awesome-client
 fi
 
 # =====================================================================================
@@ -266,90 +268,4 @@ fi
 # name=$(echo "$3" | sed 's/\//\n/g'| tail -n 1)
 # if [ "$2" == "auto" ]; then notify-send --icon "$WP" "Wallpaper changed" "$name" ; fi
 
-
-### ArcoLinux Solutions ###
-
-# awesome: use either feh or nitrogen
-# if [ "$DESKTOP_SESSION" == "awesome" ]; then
-#   if command -v "feh" >/dev/null 2>&1; then
-#     feh --bg-fill "$WP" 2> /dev/null
-#   elif command -v "nitrogen" >/dev/null 2>&1; then
-#     nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
-#   fi
-# fi
-
-# variety v0.7.2 provides good code for bspwm
-# Bspwm : use either feh or nitrogen
-# if [ "$DESKTOP_SESSION" == "bspwm" ] ; then
-#   if command -v "feh" >/dev/null 2>&1; then
-#     feh --bg-fill "$WP" 2> /dev/null
-#   elif command -v "nitrogen" >/dev/null 2>&1; then
-#     nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
-#   fi
-# fi
-
-
-# Xmonad : use either feh or nitrogen
-# if [ "$DESKTOP_SESSION" == "xmonad" ] ; then
-#   if command -v "feh" >/dev/null 2>&1; then
-#     feh --bg-fill "$WP" 2> /dev/null
-#   elif command -v "nitrogen" >/dev/null 2>&1; then
-#     nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
-#   fi
-# fi
-
-# Qtile : use either feh or nitrogen
-# if [ "$DESKTOP_SESSION" == "qtile" ] ; then
-#   if command -v "feh" >/dev/null 2>&1; then
-#     feh --bg-fill "$WP" 2> /dev/null
-#   elif command -v "nitrogen" >/dev/null 2>&1; then
-#     nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
-#   fi
-# fi
-
-
-# herbstluftwm : use either feh or nitrogen
-# if [ "$DESKTOP_SESSION" == "herbstluftwm" ] ; then
-#   if command -v "feh" >/dev/null 2>&1; then
-#     feh --bg-fill "$WP" 2> /dev/null
-#   elif command -v "nitrogen" >/dev/null 2>&1; then
-#     nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
-#   fi
-# fi
-
-# jwm : use either feh or nitrogen
-# if [ "$DESKTOP_SESSION" == "jwm" ] ; then
-#   if command -v "feh" >/dev/null 2>&1; then
-#     feh --bg-fill "$WP" 2> /dev/null
-#   elif command -v "nitrogen" >/dev/null 2>&1; then
-#     nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
-#   fi
-# fi
-
-#spectrwm : use either feh or nitrogen
-# if [ "$DESKTOP_SESSION" == "spectrwm" ] ; then
-#   if command -v "feh" >/dev/null 2>&1; then
-#     feh --bg-fill "$WP" 2> /dev/null
-#   elif command -v "nitrogen" >/dev/null 2>&1; then
-#     nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
-#   fi
-# fi
-
-# icewm : use either feh or nitrogen
-# if [ "$DESKTOP_SESSION" == "icewm-session" ] ; then
-#   if command -v "feh" >/dev/null 2>&1; then
-#     feh --bg-fill "$WP" 2> /dev/null
-#   elif command -v "nitrogen" >/dev/null 2>&1; then
-#     nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
-#   fi
-# fi
-
-# fvwm3 : use either feh or nitrogen
-# if [ "$DESKTOP_SESSION" == "fvwm3" ] ; then
-#   if command -v "feh" >/dev/null 2>&1; then
-#     feh --bg-fill "$WP" 2> /dev/null
-#   elif command -v "nitrogen" >/dev/null 2>&1; then
-#     nitrogen --set-zoom-fill --save "$WP" 2> /dev/null
-#   fi
-# fi
 exit 0
