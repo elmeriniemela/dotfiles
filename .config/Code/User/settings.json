@@ -64,6 +64,9 @@
     "git.autofetch": false,
     // Controls whether to enable automatic GitHub authentication for git commands within VS Code.
     "github.gitAuthentication": false,
+    "grammarly.files.include":[
+        "**/*.tex"
+    ],
     "search.exclude": {
         "**/.git": true,
         "**/sprintit_accounting_official": true,
@@ -77,7 +80,7 @@
         "**/*.blg": true,
         "**/*.fdb_latexmk": true,
         "**/*.aux": true,
-        // "**/tests/*": true
+        "**/tests/*": true
     },
     // "latex-workshop.latex.magic.args": [
     //     "-synctex=1",
@@ -103,75 +106,6 @@
             "env": {}
         },
     ],
-    //     // {
-    //     // 	"name": "lualatexmk",
-    //     // 	"command": "latexmk",
-    //     // 	"args": [
-    //     // 		"-synctex=1",
-    //     // 		"-interaction=nonstopmode",
-    //     // 		"-file-line-error",
-    //     // 		"-lualatex",
-    //     //         "-outdir=%OUTDIR%",
-    //     // 		"%DOC%"
-    //     // 	],
-    //     // 	"env": {}
-    //     // },
-    //     // {
-    //     // 	"name": "latexmk_rconly",
-    //     // 	"command": "latexmk",
-    //     // 	"args": [
-    //     // 		"%DOC%"
-    //     // 	],
-    //     // 	"env": {}
-    //     // },
-    //     // {
-    //     // 	"name": "pdflatex",
-    //     // 	"command": "pdflatex",
-    //     // 	"args": [
-    //     // 		"-synctex=1",
-    //     // 		"-interaction=nonstopmode",
-    //     //         "-file-line-error",
-    //     //         "--shell-escape",
-    //     // 		"%DOC%"
-    //     // 	],
-    //     // 	"env": {}
-    //     // },
-    //     // {
-    //     // 	"name": "bibtex",
-    //     // 	"command": "bibtex",
-    //     // 	"args": [
-    //     // 		"%DOCFILE%"
-    //     // 	],
-    //     // 	"env": {}
-    //     // },
-    //     // {
-    //     // 	"name": "rnw2tex",
-    //     // 	"command": "Rscript",
-    //     // 	"args": [
-    //     // 		"-e",
-    //     // 		"knitr::opts_knit$set(concordance = TRUE); knitr::knit('%DOCFILE_EXT%')"
-    //     // 	],
-    //     // 	"env": {}
-    //     // },
-    //     // {
-    //     // 	"name": "jnw2tex",
-    //     // 	"command": "julia",
-    //     // 	"args": [
-    //     // 		"-e",
-    //     // 		"using Weave; weave(\"%DOC_EXT%\", doctype=\"tex\")"
-    //     // 	],
-    //     // 	"env": {}
-    //     // },
-    //     // {
-    //     // 	"name": "jnw2texmintex",
-    //     // 	"command": "julia",
-    //     // 	"args": [
-    //     // 		"-e",
-    //     // 		"using Weave; weave(\"%DOC_EXT%\", doctype=\"texminted\")"
-    //     // 	],
-    //     // 	"env": {}
-    //     // }
-    // ],
     "minify.html": {
         "caseSensitive": false,
         "collapseBooleanAttributes": true,
@@ -226,7 +160,7 @@
     "[latex]": {
         "editor.formatOnPaste": false,
         "editor.suggestSelection": "recentlyUsedByPrefix",
-        "files.encoding": "iso88591",
+        // "files.encoding": "iso88591",
     },
 
     "workbench.editorAssociations": {
@@ -247,4 +181,8 @@
         "latex": false
     },
     "terminal.integrated.enableMultiLinePasteWarning": false,
+    "grammarly.config.suggestions.PrepositionAtTheEndOfSentence": true,
+    "grammarly.config.suggestions.UnnecessaryEllipses": true,
+    "grammarly.config.documentDialect": "british",
+    "window.zoomLevel": -1,
 }
