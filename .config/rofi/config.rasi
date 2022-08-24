@@ -1,67 +1,60 @@
 configuration {
-    modi: "drun,calc,window,ssh";
-/*	width: 50;*/
-/*	lines: 15;*/
-/*	columns: 1;*/
+	modes: "drun,calc,window,ssh";
 /*	font: "mono 12";*/
-/*	bw: 1;*/
 /*	location: 0;*/
-/*	padding: 5;*/
 /*	yoffset: 0;*/
 /*	xoffset: 0;*/
 /*	fixed-num-lines: true;*/
 	show-icons: true;
-	terminal: "terminator";
+	terminal: "xfce4-terminal";
 /*	ssh-client: "ssh";*/
-	ssh-command: "{terminal} --new-tab -e '{ssh-client} {host}'";
+	ssh-command: "{terminal} {ssh-client} {host}";
 /*	run-command: "{cmd}";*/
 /*	run-list-command: "";*/
 /*	run-shell-command: "{terminal} -e {cmd}";*/
 /*	window-command: "wmctrl -i -R {window}";*/
 /*	window-match-fields: "all";*/
 /*	icon-theme: ;*/
-/*	drun-match-fields: "name,generic,exec,categories";*/
+/*	drun-match-fields: "name,generic,exec,categories,keywords";*/
+/*	drun-categories: ;*/
 /*	drun-show-actions: false;*/
 /*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
+/*	drun-url-launcher: "xdg-open";*/
 /*	disable-history: false;*/
 /*	ignored-prefixes: "";*/
 /*	sort: false;*/
-/*	sorting-method: ;*/
+/*	sorting-method: "normal";*/
 /*	case-sensitive: false;*/
-	cycle: true;
+/*	cycle: true;*/
 	sidebar-mode: true;
+/*	hover-select: false;*/
 /*	eh: 1;*/
 /*	auto-select: false;*/
 /*	parse-hosts: false;*/
 /*	parse-known-hosts: true;*/
-/*	combi-modi: "window,run";*/
+/*	combi-modes: "window,run";*/
 /*	matching: "normal";*/
 /*	tokenize: true;*/
 /*	m: "-5";*/
-/*	line-margin: 2;*/
-/*	line-padding: 1;*/
 /*	filter: ;*/
-/*	separator-style: "dash";*/
-/*	hide-scrollbar: false;*/
-/*	fullscreen: false;*/
-/*	fake-transparency: false;*/
 /*	dpi: -1;*/
 /*	threads: 0;*/
-/*	scrollbar-width: 8;*/
 /*	scroll-method: 0;*/
-/*	fake-background: "screenshot";*/
 	window-format: "{t}    {c}   {w}";
 /*	click-to-exit: true;*/
-/*	show-match: true;*/
-/*	theme: ;*/
-/*	color-normal: ;*/
-/*	color-urgent: ;*/
-/*	color-active: ;*/
-/*	color-window: ;*/
 /*	max-history-size: 25;*/
 /*	combi-hide-mode-prefix: false;*/
+/*	combi-display-format: "{mode} {text}";*/
 /*	matching-negate-char: '-' /* unsupported */;*/
 /*	cache-dir: ;*/
+/*	window-thumbnail: false;*/
+/*	drun-use-desktop-cache: false;*/
+/*	drun-reload-desktop-cache: false;*/
+/*	normalize-match: false;*/
+/*	steal-focus: false;*/
+/*	application-fallback-icon: ;*/
+/*	refilter-timeout-limit: 8192;*/
+/*	xserver-i300-workaround: false;*/
 /*	pid: "/run/user/1000/rofi.pid";*/
 /*	display-window: ;*/
 /*	display-windowcd: ;*/
@@ -70,6 +63,8 @@ configuration {
 /*	display-drun: ;*/
 /*	display-combi: ;*/
 /*	display-keys: ;*/
+/*	display-filebrowser: ;*/
+/*	display-calc: ;*/
 /*	kb-primary-paste: "Control+V,Shift+Insert";*/
 /*	kb-secondary-paste: "Control+v,Insert";*/
 /*	kb-clear-line: "Control+w";*/
@@ -77,8 +72,8 @@ configuration {
 /*	kb-move-end: "Control+e";*/
 /*	kb-move-word-back: "Alt+b,Control+Left";*/
 /*	kb-move-word-forward: "Alt+f,Control+Right";*/
-	kb-move-char-back: "Left,Control+b";
-	kb-move-char-forward: "Right,Control+f";
+/*	kb-move-char-back: "Left,Control+b";*/
+/*	kb-move-char-forward: "Right,Control+f";*/
 /*	kb-remove-word-back: "Control+Alt+h,Control+BackSpace";*/
 /*	kb-remove-word-forward: "Control+Alt+d";*/
 /*	kb-remove-char-forward: "Delete,Control+d";*/
@@ -87,15 +82,19 @@ configuration {
 /*	kb-remove-to-sol: "Control+u";*/
 /*	kb-accept-entry: "Control+j,Control+m,Return,KP_Enter";*/
 /*	kb-accept-custom: "Control+Return";*/
+/*	kb-accept-custom-alt: "Control+Shift+Return";*/
 /*	kb-accept-alt: "Shift+Return";*/
 /*	kb-delete-entry: "Shift+Delete";*/
 	kb-mode-next: "Shift+Right,Tab";
 	kb-mode-previous: "Shift+Left,ISO_Left_Tab";
+/*	kb-mode-complete: "Control+l";*/
 /*	kb-row-left: "Control+Page_Up";*/
 /*	kb-row-right: "Control+Page_Down";*/
-	kb-row-up: "Up,Control+p";
+/*	kb-row-up: "Up,Control+p";*/
 /*	kb-row-down: "Down,Control+n";*/
-	kb-row-tab: "Control+Tab";
+/*	kb-row-tab: "";*/
+	kb-element-next: "Control+Tab";
+	kb-element-prev: "Control+ISO_Left_Tab";
 /*	kb-page-prev: "Page_Up";*/
 /*	kb-page-next: "Page_Down";*/
 /*	kb-row-first: "Home,KP_Home";*/
@@ -142,5 +141,13 @@ configuration {
 /*	me-select-entry: "MousePrimary";*/
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
+  timeout {
+      action: "kb-cancel";
+      delay:  0;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
 }
 @import "/usr/share/rofi/themes/Arc-Dark.rasi"
