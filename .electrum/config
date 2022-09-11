@@ -13,6 +13,7 @@
     "history_rates_capital_gains": true,
     "mempool_fees": false,
     "oneserver": true,
+    "gui_last_wallet": "/home/elmeri/.electrum/wallets/cold.watch",
     "qt_gui_color_theme": "dark",
     "receive_qr_visible": true,
     "receive_tabs_index": 1,
