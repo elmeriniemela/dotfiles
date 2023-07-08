@@ -2,7 +2,7 @@
 application/pkix-cert=code.desktop;
 application/xml=code.desktop;
 image/svg+xml=code.desktop;code.desktop;
-text/plain=code.desktop;code.desktop;
+text/plain=code.desktop;
 application/wsdl+xml=code.desktop;
 application/octet-stream=code.desktop;veracrypt.desktop;
 image/png=gimp.desktop;org.xfce.ristretto.desktop;org.nomacs.ImageLounge.desktop;

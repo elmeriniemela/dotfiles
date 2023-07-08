@@ -25,6 +25,7 @@
             //   "args": ["-l"]
         }
     },
+    "files.participants.timeout": 0,
     "workbench.editor.wrapTabs": true,
     "editor.semanticHighlighting.enabled": false,
     "glsllint.glslangValidatorArgs": "-V",
@@ -48,6 +49,7 @@
     "files.trimTrailingWhitespace": true,
     "latex-workshop.chktex.enabled": true,
     "latex-workshop.view.pdf.viewer": "tab",
+    "emmet.showExpandedAbbreviation": "never",
     // When opening a file, `editor.tabSize` and `editor.insertSpaces`
     // will be detected based on the file contents. Set to false to keep
     // the values you've explicitly set, above.
@@ -61,6 +63,8 @@
     "[html]": {
         "editor.defaultFormatter": "vscode.html-language-features"
     },
+    "html.format.wrapLineLength": 0, // disable
+    "xml.format.maxLineWidth": 0, // disable
     "git.autofetch": false,
     // Controls whether to enable automatic GitHub authentication for git commands within VS Code.
     "github.gitAuthentication": false,
@@ -69,11 +73,14 @@
     ],
     "search.exclude": {
         "**/.git": true,
+        "**/.gitmodules": true,
         "**/sprintit_accounting_official": true,
+        "**/pn_accounting_official": true,
         "**/innotiimi_addons/*": true,
         "**/vividi_addons/*": true,
+        "**/setup/*": true,
         "**/sprintit_contract_distribution/*": true,
-        "**/yty_addons/*": true,
+        // "**/yty_addons/*": true,
         "**/*.svg": true,
         "**/*.log": true,
         "**/*.bbl": true,
@@ -154,7 +161,7 @@
     "[xml]": {
         "editor.autoClosingBrackets": "never",
         "files.trimFinalNewlines": false,
-        "files.trimTrailingWhitespace": true
+        "files.trimTrailingWhitespace": true,
     },
     "xml.format.spaceBeforeEmptyCloseTag": false,
     // "files.autoGuessEncoding":true,
@@ -172,7 +179,8 @@
         "editor.defaultFormatter": "ms-vscode.cpptools"
     },
     "[python]": {
-        "editor.defaultFormatter": "ms-python.python"
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.formatOnType": true
     },
     "editor.inlineSuggest.enabled": true,
 	"notebook.output.textLineLimit": 300,
@@ -192,4 +200,5 @@
         "jupyter-notebook": "left"
     },
     "window.zoomLevel": -1,
+    "explorer.confirmDragAndDrop": true,
 }
