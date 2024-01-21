@@ -96,24 +96,35 @@
     //     "--shell-escape",
     //     "%DOC%"
     // ],
-    "latex-workshop.latex.tools": [
-        {
-            "name": "latexmk",
-            "command": "latexmk",
-            "args": [
-                "-xelatex",
-                "-synctex=1",
-                "-interaction=nonstopmode",
-                "-file-line-error",
-                "-f",
-                "-pdf",
-                "-outdir=%OUTDIR%",
-                "--shell-escape",
-                "%DOC%"
-            ],
-            "env": {}
-        },
-    ],
+    "latex-workshop.latex.tools": [{
+        "name": "latexmk",
+        "command": "latexmk",
+        "args": [
+            "-xelatex",
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "%DOC%"
+        ]
+    }],
+    // "latex-workshop.latex.tools": [
+    //     {
+    //         "name": "latexmk",
+    //         "command": "latexmk",
+    //         "args": [
+    //             "-xelatex",
+    //             "-synctex=1",
+    //             "-interaction=nonstopmode",
+    //             "-file-line-error",
+    //             "-f",
+    //             "-pdf",
+    //             "-outdir=%OUTDIR%",
+    //             "--shell-escape",
+    //             "%DOC%"
+    //         ],
+    //         "env": {}
+    //     },
+    // ],
     "minify.html": {
         "caseSensitive": false,
         "collapseBooleanAttributes": true,
@@ -199,6 +210,7 @@
         "default": "right",
         "jupyter-notebook": "left"
     },
-    "window.zoomLevel": -1,
     "explorer.confirmDragAndDrop": true,
+    "editor.minimap.enabled": false,
+    "window.zoomLevel": -1,
 }

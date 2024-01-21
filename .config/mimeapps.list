@@ -18,10 +18,11 @@ application/json=code.desktop;
 x-scheme-handler/mailto=thunderbird.desktop;;
 x-scheme-handler/mid=thunderbird.desktop;;
 image/x-portable-graymap=org.nomacs.ImageLounge.desktop;
-text/csv=code.desktop;
+text/csv=libreoffice-calc.desktop;code.desktop;
+application/x-zerosize=code.desktop;
 
 [Default Applications]
-inode/directory=pcmanfm.desktop;
+inode/directory=thunar.desktop;
 text/plain=code.desktop
 text/csv=code.desktop;
 text/xml=code.desktop;
@@ -45,5 +46,6 @@ message/rfc822=thunderbird.desktop;
 x-scheme-handler/mid=thunderbird.desktop;
 image/x-portable-graymap=org.nomacs.ImageLounge.desktop
 x-scheme-handler/magnet=deluge.desktop
+application/x-zerosize=code.desktop
 
 [Removed Associations]
