@@ -57,3 +57,4 @@ pg_dump --no-owner --format=d --jobs=4 --file 11.dump 11
 syncronized = syncronization of execution time and mutually excluded data access 
 git rebase --interactive HEAD~2
 pip install pyopenssl==22.1.0
+find . -type f -exec dos2unix {} \;

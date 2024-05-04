@@ -78,6 +78,8 @@
         "**/pn_accounting_official": true,
         "**/innotiimi_addons/*": true,
         "**/vividi_addons/*": true,
+        "**/src/odoo/*": true,
+        "**/src/enterprise/*": true,
         "**/setup/*": true,
         "**/sprintit_contract_distribution/*": true,
         // "**/yty_addons/*": true,
