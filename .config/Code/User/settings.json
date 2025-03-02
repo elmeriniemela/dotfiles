@@ -215,4 +215,6 @@
     "explorer.confirmDragAndDrop": true,
     "editor.minimap.enabled": false,
     "window.zoomLevel": -1,
+    "xml.format.preserveAttributeLineBreaks": false,
+    "xml.format.joinContentLines": true,
 }
