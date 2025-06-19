@@ -65,6 +65,15 @@
     },
     "html.format.wrapLineLength": 0, // disable
     "xml.format.maxLineWidth": 0, // disable
+    "xml.format.spaceBeforeEmptyCloseTag": false,
+    "xml.format.preserveAttributeLineBreaks": true,
+    "xml.format.joinContentLines": false,
+    "xml.format.splitAttributes": false,
+    "[xml]": {
+        "editor.autoClosingBrackets": "never",
+        "files.trimFinalNewlines": false,
+        "files.trimTrailingWhitespace": true,
+    },
     "git.autofetch": false,
     // Controls whether to enable automatic GitHub authentication for git commands within VS Code.
     "github.gitAuthentication": false,
@@ -78,6 +87,7 @@
         "**/pn_accounting_official": true,
         "**/innotiimi_addons/*": true,
         "**/vividi_addons/*": true,
+        "**/klt_history_data/*": true,
         "**/src/odoo/*": true,
         "**/src/enterprise/*": true,
         "**/setup/*": true,
@@ -171,12 +181,6 @@
         "useShortDoctype": false
     },
     "csv-preview.separator": ";",
-    "[xml]": {
-        "editor.autoClosingBrackets": "never",
-        "files.trimFinalNewlines": false,
-        "files.trimTrailingWhitespace": true,
-    },
-    "xml.format.spaceBeforeEmptyCloseTag": false,
     // "files.autoGuessEncoding":true,
 
     "[latex]": {
@@ -199,10 +203,12 @@
 	"notebook.output.textLineLimit": 300,
     "github.copilot.enable": {
         "*": true,
-        "yaml": false,
         "plaintext": true,
         "markdown": false,
-        "latex": false
+        "scminput": false,
+        "yaml": false,
+        "latex": false,
+        "sql": false
     },
     "terminal.integrated.enableMultiLinePasteWarning": false,
     "grammarly.config.suggestions.PrepositionAtTheEndOfSentence": true,
@@ -215,6 +221,7 @@
     "explorer.confirmDragAndDrop": true,
     "editor.minimap.enabled": false,
     "window.zoomLevel": -1,
-    "xml.format.preserveAttributeLineBreaks": false,
-    "xml.format.joinContentLines": true,
+    "workbench.startupEditor": "none",
+
+
 }

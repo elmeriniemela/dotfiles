@@ -20,6 +20,8 @@ x-scheme-handler/mid=thunderbird.desktop;;userapp-Thunderbird-VM2RY2.desktop;
 image/x-portable-graymap=org.nomacs.ImageLounge.desktop;
 text/csv=libreoffice-calc.desktop;code.desktop;
 application/x-zerosize=code.desktop;
+message/rfc822=code.desktop;
+application/rtf=libreoffice-writer.desktop;code.desktop;
 
 [Default Applications]
 inode/directory=thunar.desktop;
