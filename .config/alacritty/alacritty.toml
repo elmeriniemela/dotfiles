@@ -26,7 +26,7 @@ foreground = "#F9F9F9"
 size = 11.0
 
 [font.bold]
-family = "hack"
+family = "monospace"
 style = "Bold"
 
 [font.bold_italic]
@@ -34,11 +34,11 @@ family = "monospace"
 style = "Bold Italic"
 
 [font.italic]
-family = "hack"
+family = "monospace"
 style = "Italic"
 
 [font.normal]
-family = "hack"
+family = "monospace"
 style = "Regular"
 
 [[keyboard.bindings]]
