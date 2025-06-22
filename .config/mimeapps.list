@@ -1,7 +1,7 @@
 [Added Associations]
 application/pkix-cert=code.desktop;
 application/xml=code.desktop;
-image/svg+xml=code.desktop;code.desktop;
+image/svg+xml=code.desktop;code.desktop;org.nomacs.ImageLounge.desktop;
 text/plain=code.desktop;
 application/wsdl+xml=code.desktop;
 application/octet-stream=code.desktop;veracrypt.desktop;
@@ -49,5 +49,6 @@ x-scheme-handler/mid=userapp-Thunderbird-VM2RY2.desktop
 image/x-portable-graymap=org.nomacs.ImageLounge.desktop
 x-scheme-handler/magnet=deluge.desktop
 application/x-zerosize=code.desktop
+image/svg+xml=org.nomacs.ImageLounge.desktop
 
 [Removed Associations]
