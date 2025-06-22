@@ -32,9 +32,12 @@ from libqtile.lazy import lazy
 import colors
 
 mod = "mod4"              # Sets mod key to SUPER/WINDOWS
-myTerm = "alacritty"      # My terminal of choice
-myBrowser = "brave"       # My browser of choice
-myEmacs = "emacsclient -c -a 'emacs' " # The space at the end is IMPORTANT!
+myTerm = "alacritty"
+myBrowser = "brave"
+myFileManager = "thunar"
+myEmail = "thunderbird"
+myEditor = "vim"
+myQuiEditor = "code"
 
 # Allows you to input a name when adding treetab section.
 @lazy.layout.function
@@ -48,7 +51,7 @@ def minimize_all(qtile):
     for win in qtile.current_group.windows:
         if hasattr(win, "toggle_minimize"):
             win.toggle_minimize()
-           
+
 # A function for toggling between MAX and MONADTALL layouts
 @lazy.function
 def maximize_by_switching_layout(qtile):
@@ -58,51 +61,26 @@ def maximize_by_switching_layout(qtile):
     elif current_layout_name == 'max':
         qtile.current_group.layout = 'monadtall'
 
+@lazy.function
+def conf_monitor(qtile):
+    subprocess.check_output("bootstrap-linux monitor", shell=True, text=True)
+    subprocess.check_output("~/.fehbg", shell=True, text=True)
+
 keys = [
     # The essentials
     Key([mod], "Return", lazy.spawn(myTerm), desc="Terminal"),
-    Key([mod, "shift"], "Return", lazy.spawn("rofi -show drun -show-icons"), desc='Run Launcher'),
-    Key([mod], "w", lazy.spawn(myBrowser), desc='Web browser'),
-    Key([mod], "b", lazy.hide_show_bar(position='all'), desc="Toggles the bar to show/hide"),
+    Key([mod], "space", lazy.spawn("rofi -show drun -show-icons"), desc='Run Launcher'),
+    Key([mod], "q", lazy.spawn(myBrowser), desc='Web browser'),
+    Key([mod], "e", lazy.spawn(myFileManager), desc='File manager'),
+    Key([mod], "t", lazy.spawn(myEmail), desc='Email'),
+    Key([mod], "a", lazy.spawn("signal-desctop"), desc='Signal'),
+    Key([mod], "c", lazy.spawn(myQuiEditor), desc='Editor'),
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
-    Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "shift"], "q", lazy.spawn("dm-logout -r"), desc="Logout menu"),
+    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
+    Key([mod, "control"], "w", conf_monitor(), desc="autoconfigure monitors"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
-    Key([mod, "shift"], "T", lazy.spawn("conky-toggle"), desc="Conky toggle on/off"),
-    
-    # Switch between windows
-    # Some layouts like 'monadtall' only need to use j/k to move
-    # through the stack, but other layouts like 'columns' will
-    # require all four directions h/j/k/l to move around.
-    Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
-    Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
-    Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
-    Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
 
-    # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "h",
-        lazy.layout.shuffle_left(),
-        lazy.layout.move_left().when(layout=["treetab"]),
-        desc="Move window to the left/move tab left in treetab"),
-
-    Key([mod, "shift"], "l",
-        lazy.layout.shuffle_right(),
-        lazy.layout.move_right().when(layout=["treetab"]),
-        desc="Move window to the right/move tab right in treetab"),
-
-    Key([mod, "shift"], "j",
-        lazy.layout.shuffle_down(),
-        lazy.layout.section_down().when(layout=["treetab"]),
-        desc="Move window down/move down a section in treetab"
-    ),
-    Key([mod, "shift"], "k",
-        lazy.layout.shuffle_up(),
-        lazy.layout.section_up().when(layout=["treetab"]),
-        desc="Move window downup/move up a section in treetab"
-    ),
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
@@ -113,19 +91,6 @@ keys = [
     # Treetab prompt
     Key([mod, "shift"], "a", add_treetab_section, desc='Prompt to add new section in treetab'),
 
-    # Grow/shrink windows left/right. 
-    # This is mainly for the 'monadtall' and 'monadwide' layouts
-    # although it does also work in the 'bsp' and 'columns' layouts.
-    Key([mod], "equal",
-        lazy.layout.grow_left().when(layout=["bsp", "columns"]),
-        lazy.layout.grow().when(layout=["monadtall", "monadwide"]),
-        desc="Grow window to the left"
-    ),
-    Key([mod], "minus",
-        lazy.layout.grow_right().when(layout=["bsp", "columns"]),
-        lazy.layout.shrink().when(layout=["monadtall", "monadwide"]),
-        desc="Grow window to the left"
-    ),
 
     # Grow windows up, down, left, right.  Only works in certain layouts.
     # Works in 'bsp' and 'columns' layout.
@@ -142,40 +107,7 @@ keys = [
     # Switch focus of monitors
     Key([mod], "period", lazy.next_screen(), desc='Move focus to next monitor'),
     Key([mod], "comma", lazy.prev_screen(), desc='Move focus to prev monitor'),
-    
-    # Emacs programs launched using the key chord SUPER+e followed by 'key'
-    KeyChord([mod],"e", [
-        Key([], "e", lazy.spawn(myEmacs), desc='Emacs Dashboard'),
-        Key([], "a", lazy.spawn(myEmacs + "--eval '(emms-play-directory-tree \"~/Music/\")'"), desc='Emacs EMMS'),
-        Key([], "b", lazy.spawn(myEmacs + "--eval '(ibuffer)'"), desc='Emacs Ibuffer'),
-        Key([], "d", lazy.spawn(myEmacs + "--eval '(dired nil)'"), desc='Emacs Dired'),
-        Key([], "i", lazy.spawn(myEmacs + "--eval '(erc)'"), desc='Emacs ERC'),
-        Key([], "s", lazy.spawn(myEmacs + "--eval '(eshell)'"), desc='Emacs Eshell'),
-        Key([], "v", lazy.spawn(myEmacs + "--eval '(vterm)'"), desc='Emacs Vterm'),
-        Key([], "w", lazy.spawn(myEmacs + "--eval '(eww \"distro.tube\")'"), desc='Emacs EWW'),
-        Key([], "F4", lazy.spawn("killall emacs"),
-                      lazy.spawn("/usr/bin/emacs --daemon"),
-                      desc='Kill/restart the Emacs daemon')
-    ]),
-    # Dmenu/rofi scripts launched using the key chord SUPER+p followed by 'key'
-    KeyChord([mod], "p", [
-        Key([], "h", lazy.spawn("dm-hub -r"), desc='List all dmscripts'),
-        Key([], "a", lazy.spawn("dm-sounds -r"), desc='Choose ambient sound'),
-        Key([], "b", lazy.spawn("dm-setbg -r"), desc='Set background'),
-        Key([], "c", lazy.spawn("dtos-colorscheme -r"), desc='Choose color scheme'),
-        Key([], "e", lazy.spawn("dm-confedit -r"), desc='Choose a config file to edit'),
-        Key([], "i", lazy.spawn("dm-maim -r"), desc='Take a screenshot'),
-        Key([], "k", lazy.spawn("dm-kill -r"), desc='Kill processes '),
-        Key([], "m", lazy.spawn("dm-man -r"), desc='View manpages'),
-        Key([], "n", lazy.spawn("dm-note -r"), desc='Store and copy notes'),
-        Key([], "o", lazy.spawn("dm-bookman -r"), desc='Browser bookmarks'),
-        Key([], "p", lazy.spawn("rofi-pass"), desc='Password menu'),
-        Key([], "q", lazy.spawn("dm-logout -r"), desc='Logout menu'),
-        Key([], "r", lazy.spawn("dm-radio -r"), desc='Listen to online radio'),
-        Key([], "s", lazy.spawn("dm-websearch -r"), desc='Search various engines'),
-        Key([], "t", lazy.spawn("dm-translate -r"), desc='Translate text'),
-        Key([], "u", lazy.spawn("dm-music -r"), desc='Toggle music mpc/mpd')
-    ])
+
 ]
 
 groups = []
@@ -196,7 +128,7 @@ for i in range(len(group_names)):
             layout=group_layouts[i].lower(),
             label=group_labels[i],
         ))
- 
+
 for i in groups:
     keys.extend(
         [
@@ -308,11 +240,11 @@ def init_widgets_list():
                  fontsize = 14
                  ),
         widget.LaunchBar(
-                 progs = [("🦁", "brave", "Brave web browser"),
-                          ("🚀", "alacritty", "Alacritty terminal"),
-                          ("📁", "pcmanfm", "PCManFM file manager"),
-                          ("🎸", "vlc", "VLC media player")
-                         ], 
+                 progs = [("🦁", myBrowser, "Web browser"),
+                          ("🚀", myTerm, "Yerminal"),
+                          ("📁", myFileManager, "File manager"),
+                          ("📮", myEmail, "Email client")
+                         ],
                  fontsize = 12,
                  padding = 12,
                  foreground = colors[3],
@@ -344,18 +276,18 @@ def init_widgets_list():
                  update_interval = 300,
                  func = lambda: subprocess.check_output("printf $(uname -r)", shell=True, text=True),
                  foreground = colors[3],
-                 padding = 8, 
+                 padding = 8,
                  fmt = '❤  {}',
                  ),
         widget.CPU(
                  foreground = colors[4],
-                 padding = 8, 
+                 padding = 8,
                  mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
                  format = '  Cpu: {load_percent}%',
                  ),
         widget.Memory(
                  foreground = colors[8],
-                 padding = 8, 
+                 padding = 8,
                  mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
                  format = '{MemUsed: .0f}{mm}',
                  fmt = '🖥  Mem: {}',
@@ -363,7 +295,7 @@ def init_widgets_list():
         widget.DF(
                  update_interval = 60,
                  foreground = colors[5],
-                 padding = 8, 
+                 padding = 8,
                  mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('notify-disk')},
                  partition = '/',
                  #format = '[{p}] {uf}{m} ({r:.0f}%)',
@@ -373,14 +305,14 @@ def init_widgets_list():
                  ),
         widget.Volume(
                  foreground = colors[7],
-                 padding = 8, 
+                 padding = 8,
                  fmt = '🕫  Vol: {}',
                  ),
         widget.Clock(
                  foreground = colors[8],
-                 padding = 8, 
+                 padding = 8,
                  mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn('notify-date')},
-                 ## Uncomment for date and time 
+                 ## Uncomment for date and time
                  # format = "⧗  %a, %b %d - %H:%M",
                  ## Uncomment for time only
                  format = "⧗  %I:%M %p",
@@ -393,7 +325,7 @@ def init_widgets_list():
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
-    return widgets_screen1 
+    return widgets_screen1
 
 # All other monitors' bars will display everything but widgets 22 (systray) and 23 (spacer).
 def init_widgets_screen2():
@@ -405,9 +337,10 @@ def init_widgets_screen2():
 # For ex: Screen(top=bar.Bar(widgets=init_widgets_screen2(), background="#00000000", size=24)),
 
 def init_screens():
-    return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[8, 12, 0, 12], size=30)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), margin=[8, 12, 0, 12], size=30)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), margin=[8, 12, 0, 12], size=30))]
+    return [
+        Screen(top=bar.Bar(widgets=init_widgets_screen1(), margin=[8, 12, 0, 12], size=30)),
+        Screen(top=bar.Bar(widgets=init_widgets_screen2(), margin=[8, 12, 0, 12], size=30)),
+    ]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
@@ -485,7 +418,7 @@ floating_layout = layout.Floating(
         Match(wm_class="tasty.javafx.launcher.LauncherFxApp"), # tastytrade settings
     ]
 )
-auto_fullscreen = True
+auto_fullscreen = False
 focus_on_window_activation = "smart"
 reconfigure_screens = True
 
