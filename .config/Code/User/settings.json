@@ -74,6 +74,7 @@
         "files.trimFinalNewlines": false,
         "files.trimTrailingWhitespace": true,
     },
+
     "git.autofetch": false,
     // Controls whether to enable automatic GitHub authentication for git commands within VS Code.
     "github.gitAuthentication": false,
@@ -202,7 +203,7 @@
     "editor.inlineSuggest.enabled": true,
 	"notebook.output.textLineLimit": 300,
     "github.copilot.enable": {
-        "*": true,
+        "*": false,
         "plaintext": true,
         "markdown": false,
         "scminput": false,
