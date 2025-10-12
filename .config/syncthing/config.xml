@@ -1,6 +1,9 @@
-<configuration version="37">
+<configuration version="51">
     <folder id="cph2609_kr3j-kuvat" label="OnePlusDCIM" path="/run/media/elmeri/Portable4T/OnePlusDCIM" type="receiveonly" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" fsWatcherTimeoutS="0" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
+        <device id="OL5XNCM-XIIHUYE-U5FLVIA-2VDDWYZ-3R2EY5P-ISCNBN4-VBFSTUO-PQFHUAN" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
         <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
@@ -20,15 +23,14 @@
         <ignoreDelete>false</ignoreDelete>
         <scanProgressIntervalS>0</scanProgressIntervalS>
         <pullerPauseS>0</pullerPauseS>
+        <pullerDelayS>1</pullerDelayS>
         <maxConflicts>10</maxConflicts>
         <disableSparseFiles>false</disableSparseFiles>
-        <disableTempIndexes>false</disableTempIndexes>
         <paused>false</paused>
-        <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
         <copyOwnershipFromParent>false</copyOwnershipFromParent>
         <modTimeWindowS>0</modTimeWindowS>
-        <maxConcurrentWrites>2</maxConcurrentWrites>
+        <maxConcurrentWrites>16</maxConcurrentWrites>
         <disableFsync>false</disableFsync>
         <blockPullOrder>standard</blockPullOrder>
         <copyRangeMethod>standard</copyRangeMethod>
@@ -45,10 +47,10 @@
     </folder>
     <folder id="cphja-pyiw5" label="Library" path="/run/media/elmeri/Portable4T/Library" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" fsWatcherTimeoutS="0" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
-        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
+        <device id="OL5XNCM-XIIHUYE-U5FLVIA-2VDDWYZ-3R2EY5P-ISCNBN4-VBFSTUO-PQFHUAN" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -64,15 +66,14 @@
         <ignoreDelete>false</ignoreDelete>
         <scanProgressIntervalS>0</scanProgressIntervalS>
         <pullerPauseS>0</pullerPauseS>
+        <pullerDelayS>1</pullerDelayS>
         <maxConflicts>10</maxConflicts>
         <disableSparseFiles>false</disableSparseFiles>
-        <disableTempIndexes>false</disableTempIndexes>
         <paused>false</paused>
-        <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
         <copyOwnershipFromParent>false</copyOwnershipFromParent>
         <modTimeWindowS>0</modTimeWindowS>
-        <maxConcurrentWrites>2</maxConcurrentWrites>
+        <maxConcurrentWrites>16</maxConcurrentWrites>
         <disableFsync>false</disableFsync>
         <blockPullOrder>standard</blockPullOrder>
         <copyRangeMethod>standard</copyRangeMethod>
@@ -89,10 +90,10 @@
     </folder>
     <folder id="il9w5-md2bm" label="gocryptfs" path="/run/media/elmeri/Portable4T/gocryptfs" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" fsWatcherTimeoutS="0" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
-        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
+        <device id="OL5XNCM-XIIHUYE-U5FLVIA-2VDDWYZ-3R2EY5P-ISCNBN4-VBFSTUO-PQFHUAN" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -108,15 +109,14 @@
         <ignoreDelete>false</ignoreDelete>
         <scanProgressIntervalS>0</scanProgressIntervalS>
         <pullerPauseS>0</pullerPauseS>
+        <pullerDelayS>1</pullerDelayS>
         <maxConflicts>10</maxConflicts>
         <disableSparseFiles>false</disableSparseFiles>
-        <disableTempIndexes>false</disableTempIndexes>
         <paused>false</paused>
-        <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
         <copyOwnershipFromParent>false</copyOwnershipFromParent>
         <modTimeWindowS>0</modTimeWindowS>
-        <maxConcurrentWrites>2</maxConcurrentWrites>
+        <maxConcurrentWrites>16</maxConcurrentWrites>
         <disableFsync>false</disableFsync>
         <blockPullOrder>standard</blockPullOrder>
         <copyRangeMethod>standard</copyRangeMethod>
@@ -133,6 +133,9 @@
     </folder>
     <folder id="j1vtk-ct9rs" label="OnePlusPictures" path="/run/media/elmeri/Portable4T/OnePlusPictures" type="receiveonly" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" fsWatcherTimeoutS="0" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
+        <device id="OL5XNCM-XIIHUYE-U5FLVIA-2VDDWYZ-3R2EY5P-ISCNBN4-VBFSTUO-PQFHUAN" introducedBy="">
+            <encryptionPassword></encryptionPassword>
+        </device>
         <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
@@ -152,15 +155,14 @@
         <ignoreDelete>false</ignoreDelete>
         <scanProgressIntervalS>0</scanProgressIntervalS>
         <pullerPauseS>0</pullerPauseS>
+        <pullerDelayS>1</pullerDelayS>
         <maxConflicts>10</maxConflicts>
         <disableSparseFiles>false</disableSparseFiles>
-        <disableTempIndexes>false</disableTempIndexes>
         <paused>false</paused>
-        <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
         <copyOwnershipFromParent>false</copyOwnershipFromParent>
         <modTimeWindowS>0</modTimeWindowS>
-        <maxConcurrentWrites>2</maxConcurrentWrites>
+        <maxConcurrentWrites>16</maxConcurrentWrites>
         <disableFsync>false</disableFsync>
         <blockPullOrder>standard</blockPullOrder>
         <copyRangeMethod>standard</copyRangeMethod>
@@ -177,10 +179,10 @@
     </folder>
     <folder id="ru9y2-diehk" label="Documents" path="/run/media/elmeri/Portable4T/Documents" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" fsWatcherTimeoutS="0" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
-        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
+        <device id="OL5XNCM-XIIHUYE-U5FLVIA-2VDDWYZ-3R2EY5P-ISCNBN4-VBFSTUO-PQFHUAN" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -198,15 +200,14 @@
         <ignoreDelete>false</ignoreDelete>
         <scanProgressIntervalS>0</scanProgressIntervalS>
         <pullerPauseS>0</pullerPauseS>
+        <pullerDelayS>1</pullerDelayS>
         <maxConflicts>10</maxConflicts>
         <disableSparseFiles>false</disableSparseFiles>
-        <disableTempIndexes>false</disableTempIndexes>
         <paused>false</paused>
-        <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
         <copyOwnershipFromParent>false</copyOwnershipFromParent>
         <modTimeWindowS>0</modTimeWindowS>
-        <maxConcurrentWrites>2</maxConcurrentWrites>
+        <maxConcurrentWrites>16</maxConcurrentWrites>
         <disableFsync>false</disableFsync>
         <blockPullOrder>standard</blockPullOrder>
         <copyRangeMethod>standard</copyRangeMethod>
@@ -223,10 +224,10 @@
     </folder>
     <folder id="spkhn-uzvgh" label="Memories" path="/run/media/elmeri/Portable4T/Memories" type="sendreceive" rescanIntervalS="3600" fsWatcherEnabled="true" fsWatcherDelayS="10" fsWatcherTimeoutS="0" ignorePerms="false" autoNormalize="true">
         <filesystemType>basic</filesystemType>
-        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
+        <device id="OL5XNCM-XIIHUYE-U5FLVIA-2VDDWYZ-3R2EY5P-ISCNBN4-VBFSTUO-PQFHUAN" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
-        <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" introducedBy="">
+        <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" introducedBy="">
             <encryptionPassword></encryptionPassword>
         </device>
         <minDiskFree unit="%">1</minDiskFree>
@@ -242,15 +243,14 @@
         <ignoreDelete>false</ignoreDelete>
         <scanProgressIntervalS>0</scanProgressIntervalS>
         <pullerPauseS>0</pullerPauseS>
+        <pullerDelayS>1</pullerDelayS>
         <maxConflicts>10</maxConflicts>
         <disableSparseFiles>false</disableSparseFiles>
-        <disableTempIndexes>false</disableTempIndexes>
         <paused>false</paused>
-        <weakHashThresholdPct>25</weakHashThresholdPct>
         <markerName>.stfolder</markerName>
         <copyOwnershipFromParent>false</copyOwnershipFromParent>
         <modTimeWindowS>0</modTimeWindowS>
-        <maxConcurrentWrites>2</maxConcurrentWrites>
+        <maxConcurrentWrites>16</maxConcurrentWrites>
         <disableFsync>false</disableFsync>
         <blockPullOrder>standard</blockPullOrder>
         <copyRangeMethod>standard</copyRangeMethod>
@@ -265,9 +265,9 @@
             <maxTotalSize>4096</maxTotalSize>
         </xattrFilter>
     </folder>
-    <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" name="archlinux" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
+    <device id="OL5XNCM-XIIHUYE-U5FLVIA-2VDDWYZ-3R2EY5P-ISCNBN4-VBFSTUO-PQFHUAN" name="Homeserver" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
-        <paused>true</paused>
+        <paused>false</paused>
         <autoAcceptFolders>false</autoAcceptFolders>
         <maxSendKbps>0</maxSendKbps>
         <maxRecvKbps>0</maxRecvKbps>
@@ -276,9 +276,9 @@
         <remoteGUIPort>0</remoteGUIPort>
         <numConnections>0</numConnections>
     </device>
-    <device id="XYM4VSJ-JCEG7CN-NONTPPS-WYTGRNC-GWN2J4G-OHNBJOF-OPBGSTC-ITDVNQE" name="Homeserver" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
+    <device id="WTUYDZM-ALVCUNO-C42GYJI-J2AM5JR-QXVG6OO-HG4FFSK-EKGE4CO-5N45VAD" name="archlinux" compression="metadata" introducer="false" skipIntroductionRemovals="false" introducedBy="">
         <address>dynamic</address>
-        <paused>false</paused>
+        <paused>true</paused>
         <autoAcceptFolders>false</autoAcceptFolders>
         <maxSendKbps>0</maxSendKbps>
         <maxRecvKbps>0</maxRecvKbps>
@@ -298,7 +298,7 @@
         <remoteGUIPort>0</remoteGUIPort>
         <numConnections>0</numConnections>
     </device>
-    <gui enabled="true" tls="false" debugging="false" sendBasicAuthPrompt="false">
+    <gui enabled="true" tls="false" sendBasicAuthPrompt="false">
         <address>127.0.0.1:8384</address>
         <metricsWithoutAuth>false</metricsWithoutAuth>
         <apikey>xgPTJCerDnSmbwaX4kzezYnuMHJW9oAD</apikey>
@@ -346,7 +346,6 @@
         <stunKeepaliveStartS>180</stunKeepaliveStartS>
         <stunKeepaliveMinS>20</stunKeepaliveMinS>
         <stunServer>default</stunServer>
-        <databaseTuning>auto</databaseTuning>
         <maxConcurrentIncomingRequestKiB>0</maxConcurrentIncomingRequestKiB>
         <announceLANAddresses>true</announceLANAddresses>
         <sendFullIndexOnUpgrade>false</sendFullIndexOnUpgrade>
@@ -380,15 +379,14 @@
             <ignoreDelete>false</ignoreDelete>
             <scanProgressIntervalS>0</scanProgressIntervalS>
             <pullerPauseS>0</pullerPauseS>
+            <pullerDelayS>1</pullerDelayS>
             <maxConflicts>10</maxConflicts>
             <disableSparseFiles>false</disableSparseFiles>
-            <disableTempIndexes>false</disableTempIndexes>
             <paused>false</paused>
-            <weakHashThresholdPct>25</weakHashThresholdPct>
             <markerName>.stfolder</markerName>
             <copyOwnershipFromParent>false</copyOwnershipFromParent>
             <modTimeWindowS>0</modTimeWindowS>
-            <maxConcurrentWrites>2</maxConcurrentWrites>
+            <maxConcurrentWrites>16</maxConcurrentWrites>
             <disableFsync>false</disableFsync>
             <blockPullOrder>standard</blockPullOrder>
             <copyRangeMethod>standard</copyRangeMethod>
