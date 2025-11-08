@@ -17,7 +17,7 @@
     "qt_gui_color_theme": "dark",
     "receive_qr_visible": true,
     "receive_tabs_index": 1,
-    "server": "192.168.1.250:50001:t",
+    "server": "bitcoin-rpc.eniemela.fi:50012:s",
     "show_addresses_tab": true,
     "show_channels_tab": true,
     "show_console_tab": true,
