@@ -223,6 +223,8 @@
     "editor.minimap.enabled": false,
     "window.zoomLevel": -1,
     "workbench.startupEditor": "none",
+    "claudeCode.preferredLocation": "panel",
+    "claudeCode.useTerminal": true,
 
 
 }
