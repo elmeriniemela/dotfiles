@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE
