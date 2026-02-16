@@ -9,5 +9,6 @@ then
     fi
     export ODOO_CONFIG_FILE=$2
     export ODOO_VERSION_DIR=$HOME"/Work/${1:4}"
+    export ODOO_MODULE="$(basename "$PWD")"
 fi
 . $HOME/.venv/$1/bin/activate
