@@ -35,10 +35,18 @@ run_upgrade() {
     $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -u $ODOO_MODULE --stop-after-init --http-port=0
 }
 run_tests() {
-    # TODO: if --no-coverage flag is given, run this command instead (and shift the args somehow that --no-coverage doesn't get passed to to odoo):
-    # $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -u $ODOO_MODULE --stop-after-init --http-port=0 --test-enable --test-tags=$ODOO_MODULE
-    $ODOO_VENV/python -m coverage run --omit=__manifest__.py --source=$PWD $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -u $ODOO_MODULE --stop-after-init --http-port=0 --test-enable --test-tags=$ODOO_MODULE
-    $ODOO_VENV/python -m coverage report -m
+    local use_coverage=1 arg
+    local -a args=()
+    for arg in "$@"; do [[ "$arg" == "--no-coverage" ]] && use_coverage=0 || args+=("$arg"); done
+
+    set -- "${args[@]}" --conf "$ODOO_VERSION_DIR/$ODOO_CONFIG_FILE" -u "$ODOO_MODULE" --stop-after-init --http-port=0 --test-enable --test-tags="$ODOO_MODULE"
+
+    if (( use_coverage )); then
+        $ODOO_VENV/python -m coverage run --omit=__manifest__.py --source="$PWD" "$ODOO_VERSION_DIR/odoo/odoo-bin" "$@"
+        $ODOO_VENV/python -m coverage report -m
+    else
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin "$@"
+    fi
 }
 run_translate() {
     $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -u i18n export $ODOO_MODULE
