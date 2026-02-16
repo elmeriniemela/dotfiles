@@ -1,0 +1,27 @@
+model = "gpt-5.3-codex"
+model_reasoning_effort = "xhigh"
+
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+network_access = true
+writable_roots = [
+  "/var/run/postgresql",
+  "/run/postgresql",
+  "/home/elmeri/.local/share/Odoo",
+  "/home/elmeri/Work/19",
+  "/tmp"
+]
+
+[projects."/home/elmeri/Work/19/sahkoinfo_addons/sprintit_gimlet_lms"]
+trust_level = "trusted"
+
+[projects."/home/elmeri/Work/19/sahkoinfo_addons/sprintit_digital_materials"]
+trust_level = "trusted"
+
+[projects."/home/elmeri/Work/19/sahkoinfo_addons"]
+trust_level = "trusted"
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["@playwright/mcp@latest"]

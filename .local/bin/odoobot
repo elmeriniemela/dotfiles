@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_NAME="odoobot"
+
+show_help() {
+  cat <<EOF
+Usage:
+  ${SCRIPT_NAME} <version> <conf> <function> [optional args...]
+  ${SCRIPT_NAME} --help
+
+Description:
+    Script for running Odoo locally via AI agents. It assumes the current working directory is an Odoo module.
+  - version: sets ODOO_VERSION, i.e. '19'
+  - conf: sets ODOO_CONFIG_FILE, i.e. 'test.conf'
+  - function: chooses which script branch runs
+
+Supported functions:
+  server
+  upgrade
+  tests
+  translate
+
+Optional args are passed into odoo-bin.
+
+Current behavior:
+  Each function branch only prints the parsed arguments.
+EOF
+}
+
+run_server() {
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE
+}
+run_upgrade() {
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -u $ODOO_MODULE --stop-after-init --http-port=0
+}
+run_tests() {
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -u $ODOO_MODULE --stop-after-init --http-port=0 --test-enable --test-tags=$ODOO_MODULE
+}
+run_translate() {
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -u i18n export $ODOO_MODULE --languages=fi
+}
+
+if [[ $# -lt 3 ]]; then
+  echo "Error: missing required arguments."
+  echo
+  show_help
+  exit 1
+fi
+
+export ODOO_VERSION="$1"
+export ODOO_CONFIG_FILE="$2"
+export ODOO_FUNCTION="$3"
+shift 3
+
+export ODOO_VENV="$HOME/.venv/odoo$ODOO_VERSION/bin"
+export ODOO_VERSION_DIR=$HOME"/Work/${ODOO_VERSION}"
+export ODOO_MODULE="$(basename "$PWD")"
+
+case "${ODOO_FUNCTION}" in
+  server)
+    run_server "$@"
+    ;;
+  upgrade)
+    run_upgrade "$@"
+    ;;
+  tests)
+    run_tests "$@"
+    ;;
+  translate)
+    run_translate "$@"
+    ;;
+  --help|-h|help)
+    show_help
+    ;;
+  *)
+    echo "Error: unknown function '${ODOO_FUNCTION}'."
+    echo
+    show_help
+    exit 1
+    ;;
+esac
