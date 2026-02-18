@@ -18,13 +18,10 @@ Description:
 Supported functions:
   server
   upgrade
-  tests
+  tests [optional --no-coverage]
   translate
 
-Optional args are passed into odoo-bin.
-
-Current behavior:
-  Each function branch only prints the parsed arguments.
+Optional args are passed into odoo-bin, unless the function specifies a separate meaning for them.
 EOF
 }
 
