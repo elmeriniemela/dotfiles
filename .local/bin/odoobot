@@ -62,7 +62,7 @@ export ODOO_FUNCTION="$3"
 shift 3
 
 export ODOO_VENV="$HOME/.venv/odoo$ODOO_VERSION/bin"
-export ODOO_VERSION_DIR=$HOME"/Work/${ODOO_VERSION}"
+export ODOO_VERSION_DIR=$HOME"/Odoo/${ODOO_VERSION}"
 export ODOO_MODULE="$(basename "$PWD")"
 
 case "${ODOO_FUNCTION}" in

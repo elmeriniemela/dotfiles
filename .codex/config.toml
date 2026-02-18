@@ -9,17 +9,17 @@ writable_roots = [
   "/var/run/postgresql",
   "/run/postgresql",
   "/home/elmeri/.local/share/Odoo",
-  "/home/elmeri/Work/19",
+  "/home/elmeri/Odoo/19",
   "/tmp"
 ]
 
-[projects."/home/elmeri/Work/19/sahkoinfo_addons/sprintit_gimlet_lms"]
+[projects."/home/elmeri/Odoo/19/sahkoinfo_addons/sprintit_gimlet_lms"]
 trust_level = "trusted"
 
-[projects."/home/elmeri/Work/19/sahkoinfo_addons/sprintit_digital_materials"]
+[projects."/home/elmeri/Odoo/19/sahkoinfo_addons/sprintit_digital_materials"]
 trust_level = "trusted"
 
-[projects."/home/elmeri/Work/19/sahkoinfo_addons"]
+[projects."/home/elmeri/Odoo/19/sahkoinfo_addons"]
 trust_level = "trusted"
 
 [mcp_servers.playwright]
