@@ -46,7 +46,7 @@ run_tests() {
     fi
 }
 run_translate() {
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -u i18n export $ODOO_MODULE
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n export --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE $ODOO_MODULE $*
 }
 
 if [[ $# -lt 3 ]]; then
