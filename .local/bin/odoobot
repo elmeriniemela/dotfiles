@@ -18,6 +18,7 @@ Description:
 Supported functions:
   server
   upgrade
+  install
   tests [optional --no-coverage]
   translate
 
@@ -26,17 +27,20 @@ EOF
 }
 
 run_server() {
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$"
 }
 run_upgrade() {
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -u $ODOO_MODULE --stop-after-init --http-port=0
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0
+}
+run_install() {
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -i $ODOO_MODULE --stop-after-init --http-port=0
 }
 run_tests() {
     local use_coverage=1 arg
     local -a args=()
     for arg in "$@"; do [[ "$arg" == "--no-coverage" ]] && use_coverage=0 || args+=("$arg"); done
 
-    set -- "${args[@]}" --conf "$ODOO_VERSION_DIR/$ODOO_CONFIG_FILE" -u "$ODOO_MODULE" --stop-after-init --http-port=0 --test-enable --test-tags="$ODOO_MODULE"
+    set -- "${args[@]}" --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0 --test-enable --test-tags=$ODOO_MODULE
 
     if (( use_coverage )); then
         $ODOO_VENV/python -m coverage run --omit=__manifest__.py --source="$PWD" "$ODOO_VERSION_DIR/odoo/odoo-bin" "$@"
@@ -46,7 +50,8 @@ run_tests() {
     fi
 }
 run_translate() {
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n export --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE $ODOO_MODULE $*
+    mkdir -p i18n
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n export --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" $ODOO_MODULE $*
 }
 
 if [[ $# -lt 3 ]]; then
@@ -64,6 +69,7 @@ shift 3
 export ODOO_VENV="$HOME/.venv/odoo$ODOO_VERSION/bin"
 export ODOO_VERSION_DIR=$HOME"/Odoo/${ODOO_VERSION}"
 export ODOO_MODULE="$(basename "$PWD")"
+export ODOO_DATABASE="$ODOO_VERSION-$ODOO_MODULE"
 
 case "${ODOO_FUNCTION}" in
   server)
@@ -71,6 +77,9 @@ case "${ODOO_FUNCTION}" in
     ;;
   upgrade)
     run_upgrade "$@"
+    ;;
+  install)
+    run_install "$@"
     ;;
   tests)
     run_tests "$@"
