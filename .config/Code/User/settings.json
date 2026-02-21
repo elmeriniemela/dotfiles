@@ -100,7 +100,6 @@
         "**/*.blg": true,
         "**/*.fdb_latexmk": true,
         "**/*.aux": true,
-        "**/tests/*": true
     },
     // "latex-workshop.latex.magic.args": [
     //     "-synctex=1",
