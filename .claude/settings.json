@@ -1,0 +1,11 @@
+{
+    "model": "opus",
+    "enabledPlugins": {
+        "pyright-lsp@claude-plugins-official": true
+    },
+    "additionalDirectories": [
+        "~/Odoo",
+        "~/Projects"
+    ],
+    "effortLevel": "high"
+}
