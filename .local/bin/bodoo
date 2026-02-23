@@ -51,7 +51,8 @@ run_tests() {
 }
 run_translate() {
     mkdir -p i18n
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n export --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" $ODOO_MODULE $*
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n loadlang --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE $*
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n export --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE $ODOO_MODULE $*
 }
 
 if [[ $# -lt 3 ]]; then
