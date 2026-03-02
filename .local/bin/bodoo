@@ -20,22 +20,33 @@ Supported functions:
   upgrade
   install
   tests [optional --no-coverage]
-  translate
+  translate [required --language=X]
 
 Optional args are passed into odoo-bin, unless the function specifies a separate meaning for them.
 EOF
+}
+
+ensure_manifest() {
+    if [[ ! -f "__manifest__.py" ]]; then
+        echo "Error: __manifest__.py does not exist. $ODOO_MODULE is not an odoo module." >&2
+        exit 1
+    fi
 }
 
 run_server() {
     $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$"
 }
 run_upgrade() {
+    ensure_manifest
     $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0
 }
 run_install() {
+    ensure_manifest
+    dropdb $ODOO_DATABASE
     $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -i $ODOO_MODULE --stop-after-init --http-port=0
 }
 run_tests() {
+    ensure_manifest
     local use_coverage=1 arg
     local -a args=()
     for arg in "$@"; do [[ "$arg" == "--no-coverage" ]] && use_coverage=0 || args+=("$arg"); done
@@ -50,6 +61,7 @@ run_tests() {
     fi
 }
 run_translate() {
+    ensure_manifest
     mkdir -p i18n
     $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n loadlang --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE $*
     $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n export --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE $ODOO_MODULE $*

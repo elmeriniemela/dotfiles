@@ -1,5 +1,9 @@
 {
     "auto_connect": false,
+    "blockchain_preferred_block": {
+        "hash": "000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1b60a8ce26f",
+        "height": 0
+    },
     "check_updates": false,
     "config_version": 3,
     "dark_icon": true,
@@ -9,19 +13,21 @@
     "fee_level": 0,
     "fee_per_kb": 1000,
     "fiat_address": true,
+    "gui_last_wallet": "/home/elmeri/.electrum/wallets/cold.watch",
     "history_rates": true,
     "history_rates_capital_gains": true,
     "mempool_fees": false,
     "oneserver": true,
-    "gui_last_wallet": "/home/elmeri/.electrum/wallets/cold.watch",
     "qt_gui_color_theme": "dark",
     "receive_qr_visible": true,
     "receive_tabs_index": 1,
+    "rpcuser": "user",
     "server": "bitcoin-rpc.eniemela.fi:50012:s",
     "show_addresses_tab": true,
     "show_channels_tab": true,
     "show_console_tab": true,
     "show_contacts_tab": true,
     "show_utxo_tab": true,
+    "terms_of_use_accepted": 1,
     "use_exchange_rate": true
 }
