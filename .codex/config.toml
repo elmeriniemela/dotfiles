@@ -8,17 +8,8 @@ network_access = true
 writable_roots = [
   "/var/run/postgresql",
   "/home/elmeri/.local/share/Odoo",
-  "/home/elmeri/Odoo",
+  "/home/elmeri/Odoo/src",
 ]
-
-[projects."/home/elmeri/Odoo/19/sahkoinfo_addons/sprintit_gimlet_lms"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Odoo/19/sahkoinfo_addons/sprintit_digital_materials"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Odoo/19/sahkoinfo_addons"]
-trust_level = "trusted"
 
 [mcp_servers.playwright]
 command = "npx"
