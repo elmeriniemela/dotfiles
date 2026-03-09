@@ -13,7 +13,11 @@ writable_roots = [
 
 [mcp_servers.playwright]
 command = "npx"
-args = ["@playwright/mcp@latest"]
+args = [
+  "@playwright/mcp@latest",
+  "--allowed-hosts=localhost,127.0.0.1"
+]
 
 [notice.model_migrations]
 "gpt-5.1-codex-max" = "gpt-5.3-codex"
+"gpt-5.3-codex" = "gpt-5.4"
