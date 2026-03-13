@@ -6,13 +6,12 @@ SCRIPT_NAME="odoobot"
 show_help() {
   cat <<EOF
 Usage:
-  ${SCRIPT_NAME} <version> <conf> <function> [optional args...]
+  ${SCRIPT_NAME} <version> <function> [optional args...]
   ${SCRIPT_NAME} --help
 
 Description:
     Script for running Odoo locally via AI agents. It assumes the current working directory is an Odoo module.
   - version: sets ODOO_VERSION, i.e. '19'
-  - conf: sets ODOO_CONFIG_FILE, i.e. 'test.conf'
   - function: chooses which script branch runs
 
 Supported functions:
@@ -26,6 +25,21 @@ Optional args are passed into odoo-bin, unless the function specifies a separate
 EOF
 }
 
+ensure_odoo_config() {
+    local dir="$PWD"
+
+    while [[ "$dir" != "/" ]]; do
+        if [[ -f "$dir/odoorc.conf" ]]; then
+            export ODOO_CONFIG_FILE="$dir/odoorc.conf"
+            return 0
+        fi
+        dir="$(dirname "$dir")"
+    done
+
+    echo "Error: odoorc.conf does not exist in any parent dir." >&2
+    exit 1
+}
+
 ensure_manifest() {
     if [[ ! -f "__manifest__.py" ]]; then
         echo "Error: __manifest__.py does not exist. $ODOO_MODULE is not an odoo module." >&2
@@ -34,16 +48,17 @@ ensure_manifest() {
 }
 
 run_server() {
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$"
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$"
 }
 run_upgrade() {
     ensure_manifest
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0
 }
 run_install() {
     ensure_manifest
-    dropdb $ODOO_DATABASE
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -i $ODOO_MODULE --stop-after-init --http-port=0
+    dropdb $ODOO_DATABASE 2>/dev/null || :
+    echo "Install $ODOO_MODULE"
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -i $ODOO_MODULE --stop-after-init --http-port=0
 }
 run_tests() {
     ensure_manifest
@@ -51,7 +66,7 @@ run_tests() {
     local -a args=()
     for arg in "$@"; do [[ "$arg" == "--no-coverage" ]] && use_coverage=0 || args+=("$arg"); done
 
-    set -- "${args[@]}" --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0 --test-enable --test-tags=$ODOO_MODULE
+    set -- "${args[@]}" --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0 --test-enable --test-tags=$ODOO_MODULE
 
     if (( use_coverage )); then
         $ODOO_VENV/python -m coverage run --omit=__manifest__.py --source="$PWD" "$ODOO_VERSION_DIR/odoo/odoo-bin" "$@"
@@ -62,12 +77,13 @@ run_tests() {
 }
 run_translate() {
     ensure_manifest
+    run_upgrade
     mkdir -p i18n
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n loadlang --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE $*
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n export --conf $ODOO_VERSION_DIR/$ODOO_CONFIG_FILE -d $ODOO_DATABASE $ODOO_MODULE $*
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n loadlang --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE $*
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n export --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE $ODOO_MODULE $*
 }
 
-if [[ $# -lt 3 ]]; then
+if [[ $# -lt 2 ]]; then
   echo "Error: missing required arguments."
   echo
   show_help
@@ -75,14 +91,15 @@ if [[ $# -lt 3 ]]; then
 fi
 
 export ODOO_VERSION="$1"
-export ODOO_CONFIG_FILE="$2"
-export ODOO_FUNCTION="$3"
-shift 3
+export ODOO_FUNCTION="$2"
+shift 2
+
 
 export ODOO_VENV="$HOME/.venv/odoo$ODOO_VERSION/bin"
-export ODOO_VERSION_DIR=$HOME"/Odoo/${ODOO_VERSION}"
+export ODOO_VERSION_DIR=$HOME"/Odoo/src/${ODOO_VERSION}"
 export ODOO_MODULE="$(basename "$PWD")"
 export ODOO_DATABASE="$ODOO_VERSION-$ODOO_MODULE"
+ensure_odoo_config
 
 case "${ODOO_FUNCTION}" in
   server)
