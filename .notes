@@ -58,3 +58,4 @@ syncronized = syncronization of execution time and mutually excluded data access
 git rebase --interactive HEAD~2
 pip install pyopenssl==22.1.0
 find . -type f -exec dos2unix {} \;
+grep -Ev '^[[:space:]#]|^$' /opt/odoo/odoo-server.conf

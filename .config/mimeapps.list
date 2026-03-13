@@ -50,5 +50,7 @@ image/x-portable-graymap=org.nomacs.ImageLounge.desktop
 x-scheme-handler/magnet=deluge.desktop
 application/x-zerosize=code.desktop
 image/svg+xml=org.nomacs.ImageLounge.desktop
+x-scheme-handler/sgnl=signal.desktop
+x-scheme-handler/signalcaptcha=signal.desktop
 
 [Removed Associations]

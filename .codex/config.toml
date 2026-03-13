@@ -3,6 +3,9 @@ model_reasoning_effort = "xhigh"
 
 sandbox_mode = "workspace-write"
 
+model_reasoning_summary = "none"          # Disable summaries
+model_verbosity = "low"                   # Shorten responses
+
 [sandbox_workspace_write]
 network_access = true
 writable_roots = [
