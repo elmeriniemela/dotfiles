@@ -6,6 +6,7 @@ sandbox_mode = "workspace-write"
 model_reasoning_summary = "none"          # Disable summaries
 model_verbosity = "low"                   # Shorten responses
 
+
 [sandbox_workspace_write]
 network_access = true
 writable_roots = [
@@ -20,6 +21,9 @@ args = [
   "@playwright/mcp@latest",
   "--allowed-hosts=localhost,127.0.0.1"
 ]
+
+[mcp_servers.figma]
+url = "https://mcp.figma.com/mcp"
 
 [notice.model_migrations]
 "gpt-5.1-codex-max" = "gpt-5.3-codex"
