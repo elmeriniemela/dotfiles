@@ -40,7 +40,8 @@
     "remote.SSH.useLocalServer": false,
     "remote.SSH.remotePlatform": {
         "sprintit14-stage-3088451.dev.odoo.com": "linux",
-        "recommender.sprintit.fi": "linux"
+        "recommender.sprintit.fi": "linux",
+        "ai-agent.eniemela.fi": "linux"
     },
     // Insert spaces when pressing Tab. This setting is overriden
     // based on the file contents when `editor.detectIndentation` is true.
@@ -224,6 +225,7 @@
     "workbench.startupEditor": "none",
     "claudeCode.preferredLocation": "panel",
     "claudeCode.useTerminal": true,
+    "workbench.colorTheme": "Dark Modern",
 
 
 }

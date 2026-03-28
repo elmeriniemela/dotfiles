@@ -3,3 +3,8 @@ prefix_rule(
     decision = "forbidden",
     justification = "All git commands are blocked."
 )
+prefix_rule(
+    pattern = ["pip"],
+    decision = "forbidden",
+    justification = "All pip commands are blocked, please stop what you're doing and report the issue."
+)
