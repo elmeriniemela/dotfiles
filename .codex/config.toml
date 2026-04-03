@@ -28,3 +28,8 @@ url = "https://mcp.figma.com/mcp"
 [notice.model_migrations]
 "gpt-5.1-codex-max" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
+
+[projects."/home/elmeri/Odoo/src/**"]
+trust_level = "trusted"
+
+

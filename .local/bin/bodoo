@@ -20,7 +20,7 @@ Supported functions:
   install
   dropdb
   tests [optional --no-coverage]
-  translate [required --language=X]
+  translate <lang>
 
 Optional args are passed into odoo-bin, unless the function specifies a separate meaning for them.
 EOF
@@ -255,6 +255,20 @@ restore_odoo_python_pairs() {
 }
 
 
+ensure_odoo_env() {
+    local dir="$PWD"
+
+    while [[ "$dir" != "/" ]]; do
+        if [[ -f "$dir/odoorc.env" ]]; then
+            source $dir/odoorc.env
+            return 0
+        fi
+        dir="$(dirname "$dir")"
+    done
+
+    echo "Error: odoorc.env does not exist in any parent dir." >&2
+    exit 1
+}
 
 ensure_odoo_config() {
     local dir="$PWD"
@@ -262,18 +276,6 @@ ensure_odoo_config() {
     while [[ "$dir" != "/" ]]; do
         if [[ -f "$dir/odoorc.conf" ]]; then
             export ODOO_CONFIG_FILE="$dir/odoorc.conf"
-            export ODOO_VERSION
-            ODOO_VERSION="$(awk -F= '
-                /^[[:space:]]*odoo_version[[:space:]]*=/ {
-                    gsub(/^[[:space:]]+|[[:space:]]+$/, "", $2)
-                    print $2
-                    exit
-                }
-            ' "$ODOO_CONFIG_FILE")"
-            if [[ -z "$ODOO_VERSION" ]]; then
-                echo "Error: $ODOO_CONFIG_FILE must contain 'odoo_version = <version>'." >&2
-                exit 1
-            fi
             return 0
         fi
         dir="$(dirname "$dir")"
@@ -305,7 +307,7 @@ run_dropdb() {
 }
 run_install() {
     echo "Install $ODOO_MODULE"
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" --load-language=fi_FI -i $ODOO_MODULE --stop-after-init --http-port=0
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" --load-language=en_US -i $ODOO_MODULE --stop-after-init --http-port=0
 }
 run_tests() {
     local use_coverage=1 arg
@@ -324,15 +326,20 @@ run_tests() {
 run_translate() {
     run_upgrade
     mkdir -p i18n
-    touch i18n/fi.po
+    touch i18n/$1.po
     SAVED_TSV="i18n/saved.tsv"
     trap 'rm -rf "i18n/saved.tsv"' EXIT
 
 
-    extract_odoo_python_pairs "i18n/fi.po"
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n loadlang --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE $*
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n export --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE $ODOO_MODULE $*
-    restore_odoo_python_pairs "i18n/fi.po"
+    extract_odoo_python_pairs "i18n/$1.po"
+    if (( ODOO_VERSION <= 18 )); then
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE -u $ODOO_MODULE --load-language=fi_FI --stop-after-init
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin --i18n-export=i18n/$1.po --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --modules=$ODOO_MODULE --language=fi_FI
+    else
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n loadlang --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --languages=$1
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n export --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE $ODOO_MODULE --languages=$1
+    fi
+    restore_odoo_python_pairs "i18n/$1.po"
 }
 
 if [[ $# -lt 1 ]]; then
@@ -351,6 +358,7 @@ if [[ "$ODOO_FUNCTION" == "--help" || "$ODOO_FUNCTION" == "-h" || "$ODOO_FUNCTIO
 fi
 
 # Set ODOO_VERSION first
+ensure_odoo_env
 ensure_odoo_config
 
 export ODOO_VENV="$HOME/.venv/odoo$ODOO_VERSION/bin"
