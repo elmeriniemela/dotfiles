@@ -6,21 +6,24 @@ SCRIPT_NAME="bodoo"
 show_help() {
   cat <<EOF
 Usage:
-  ${SCRIPT_NAME} <function> [optional args...]
+  ${SCRIPT_NAME} [function] [optional args...]
+  ${SCRIPT_NAME} [odoo-bin args...]
   ${SCRIPT_NAME} --help
 
 Description:
-    Script for running Odoo locally via AI agents. It assumes the current working directory is an Odoo module.
-  - function: chooses which script branch runs
+  Script for running Odoo locally via AI agents. It assumes the current working directory is an Odoo module.
+  - function: optional, chooses a non-server branch
 
 Supported functions:
   version
-  server
   upgrade
   install
   dropdb
   tests [optional --no-coverage]
   translate <lang>
+
+Default behavior:
+  Runs the Odoo server (run_server) when no function is selected.
 
 Optional args are passed into odoo-bin, unless the function specifies a separate meaning for them.
 EOF
@@ -126,19 +129,21 @@ run_translate() {
     restore_odoo_python_pairs "i18n/$1.po"
 }
 
-if [[ $# -lt 1 ]]; then
-  echo "Error: missing required arguments."
-  echo
-  show_help
-  exit 1
-fi
-
-export ODOO_FUNCTION="$1"
-shift
-
-if [[ "$ODOO_FUNCTION" == "--help" || "$ODOO_FUNCTION" == "-h" || "$ODOO_FUNCTION" == "help" ]]; then
-  show_help
-  exit 0
+export ODOO_FUNCTION=""
+if [[ $# -gt 0 ]]; then
+  case "$1" in
+    --help|-h|help)
+      show_help
+      exit 0
+      ;;
+    version|upgrade|install|dropdb|tests|translate)
+      export ODOO_FUNCTION="$1"
+      shift
+      ;;
+    *)
+      # No function selected: default to server and pass all args through.
+      ;;
+  esac
 fi
 
 # Set ODOO_VERSION first
@@ -157,9 +162,6 @@ case "${ODOO_FUNCTION}" in
   version)
     run_version
     ;;
-  server)
-    run_server "$@"
-    ;;
   upgrade)
     run_upgrade "$@"
     ;;
@@ -177,6 +179,9 @@ case "${ODOO_FUNCTION}" in
     ;;
   --help|-h|help)
     show_help
+    ;;
+  "")
+    run_server "$@"
     ;;
   *)
     echo "Error: unknown function '${ODOO_FUNCTION}'."
