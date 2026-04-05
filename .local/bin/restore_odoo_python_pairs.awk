@@ -14,10 +14,10 @@ function load_saved(   line, tabpos, key, value) {
 
 function reset_entry() {
     entry_count = 0
-    is_odoo_python = 0
     in_msgid = 0
     in_msgstr = 0
     msgid = ""
+    msgstr = ""
 }
 
 function append_line(line) {
@@ -36,6 +36,8 @@ function po_unquote(line, s) {
 
 function po_unescape(str, s) {
     s = str
+    gsub(/\\t/, "\t", s)
+    gsub(/\\r/, "\r", s)
     gsub(/\\n/, "\n", s)
     gsub(/\\"/, "\"", s)
     gsub(/\\\\/, "\\", s)
@@ -45,6 +47,8 @@ function po_unescape(str, s) {
 function po_escape(str, s) {
     s = str
     gsub(/\\/, "\\\\", s)
+    gsub(/\t/, "\\t", s)
+    gsub(/\r/, "\\r", s)
     gsub(/"/, "\\\"", s)
     gsub(/\n/, "\\n\"\n\"", s)
     return s
@@ -58,7 +62,7 @@ function flush_entry(   i, key, restored, replaced) {
     key = msgid
     restored = 0
 
-    if (is_odoo_python && key != "" && (key in saved_map)) {
+    if (key != "" && msgstr == "" && (key in saved_map)) {
         replaced = po_unescape(saved_map[key])
 
         for (i = 1; i <= entry_count; i++) {
@@ -110,13 +114,6 @@ BEGIN {
     append_line($0)
 }
 
-/^#\./ {
-    if ($0 ~ /odoo-python/) {
-        is_odoo_python = 1
-    }
-    next
-}
-
 /^msgid[[:space:]]+"/ {
     in_msgid = 1
     in_msgstr = 0
@@ -127,12 +124,15 @@ BEGIN {
 /^msgstr[[:space:]]+"/ {
     in_msgid = 0
     in_msgstr = 1
+    msgstr = po_unquote(substr($0, index($0, "\"")))
     next
 }
 
 /^[[:space:]]*"/ {
     if (in_msgid) {
         msgid = msgid po_unquote($0)
+    } else if (in_msgstr) {
+        msgstr = msgstr po_unquote($0)
     }
     next
 }

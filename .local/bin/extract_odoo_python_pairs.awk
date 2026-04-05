@@ -1,7 +1,6 @@
 #!/usr/bin/env -S gawk -f
 
 function reset_entry() {
-    is_odoo_python = 0
     in_msgid = 0
     in_msgstr = 0
     msgid = ""
@@ -29,7 +28,7 @@ function po_escape(str, s) {
 }
 
 function flush_entry() {
-    if (is_odoo_python && msgid != "" && msgstr != "") {
+    if (msgid != "" && msgstr != "") {
         print po_escape(msgid) "\t" po_escape(msgstr) >> out
     }
     reset_entry()
@@ -48,13 +47,6 @@ BEGIN {
 
 /^[[:space:]]*$/ {
     flush_entry()
-    next
-}
-
-/^#\./ {
-    if ($0 ~ /odoo-python/) {
-        is_odoo_python = 1
-    }
     next
 }
 
