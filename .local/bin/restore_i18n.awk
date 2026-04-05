@@ -1,4 +1,4 @@
-#!/usr/bin/env -S gawk -f
+#! /bin/awk -f
 
 function load_saved(   line, tabpos, key, value) {
     while ((getline line < saved) > 0) {
@@ -95,7 +95,7 @@ function flush_entry(   i, key, restored, replaced) {
 
 BEGIN {
     if (ARGC != 3) {
-        print "Usage: restore_odoo_python_pairs.awk <po_file> <saved_tsv>" > "/dev/stderr"
+        print "Usage: restore_i18n.awk <po_file> <saved_tsv>" > "/dev/stderr"
         exit 2
     }
 

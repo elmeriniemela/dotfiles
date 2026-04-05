@@ -1,4 +1,4 @@
-#!/usr/bin/env -S gawk -f
+#! /bin/awk -f
 
 function reset_entry() {
     in_msgid = 0
@@ -36,7 +36,7 @@ function flush_entry() {
 
 BEGIN {
     if (ARGC != 3) {
-        print "Usage: extract_odoo_python_pairs.awk <po_file> <out_tsv>" > "/dev/stderr"
+        print "Usage: extract_i18n.awk <po_file> <out_tsv>" > "/dev/stderr"
         exit 2
     }
 
