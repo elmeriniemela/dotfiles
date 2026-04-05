@@ -12,10 +12,11 @@ Usage:
 
 Description:
   Script for running Odoo locally via AI agents. It assumes the current working directory is an Odoo module.
-  - function: optional, chooses a non-server branch
+  - function: optional, chooses a non-server branch.
+
+  This is **Odoo version ${ODOO_VERSION}**. Odoo core code can be found from ~/Odoo/src/${ODOO_VERSION}/odoo/ and ~/Odoo/src/${ODOO_VERSION}/enterprise/.
 
 Supported functions:
-  version
   upgrade
   install
   dropdb
@@ -79,10 +80,6 @@ ensure_manifest() {
     fi
 }
 
-run_version() {
-    echo "$ODOO_VERSION"
-}
-
 run_server() {
     $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$"
 }
@@ -129,6 +126,12 @@ run_translate() {
     restore_odoo_python_pairs "i18n/$1.po"
 }
 
+
+
+# Set ODOO_VERSION first
+ensure_odoo_env
+
+
 export ODOO_FUNCTION=""
 if [[ $# -gt 0 ]]; then
   case "$1" in
@@ -136,7 +139,7 @@ if [[ $# -gt 0 ]]; then
       show_help
       exit 0
       ;;
-    version|upgrade|install|dropdb|tests|translate)
+    upgrade|install|dropdb|tests|translate)
       export ODOO_FUNCTION="$1"
       shift
       ;;
@@ -146,8 +149,7 @@ if [[ $# -gt 0 ]]; then
   esac
 fi
 
-# Set ODOO_VERSION first
-ensure_odoo_env
+
 ensure_odoo_config
 
 export ODOO_VENV="$HOME/.venv/odoo$ODOO_VERSION/bin"
@@ -159,9 +161,6 @@ export ODOO_DATABASE="$ODOO_VERSION-$ODOO_MODULE"
 ensure_manifest
 
 case "${ODOO_FUNCTION}" in
-  version)
-    run_version
-    ;;
   upgrade)
     run_upgrade "$@"
     ;;
