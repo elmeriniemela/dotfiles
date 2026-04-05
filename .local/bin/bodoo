@@ -30,19 +30,6 @@ Optional args are passed into odoo-bin, unless the function specifies a separate
 EOF
 }
 
-
-extract_odoo_python_pairs() {
-  local po_file=$1
-  extract_odoo_python_pairs.awk "$po_file" "$SAVED_TSV"
-}
-
-restore_odoo_python_pairs() {
-  local po_file=$1
-  restore_odoo_python_pairs.awk "$po_file" "$SAVED_TSV" > "$po_file.tmp"
-
-  mv "$po_file.tmp" "$po_file"
-}
-
 ensure_odoo_env() {
     local dir="$PWD"
 
@@ -115,7 +102,7 @@ run_translate() {
     trap 'rm -rf "i18n/saved.tsv"' EXIT
 
 
-    extract_odoo_python_pairs "i18n/$1.po"
+    extract_i18n.awk "i18n/$1.po" "$SAVED_TSV"
     if (( ODOO_VERSION <= 18 )); then
         $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE -u $ODOO_MODULE --load-language=fi_FI --stop-after-init
         $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin --i18n-export=i18n/$1.po --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --modules=$ODOO_MODULE --language=fi_FI
@@ -123,7 +110,8 @@ run_translate() {
         $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n loadlang --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --languages=$1
         $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n export --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE $ODOO_MODULE --languages=$1
     fi
-    restore_odoo_python_pairs "i18n/$1.po"
+    restore_i18n.awk "i18n/$1.po" "$SAVED_TSV" > "i18n/$1.po.tmp"
+    mv "i18n/$1.po.tmp" "i18n/$1.po"
 }
 
 
