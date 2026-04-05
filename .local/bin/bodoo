@@ -46,29 +46,34 @@ ensure_odoo_env() {
 }
 
 ensure_odoo_config() {
-    local dir="$PWD"
-
-    while [[ "$dir" != "/" ]]; do
-        if [[ -f "$dir/odoorc.conf" ]]; then
-            export ODOO_CONFIG_FILE="$dir/odoorc.conf"
-            return 0
-        fi
-        dir="$(dirname "$dir")"
-    done
-
-    echo "Error: odoorc.conf does not exist in any parent dir." >&2
-    exit 1
-}
-
-ensure_manifest() {
-    if [[ ! -f "__manifest__.py" ]]; then
-        echo "Error: __manifest__.py does not exist. $ODOO_MODULE is not an odoo module." >&2
+    if [ -z "${ODOO_CONFIG_FILE:-}" ] || [ ! -f "$ODOO_CONFIG_FILE" ]; then
+        local dir="$PWD"
+        while [[ "$dir" != "/" ]]; do
+            if [[ -f "$dir/odoorc.conf" ]]; then
+                export ODOO_CONFIG_FILE="$dir/odoorc.conf"
+                export ODOO_MODULE="$(basename "$PWD")"
+                export ODOO_DATABASE="$ODOO_VERSION-$ODOO_MODULE"
+                if [[ ! -f "__manifest__.py" ]]; then
+                    echo "Error: __manifest__.py does not exist. $ODOO_MODULE is not an odoo module." >&2
+                    exit 1
+                fi
+                return 0
+            fi
+            dir="$(dirname "$dir")"
+        done
+        echo "Error: odoorc.conf does not exist in any parent dir." >&2
         exit 1
+    else
+        echo "Using $ODOO_CONFIG_FILE..."
     fi
 }
 
 run_server() {
-    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$"
+    if [ -n "${ODOO_DATABASE:-}" ]; then
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$"
+    else
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_CONFIG_FILE
+    fi
 }
 run_upgrade() {
     $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0
@@ -118,6 +123,7 @@ run_translate() {
 
 # Set ODOO_VERSION first
 ensure_odoo_env
+ensure_odoo_config
 
 
 export ODOO_FUNCTION=""
@@ -138,15 +144,10 @@ if [[ $# -gt 0 ]]; then
 fi
 
 
-ensure_odoo_config
 
 export ODOO_VENV="$HOME/.venv/odoo$ODOO_VERSION/bin"
 export ODOO_VERSION_DIR=$HOME"/Odoo/src/${ODOO_VERSION}"
-export ODOO_MODULE="$(basename "$PWD")"
-export ODOO_DATABASE="$ODOO_VERSION-$ODOO_MODULE"
 
-# Requires the exported vars above.
-ensure_manifest
 
 case "${ODOO_FUNCTION}" in
   upgrade)
