@@ -1,0 +1,8 @@
+{
+    "security": {
+        "auth": {
+            "autoAccept": true,
+            "selectedType": "oauth-personal"
+        }
+    }
+}
