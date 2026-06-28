@@ -1,0 +1,24 @@
+# 1. ALLOW FILE EDITS (The fix for your "replace" prompt)
+[[rule]]
+toolName = ["replace", "write_file", "delete_file"]
+decision = "allow"
+priority = 500
+
+# 2. ALLOW ODOO COMMANDS
+[[rule]]
+toolName = "run_shell_command"
+# You can pass an array of command prefixes you want to auto-allow
+commandPrefix = ["odoo", "grep",]
+decision = "allow"
+priority = 500
+
+# (Optional) Allow shell redirections (>, >>) if you often pipe Odoo output to logs
+allowRedirection = true
+
+# 3. DENY GIT COMMANDS
+[[rule]]
+toolName = "run_shell_command"
+commandPrefix = "git"
+decision = "deny"
+priority = 600
+denyMessage = "Git commands are restricted in this session to prevent accidental branch pollution."

@@ -22,6 +22,7 @@ text/csv=libreoffice-calc.desktop;code.desktop;
 application/x-zerosize=code.desktop;
 message/rfc822=code.desktop;
 application/rtf=libreoffice-writer.desktop;code.desktop;
+x-scheme-handler/net.thunderbird=userapp-Thunderbird-KZUTR3.desktop;
 
 [Default Applications]
 inode/directory=thunar.desktop;
@@ -52,5 +53,8 @@ application/x-zerosize=code.desktop
 image/svg+xml=org.nomacs.ImageLounge.desktop
 x-scheme-handler/sgnl=signal.desktop
 x-scheme-handler/signalcaptcha=signal.desktop
+x-scheme-handler/slack=slack.desktop
+x-scheme-handler/claude-cli=claude-code-url-handler.desktop
+x-scheme-handler/net.thunderbird=userapp-Thunderbird-KZUTR3.desktop
 
 [Removed Associations]

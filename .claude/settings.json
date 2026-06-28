@@ -3,9 +3,18 @@
     "enabledPlugins": {
         "pyright-lsp@claude-plugins-official": true
     },
+    "effortLevel": "high",
     "additionalDirectories": [
         "~/Odoo",
         "~/Projects"
     ],
-    "effortLevel": "high"
+    "permissions": {
+        "deny": [
+            "Bash(git)",
+            "Bash(git *)",
+            "PowerShell(git)",
+            "PowerShell(git *)"
+        ]
+    },
+    "skipDangerousModePermissionPrompt": true
 }

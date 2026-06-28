@@ -39,8 +39,6 @@
     "editor.tabSize": 4,
     "remote.SSH.useLocalServer": false,
     "remote.SSH.remotePlatform": {
-        "sprintit14-stage-3088451.dev.odoo.com": "linux",
-        "recommender.sprintit.fi": "linux",
         "ai-agent.eniemela.fi": "linux"
     },
     // Insert spaces when pressing Tab. This setting is overriden
@@ -74,6 +72,8 @@
         "editor.autoClosingBrackets": "never",
         "files.trimFinalNewlines": false,
         "files.trimTrailingWhitespace": true,
+        "editor.defaultFormatter": "redhat.vscode-xml",
+        "editor.tabSize": 4
     },
 
     "git.autofetch": false,
@@ -226,6 +226,9 @@
     "claudeCode.preferredLocation": "panel",
     "claudeCode.useTerminal": true,
     "workbench.colorTheme": "Dark Modern",
+    "xml.server.binary.trustedHashes": [
+        "637a908b82398d8d99f3fc966098825e5357751222d6582323be9aff94555ec8"
+    ],
 
 
 }

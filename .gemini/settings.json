@@ -1,7 +1,9 @@
 {
     "security": {
+        "autoAccept": true,
+        "enablePermanentToolApproval": true,
+        "autoAddToPolicyByDefault": true,
         "auth": {
-            "autoAccept": true,
             "selectedType": "oauth-personal"
         }
     }
