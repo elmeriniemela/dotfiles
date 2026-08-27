@@ -1,5 +1,5 @@
 model = "gpt-5.6-sol"
-model_reasoning_effort = "low"
+model_reasoning_effort = "high"
 
 approval_policy = "on-request"
 approvals_reviewer = "auto_review"
@@ -16,4 +16,5 @@ writable_roots = [
   "/home/elmeri/.local/share/Odoo",
   "/home/elmeri/Odoo/src",
 ]
+
 

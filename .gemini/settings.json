@@ -1,10 +1,10 @@
 {
-    "security": {
-        "autoAccept": true,
-        "enablePermanentToolApproval": true,
-        "autoAddToPolicyByDefault": true,
-        "auth": {
-            "selectedType": "oauth-personal"
-        }
+  "security": {
+    "autoAccept": true,
+    "enablePermanentToolApproval": true,
+    "autoAddToPolicyByDefault": true,
+    "auth": {
+      "selectedType": "oauth-personal"
     }
+  }
 }
