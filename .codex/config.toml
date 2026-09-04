@@ -9,6 +9,19 @@ model_reasoning_summary = "none"
 model_verbosity = "low"
 plan_mode_reasoning_effort = "high"
 
+allow_login_shell = false
+default_permissions = "no-ssh"
+
+[shell_environment_policy]
+inherit = "all"
+exclude = ["SSH_AUTH_SOCK", "SSH_AGENT_PID"]
+
+[permissions.no-ssh]
+extends = ":workspace"
+
+[permissions.no-ssh.filesystem]
+"~/.ssh" = "deny"
+
 [sandbox_workspace_write]
 network_access = true
 writable_roots = [
@@ -16,5 +29,6 @@ writable_roots = [
   "/home/elmeri/.local/share/Odoo",
   "/home/elmeri/Odoo/src",
 ]
+
 
 

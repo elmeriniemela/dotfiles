@@ -1,0 +1,16 @@
+{
+    "enableTelemetry": false,
+    "toolPermission": "always-proceed",
+    "permissions": {
+        "allow": [
+            "command(*)"
+        ],
+        "deny": [
+            "command(git)",
+            "command(pip)"
+        ]
+    },
+    "trustedWorkspaces": [
+        "/home/elmeri/Odoo/src/19/deploy-manager"
+    ]
+}
