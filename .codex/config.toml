@@ -3,7 +3,6 @@ model_reasoning_effort = "high"
 
 approval_policy = "on-request"
 approvals_reviewer = "auto_review"
-sandbox_mode = "workspace-write"
 
 model_reasoning_summary = "none"
 model_verbosity = "low"
@@ -11,6 +10,9 @@ plan_mode_reasoning_effort = "high"
 
 allow_login_shell = false
 default_permissions = "no-ssh"
+
+[features]
+shell_snapshot = false
 
 [shell_environment_policy]
 inherit = "all"
@@ -22,13 +24,10 @@ extends = ":workspace"
 [permissions.no-ssh.filesystem]
 "~/.ssh" = "deny"
 
-[sandbox_workspace_write]
-network_access = true
-writable_roots = [
-  "/home/elmeri/Projects",
-  "/home/elmeri/.local/share/Odoo",
-  "/home/elmeri/Odoo/src",
-]
+[permissions.no-ssh.workspace_roots]
+"/home/elmeri/Projects" = true
+"/home/elmeri/.local/share/Odoo" = true
+"/home/elmeri/Odoo/src" = true
 
-
-
+[permissions.no-ssh.network]
+enabled = true
