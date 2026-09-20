@@ -63,7 +63,7 @@ sudo systemctl start cronie systemd-timesyncd
 sudo sed -i '/^#en_US.UTF-8/s/^#//g' /etc/locale.gen
 sudo sed -i '/^#fi_FI.UTF-8/s/^#//g' /etc/locale.gen
 sudo locale-gen
-echo '%wheel ALL=(ALL) ALL' | sudo tee /etc/sudoers.d/wheel_group
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/wheel_group" /etc/sudoers.d/wheel_group
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/vconsole.conf" /etc/vconsole.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/locale.conf" /etc/locale.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/99-sysctl.conf" /etc/sysctl.d/99-sysctl.conf
