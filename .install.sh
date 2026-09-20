@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 set -euxo pipefail
+
 sudo systemctl enable --now systemd-timesyncd
 sudo pacman -S --needed git reflector vim
 dotfiles() {
@@ -15,6 +16,9 @@ fi
 dotfiles checkout
 dotfiles config --local status.showUntrackedFiles no
 dotfiles submodule update --init --recursive
+
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/global.bashrc" /etc/bash.bashrc.local
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/bash.bashrc" /etc/bash.bashrc
 
 rm -f ~/.bashrc
 rm -f ~/.bash_profile
@@ -198,9 +202,6 @@ sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/i3lock" /et
 sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/lxlock" /usr/local/bin/lxlock
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/ssh-agent-fprint-askpass.conf" /etc/systemd/user/ssh-agent.service.d/fprint-askpass.conf
 sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/ssh-askpass-fprint" /usr/local/bin/ssh-askpass-fprint
-# This must remain root-owned because every interactive root shell sources it.
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/global.bashrc" /etc/bash.bashrc.local
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/bash.bashrc" /etc/bash.bashrc
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sddm" /etc/pam.d/sddm
 
 sudo dconf update

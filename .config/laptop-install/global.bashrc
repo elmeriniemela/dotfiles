@@ -173,9 +173,16 @@ PROMPT_COMMAND="history -a"
 
 [[ -r "/usr/share/bash-completion/completions/git" ]] && . "/usr/share/bash-completion/completions/git"
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+dotfiles() {
+    /usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" "$@"
+}
+
 __git_complete dotfiles __git_main
-alias server='/usr/bin/git --git-dir=$HOME/.server/ --work-tree=$HOME'
+
+server() {
+    /usr/bin/git --git-dir="$HOME/.server/" --work-tree="$HOME" "$@"
+}
+
 __git_complete server __git_main
 
 

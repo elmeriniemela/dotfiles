@@ -1,6 +1,6 @@
-## dotfiles
+# dotfiles
 
-### Installation from Arch ISO
+## Installation from Arch ISO
 
 Connect to internet via Ethernet cable.
 
@@ -11,11 +11,11 @@ archinstall
 
 Boot into desktop, then
 ```bash
-# Shorthand for running .install.sh on a live USB environment.
-source <(curl -sL https://eniemela.fi/api-v1/laptop-install.sh)
+# Run .install.sh in a child shell on a live USB environment.
+bash <(curl -fsSL https://eniemela.fi/api-v1/laptop-install.sh)
 ```
 
-# Test the installer with QEMU
+## Test the installer with QEMU
 
 Install QEMU on Arch Linux:
 
@@ -79,7 +79,7 @@ reboot
 Because QEMU uses `-boot once=d`, the VM should boot from the installed virtual
 disk after reboot.
 
-## Boot the installed virtual system
+### Boot the installed virtual system
 
 Immediately after installation, `reboot` should boot the installed disk because
 the installer VM uses `-boot once=d`. To open it again later, run this from the
