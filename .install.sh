@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 set -euxo pipefail
 
-sudo pacman -S --needed git
+sudo pacman -S --needed git reflector
 DOTFILESCMD=(/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME")
 
 if [[ -d "$HOME/.dotfiles" ]]; then
@@ -19,41 +19,6 @@ rm -f ~/.bash_profile
 sudo rm -f /root/.bash_profile
 sudo rm -f /root/.bashrc
 
-base_packages=(
-    base-devel              # Build tools required by AUR packages.
-    openssh                 # SSH client and server.
-    sudo                    # Run administrative commands.
-    cronie                  # Cron scheduler.
-    rsync                   # Efficient file synchronization.
-    ncdu                    # Interactive disk-usage viewer.
-    htop                    # Interactive process monitor.
-    openvpn                 # Personal VPN client.
-    bash-completion         # Shell completion definitions.
-    tmux                    # Terminal multiplexer.
-    unrar                   # Extract RAR archives.
-    unzip                   # Extract ZIP archives.
-    zip                     # Create ZIP archives.
-    ffmpeg                  # Media encoding and conversion.
-    wget                    # Command-line downloads.
-    syncthing               # File synchronization service.
-    reflector               # Arch mirrorlist management.
-    python-colorama         # Terminal color support for bootstrap-linux.
-    curl                    # Command-line HTTP client.
-    less                    # Pager for terminal output.
-    plocate                 # Fast filename search index.
-    man-db                  # Manual-page database and reader.
-    dnsutils                # DNS troubleshooting tools.
-    vim                     # Terminal text editor.
-    certbot                 # Let's Encrypt certificate client.
-    certbot-dns-cloudflare  # Cloudflare DNS challenge plugin for Certbot.
-    composer                # PHP dependency manager.
-    npm                     # JavaScript package manager.
-    ripgrep                 # Fast recursive text search.
-    jq                      # JSON command-line processor.
-    7zip                    # Archive creation and extraction.
-)
-sudo pacman -S --noconfirm --needed "${base_packages[@]}"
-
 if [[ ! -f /etc/pacman.d/chaotic-mirrorlist ]]; then
     sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
     sudo pacman-key --lsign-key 3056513887B78AEB
@@ -64,13 +29,6 @@ fi
 
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/pacman.conf" /etc/pacman.conf
 
-if ! command -v yay >/dev/null; then
-    sudo pacman -Syy
-    sudo pacman -S --noconfirm --needed yay  # Install the AUR package helper.
-fi
-
-sudo systemctl enable cronie systemd-timesyncd
-sudo systemctl start cronie systemd-timesyncd
 sudo sed -i '/^#en_US.UTF-8/s/^#//g' /etc/locale.gen
 sudo sed -i '/^#fi_FI.UTF-8/s/^#//g' /etc/locale.gen
 sudo locale-gen
@@ -80,11 +38,41 @@ sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/locale.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/99-sysctl.conf" /etc/sysctl.d/99-sysctl.conf
 
 laptop_packages=(
+    7zip                            # Archive creation and extraction.
     alacritty                       # GPU-accelerated terminal emulator.
     awesome                         # Window manager.
+    base-devel                      # Build tools required by AUR packages.
+    bash-completion                 # Shell completion definitions.
     betterlockscreen                # Lock-screen manager.
     brave-bin                       # Privacy-focused web browser.
+    certbot                         # Let's Encrypt certificate client.
+    certbot-dns-cloudflare          # Cloudflare DNS challenge plugin for Certbot.
     cloc                            # Source line counter.
+    composer                        # PHP dependency manager.
+    cronie                          # Cron scheduler.
+    curl                            # Command-line HTTP client.
+    dnsutils                        # DNS troubleshooting tools.
+    ffmpeg                          # Media encoding and conversion.
+    htop                            # Interactive process monitor.
+    jq                              # JSON command-line processor.
+    less                            # Pager for terminal output.
+    man-db                          # Manual-page database and reader.
+    ncdu                            # Interactive disk-usage viewer.
+    npm                             # JavaScript package manager.
+    openssh                         # SSH client and server.
+    openvpn                         # Personal VPN client.
+    plocate                         # Fast filename search index.
+    python-colorama                 # Terminal color support for bootstrap-linux.
+    ripgrep                         # Fast recursive text search.
+    rsync                           # Efficient file synchronization.
+    sudo                            # Run administrative commands.
+    syncthing                       # File synchronization service.
+    tmux                            # Terminal multiplexer.
+    unrar                           # Extract RAR archives.
+    unzip                           # Extract ZIP archives.
+    vim                             # Terminal text editor.
+    wget                            # Command-line downloads.
+    zip                             # Create ZIP archives.
     default-cursors                 # Default X11 cursor theme.
     xfce4-clipman-plugin            # Clipboard manager.
     xdg-utils                       # Open files with default applications.
@@ -178,8 +166,18 @@ laptop_packages=(
     breeze-gtk                      # Dark GTK theme.
     xdg-desktop-portal              # Desktop integration portal.
     xdg-desktop-portal-gtk          # GTK portal backend.
+    yay                             # Install the AUR package helper.
 )
-sudo pacman -S --noconfirm --needed "${laptop_packages[@]}"
+
+sudo reflector \
+  --age 24 \
+  --completion-percent 100 \
+  --protocol https \
+  --latest 50 \
+  --sort rate \
+  --save /etc/pacman.d/mirrorlist
+
+sudo pacman -Syy --noconfirm --needed "${laptop_packages[@]}"
 
 aur_packages=(
     blueberry               # Bluetooth configuration UI.
@@ -214,6 +212,6 @@ sudo udevadm control --reload-rules
 sudo groupadd -r nopasswdlogin || true
 sudo usermod -a -G video elmeri
 sudo usermod -a -G nopasswdlogin elmeri
-sudo systemctl enable --now NetworkManager bluetooth tlp upower
+sudo systemctl enable --now cronie systemd-timesyncd NetworkManager bluetooth tlp upower
 systemctl --user enable --now ssh-agent.service
 systemctl --user daemon-reload
