@@ -12,7 +12,7 @@ sudo_keepalive_pid=$!
 trap 'kill "$sudo_keepalive_pid" 2>/dev/null || true' EXIT
 
 sudo systemctl enable --now systemd-timesyncd
-sudo pacman -S --needed git reflector vim
+sudo pacman -S --noconfirm --needed git reflector vim
 dotfiles() {
     /usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" "$@"
 }
