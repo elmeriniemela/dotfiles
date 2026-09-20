@@ -4,10 +4,7 @@
 set -euxo pipefail
 
 
-bootstrap_packages=(
-    git  # Clone and manage the bare dotfiles repository.
-)
-sudo pacman -S --needed "${bootstrap_packages[@]}"
+sudo pacman -S --needed git
 git clone --bare git@github.com:elmeriniemela/dotfiles.git $HOME/.dotfiles
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 dotfiles checkout
@@ -55,14 +52,13 @@ base_packages=(
     7zip                    # Archive creation and extraction.
 )
 sudo pacman -S --noconfirm --needed "${base_packages[@]}"
+sudo install -D -o root -g root -m 644 "$laptop_install_files/pacman.conf" /etc/pacman.conf
 
 if ! command -v yay >/dev/null; then
     sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
     sudo pacman-key --lsign-key 3056513887B78AEB
     sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst'
     sudo pacman -U 'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-    grep -qxF '[chaotic-aur]' /etc/pacman.conf || echo '[chaotic-aur]' | sudo tee -a /etc/pacman.conf
-    grep -qxF 'Include = /etc/pacman.d/chaotic-mirrorlist' /etc/pacman.conf || echo 'Include = /etc/pacman.d/chaotic-mirrorlist' | sudo tee -a /etc/pacman.conf
     sudo pacman -Syy
     sudo pacman -S --noconfirm --needed yay  # Install the AUR package helper.
 fi
@@ -75,12 +71,7 @@ sudo locale-gen
 echo '%wheel ALL=(ALL) ALL' | sudo tee /etc/sudoers.d/wheel_group
 sudo install -D -o root -g root -m 644 "$laptop_install_files/vconsole.conf" /etc/vconsole.conf
 sudo install -D -o root -g root -m 644 "$laptop_install_files/locale.conf" /etc/locale.conf
-sudo touch /etc/sysctl.d/99-sysctl.conf
-grep -qxF 'kernel.sysrq=1' /etc/sysctl.d/99-sysctl.conf || echo 'kernel.sysrq=1' | sudo tee -a /etc/sysctl.d/99-sysctl.conf
-grep -qxF 'vm.dirty_background_ratio=5' /etc/sysctl.d/99-sysctl.conf || echo 'vm.dirty_background_ratio=5' | sudo tee -a /etc/sysctl.d/99-sysctl.conf
-grep -qxF 'vm.dirty_ratio=10' /etc/sysctl.d/99-sysctl.conf || echo 'vm.dirty_ratio=10' | sudo tee -a /etc/sysctl.d/99-sysctl.conf
-grep -qxF 'vm.swappiness=10' /etc/sysctl.d/99-sysctl.conf || echo 'vm.swappiness=10' | sudo tee -a /etc/sysctl.d/99-sysctl.conf
-grep -qxF 'kernel.yama.ptrace_scope=2' /etc/sysctl.d/99-sysctl.conf || echo 'kernel.yama.ptrace_scope=2' | sudo tee -a /etc/sysctl.d/99-sysctl.conf
+sudo install -D -o root -g root -m 644 "$laptop_install_files/99-sysctl.conf" /etc/sysctl.d/99-sysctl.conf
 
 laptop_packages=(
     alacritty                       # GPU-accelerated terminal emulator.
@@ -250,10 +241,10 @@ sudo install -D -o root -g root -m 644 "$laptop_install_files/ssh-agent-fprint-a
 sudo install -D -o root -g root -m 755 "$laptop_install_files/ssh-askpass-fprint" /usr/local/bin/ssh-askpass-fprint
 # This must remain root-owned because every interactive root shell sources it.
 sudo install -D -o root -g root -m 644 "$laptop_install_files/global.bashrc" /etc/bash.bashrc.local
-grep -qxF '[ -r /etc/bash.bashrc.local ] && . /etc/bash.bashrc.local' /etc/bash.bashrc || echo '[ -r /etc/bash.bashrc.local ] && . /etc/bash.bashrc.local' | sudo tee -a /etc/bash.bashrc
+sudo install -D -o root -g root -m 644 "$laptop_install_files/bash.bashrc" /etc/bash.bashrc
+sudo install -D -o root -g root -m 644 "$laptop_install_files/sddm" /etc/pam.d/sddm
 
 sudo dconf update
-grep -qxF 'auth        sufficient  pam_succeed_if.so user ingroup nopasswdlogin' /etc/pam.d/sddm || echo 'auth        sufficient  pam_succeed_if.so user ingroup nopasswdlogin' | sudo tee -a /etc/pam.d/sddm
 sudo udevadm control --reload-rules
 sudo groupadd -r nopasswdlogin || true
 sudo usermod -a -G video elmeri
