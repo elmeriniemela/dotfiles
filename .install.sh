@@ -100,14 +100,12 @@ laptop_packages=(
     python-coverage                 # Python test coverage reporting.
     ruff                            # Python linter and formatter.
     bluez                           # Bluetooth protocol stack.
-    bluez-libs                      # Bluetooth libraries.
     bluez-tools                     # Bluetooth management tools.
     bluez-utils                     # Bluetooth command-line utilities.
     thunar                          # File manager.
     thunar-archive-plugin           # Archive integration for Thunar.
     thunar-volman                   # Volume management for Thunar.
     pavucontrol                     # PulseAudio/PipeWire volume control.
-    openconnect                     # Work VPN client.
     mermaid-cli                     # Render Mermaid diagrams.
     thunderbird                     # Email client.
     veracrypt                       # Encrypted-volume manager.
@@ -115,7 +113,6 @@ laptop_packages=(
     ventoy-bin                      # Multi-ISO bootable USB creator.
     gocryptfs                       # Encrypted filesystem tool.
     papirus-icon-theme              # Icon theme.
-    hicolor-icon-theme              # Freedesktop fallback icons.
     tumbler                         # File-manager thumbnail service.
     firefox                         # Web browser.
     ffmpegthumbnailer               # Video thumbnails for Thunar.
@@ -124,25 +121,19 @@ laptop_packages=(
     font-manager                    # Font preview and management UI.
     fprintd                         # Fingerprint authentication daemon.
     git-lfs                         # Git large-file support.
-    alsa-card-profiles              # ALSA card profile definitions.
     alsa-firmware                   # Firmware for ALSA devices.
-    alsa-lib                        # ALSA core library.
     alsa-plugins                    # ALSA compatibility plugins.
     alsa-topology-conf              # ALSA topology configuration.
     alsa-ucm-conf                   # ALSA use-case configuration.
     alsa-utils                      # ALSA utilities such as alsamixer.
     sof-firmware                    # Intel Sound Open Firmware blobs.
-    pipewire                        # Audio and video server.
     pipewire-alsa                   # ALSA support through PipeWire.
     pipewire-audio                  # PipeWire audio components.
     pipewire-pulse                  # PulseAudio compatibility layer.
-    pipewire-session-manager        # PipeWire session management.
     pipewire-zeroconf               # PipeWire mDNS discovery.
     polkit                          # Privilege authorization framework.
     lxsession                       # Graphical Polkit authentication agent.
     postgresql                      # PostgreSQL database server.
-    postgresql-libs                 # PostgreSQL client libraries.
-    postgresql-old-upgrade          # PostgreSQL upgrade tools.
     powertop                        # Power-consumption diagnostics.
     networkmanager                  # Network connection manager.
     network-manager-applet          # NetworkManager tray applet.
@@ -168,41 +159,10 @@ laptop_packages=(
     yt-dlp                          # Video downloader.
     zbar                            # Barcode and QR-code reader.
     zoom                            # Video-conferencing client.
-    ttf-anonymous-pro               # Anonymous Pro programming font.
-    ttf-bitstream-vera              # Bitstream Vera font family.
     ttf-caladea                     # Cambria-compatible font.
     ttf-carlito                     # Calibri-compatible font.
-    ttf-cascadia-code               # Cascadia Code programming font.
-    ttf-cormorant                   # Cormorant serif font.
-    ttf-croscore                    # Chrome OS core fonts.
-    ttf-dejavu                      # Broad Unicode font family.
     ttf-droid                       # Android Droid font family.
-    ttf-eurof                       # Eurofurence display font.
-    ttf-fantasque-sans-mono         # Fantasque Sans Mono font.
-    ttf-fira-code                   # Fira Code programming font.
-    ttf-fira-mono                   # Fira Mono font.
-    ttf-fira-sans                   # Fira Sans font.
-    ttf-font-awesome                # Font Awesome icon font.
-    ttf-hack                        # Hack programming font.
-    ttf-ibm-plex                    # IBM Plex font family.
-    ttf-inconsolata                 # Inconsolata programming font.
-    ttf-iosevka-nerd                # Iosevka Nerd Font.
-    ttf-jetbrains-mono              # JetBrains Mono font.
-    ttf-jetbrains-mono-nerd         # JetBrains Mono Nerd Font.
-    ttf-lato                        # Lato font family.
-    ttf-liberation                  # Microsoft-metric-compatible fonts.
-    ttf-linux-libertine             # Linux Libertine font family.
-    ttf-linux-libertine-g           # Graphite-enabled Linux Libertine.
-    ttf-monofur                     # Monofur programming font.
-    ttf-ms-fonts                    # Microsoft core fonts.
-    ttf-nerd-fonts-symbols          # Nerd Font icon glyphs.
-    ttf-nerd-fonts-symbols-common   # Common Nerd Font symbols.
-    ttf-nerd-fonts-symbols-mono     # Monospaced Nerd Font symbols.
-    ttf-opensans                    # Open Sans font family.
-    ttf-roboto                      # Roboto font family.
-    ttf-roboto-mono                 # Roboto Mono font.
-    ttf-sourcecodepro-nerd          # Source Code Pro Nerd Font.
-    ttf-ubuntu-font-family          # Ubuntu font family.
+    inter-font                      # Awesome window-manager UI font.
     noto-fonts                      # Broad Unicode font coverage.
     noto-fonts-emoji                # Emoji font support.
     discord                         # Discord desktop client.
@@ -226,7 +186,6 @@ aur_packages=(
     acpilight               # Backlight control utility.
     xautolock               # Automatically lock inactive X11 sessions.
     archlinux-logout-git    # Arch Linux logout scripts.
-    arcolinux-logout        # Graphical logout dialog.
     wkhtmltopdf-bin         # HTML-to-PDF converter.
 )
 yay -S --noconfirm --needed "${aur_packages[@]}"
