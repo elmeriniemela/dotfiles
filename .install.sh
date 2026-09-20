@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 set -euxo pipefail
-
+sudo systemctl enable --now systemd-timesyncd
 sudo pacman -S --needed git reflector vim
 dotfiles() {
     /usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" "$@"
@@ -182,13 +182,6 @@ sudo reflector \
   --save /etc/pacman.d/mirrorlist
 
 sudo pacman -Syy --noconfirm --needed "${laptop_packages[@]}"
-
-sudo systemctl enable --now systemd-timesyncd
-
-aur_packages=(
-    wkhtmltopdf-bin         # HTML-to-PDF converter.
-)
-yay -S --noconfirm --needed "${aur_packages[@]}"
 
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/backlight.rules" /etc/udev/rules.d/backlight.rules
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/hosts" /etc/hosts
