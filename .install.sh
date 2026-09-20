@@ -46,7 +46,9 @@ laptop_packages=(
     base-devel                      # Build tools required by AUR packages.
     bash-completion                 # Shell completion definitions.
     betterlockscreen                # Lock-screen manager.
+    blueman                         # Bluetooth manager and tray applet.
     brave-bin                       # Privacy-focused web browser.
+    brightnessctl                   # Backlight control utility.
     certbot                         # Let's Encrypt certificate client.
     certbot-dns-cloudflare          # Cloudflare DNS challenge plugin for Certbot.
     cloc                            # Source line counter.
@@ -167,6 +169,7 @@ laptop_packages=(
     breeze-gtk                      # Dark GTK theme.
     xdg-desktop-portal              # Desktop integration portal.
     xdg-desktop-portal-gtk          # GTK portal backend.
+    xss-lock                        # Idle and suspend screen locker.
     yay                             # Install the AUR package helper.
 )
 
@@ -183,10 +186,6 @@ sudo pacman -Syy --noconfirm --needed "${laptop_packages[@]}"
 sudo systemctl enable --now systemd-timesyncd
 
 aur_packages=(
-    blueberry               # Bluetooth configuration UI.
-    acpilight               # Backlight control utility.
-    xautolock               # Automatically lock inactive X11 sessions.
-    arcolinux-logout        # Arch Linux logout scripts.
     wkhtmltopdf-bin         # HTML-to-PDF converter.
 )
 yay -S --noconfirm --needed "${aur_packages[@]}"
