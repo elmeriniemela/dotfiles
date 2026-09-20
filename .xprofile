@@ -1,5 +1,13 @@
-#  disabling energy star features
+export XDG_CURRENT_DESKTOP=Awesome
+export XDG_SESSION_DESKTOP=awesome
+
+# Ensure D-Bus-activated services, including xdg-desktop-portal, see the
+# Awesome-specific portal configuration.
+if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+    dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP
+fi
+
+# disabling energy star features
 xset -dpms
 # disable screensaver
 xset s off
-
