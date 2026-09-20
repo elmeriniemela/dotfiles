@@ -1,8 +1,8 @@
 #!/usr/bin/bash
 set -euxo pipefail
 
-sudo pacman -S --needed git reflector
-DOTFILESCMD=(/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME")
+sudo pacman -S --needed git reflector vim
+export DOTFILESCMD=(/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME")
 
 if [[ -d "$HOME/.dotfiles" ]]; then
     "${DOTFILESCMD[@]}" pull
@@ -65,12 +65,10 @@ laptop_packages=(
     python-colorama                 # Terminal color support for bootstrap-linux.
     ripgrep                         # Fast recursive text search.
     rsync                           # Efficient file synchronization.
-    sudo                            # Run administrative commands.
     syncthing                       # File synchronization service.
     tmux                            # Terminal multiplexer.
     unrar                           # Extract RAR archives.
     unzip                           # Extract ZIP archives.
-    vim                             # Terminal text editor.
     wget                            # Command-line downloads.
     zip                             # Create ZIP archives.
     default-cursors                 # Default X11 cursor theme.
