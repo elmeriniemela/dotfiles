@@ -1,8 +1,5 @@
 #!/usr/bin/bash
-
-
 set -euxo pipefail
-
 
 sudo pacman -S --needed git
 git clone --bare git@github.com:elmeriniemela/dotfiles.git $HOME/.dotfiles
@@ -15,8 +12,6 @@ rm -f ~/.bashrc
 rm -f ~/.bash_profile
 sudo rm -f /root/.bash_profile
 sudo rm -f /root/.bashrc
-
-laptop_install_files="$HOME/.config/laptop-install"
 
 base_packages=(
     base-devel              # Build tools required by AUR packages.
@@ -52,7 +47,7 @@ base_packages=(
     7zip                    # Archive creation and extraction.
 )
 sudo pacman -S --noconfirm --needed "${base_packages[@]}"
-sudo install -D -o root -g root -m 644 "$laptop_install_files/pacman.conf" /etc/pacman.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/pacman.conf" /etc/pacman.conf
 
 if ! command -v yay >/dev/null; then
     sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
@@ -69,9 +64,9 @@ sudo sed -i '/^#en_US.UTF-8/s/^#//g' /etc/locale.gen
 sudo sed -i '/^#fi_FI.UTF-8/s/^#//g' /etc/locale.gen
 sudo locale-gen
 echo '%wheel ALL=(ALL) ALL' | sudo tee /etc/sudoers.d/wheel_group
-sudo install -D -o root -g root -m 644 "$laptop_install_files/vconsole.conf" /etc/vconsole.conf
-sudo install -D -o root -g root -m 644 "$laptop_install_files/locale.conf" /etc/locale.conf
-sudo install -D -o root -g root -m 644 "$laptop_install_files/99-sysctl.conf" /etc/sysctl.d/99-sysctl.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/vconsole.conf" /etc/vconsole.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/locale.conf" /etc/locale.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/99-sysctl.conf" /etc/sysctl.d/99-sysctl.conf
 
 laptop_packages=(
     alacritty                       # GPU-accelerated terminal emulator.
@@ -225,30 +220,30 @@ aur_packages=(
 )
 yay -S --noconfirm --needed "${aur_packages[@]}"
 
-sudo install -D -o root -g root -m 644 "$laptop_install_files/backlight.rules" /etc/udev/rules.d/backlight.rules
-sudo install -D -o root -g root -m 644 "$laptop_install_files/hosts" /etc/hosts
-sudo install -D -o root -g root -m 644 "$laptop_install_files/30-touchpad.conf" /etc/X11/xorg.conf.d/30-touchpad.conf
-sudo install -D -o root -g root -m 644 "$laptop_install_files/environment" /etc/environment
-sudo install -D -o root -g root -m 644 "$laptop_install_files/UPower.conf" /etc/UPower/UPower.conf
-sudo install -D -o root -g root -m 644 "$laptop_install_files/awesome_sddm.conf" /etc/sddm.conf.d/awesome_sddm.conf
-sudo install -D -o root -g root -m 644 "$laptop_install_files/awesome-portals.conf" /etc/xdg-desktop-portal/awesome-portals.conf
-sudo install -D -o root -g root -m 644 "$laptop_install_files/dconf/profile/user" /etc/dconf/profile/user
-sudo install -D -o root -g root -m 644 "$laptop_install_files/dconf/local.d/00-settings" /etc/dconf/db/local.d/00-settings
-sudo install -D -o root -g root -m 644 "$laptop_install_files/sudo" /etc/pam.d/sudo
-sudo install -D -o root -g root -m 644 "$laptop_install_files/polkit-1" /etc/pam.d/polkit-1
-sudo install -D -o root -g root -m 644 "$laptop_install_files/i3lock" /etc/pam.d/i3lock
-sudo install -D -o root -g root -m 644 "$laptop_install_files/ssh-agent-fprint-askpass.conf" /etc/systemd/user/ssh-agent.service.d/fprint-askpass.conf
-sudo install -D -o root -g root -m 755 "$laptop_install_files/ssh-askpass-fprint" /usr/local/bin/ssh-askpass-fprint
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/backlight.rules" /etc/udev/rules.d/backlight.rules
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/hosts" /etc/hosts
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/30-touchpad.conf" /etc/X11/xorg.conf.d/30-touchpad.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/environment" /etc/environment
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/UPower.conf" /etc/UPower/UPower.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/awesome_sddm.conf" /etc/sddm.conf.d/awesome_sddm.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/awesome-portals.conf" /etc/xdg-desktop-portal/awesome-portals.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/dconf/profile/user" /etc/dconf/profile/user
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/dconf/local.d/00-settings" /etc/dconf/db/local.d/00-settings
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sudo" /etc/pam.d/sudo
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/polkit-1" /etc/pam.d/polkit-1
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/i3lock" /etc/pam.d/i3lock
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/ssh-agent-fprint-askpass.conf" /etc/systemd/user/ssh-agent.service.d/fprint-askpass.conf
+sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/ssh-askpass-fprint" /usr/local/bin/ssh-askpass-fprint
 # This must remain root-owned because every interactive root shell sources it.
-sudo install -D -o root -g root -m 644 "$laptop_install_files/global.bashrc" /etc/bash.bashrc.local
-sudo install -D -o root -g root -m 644 "$laptop_install_files/bash.bashrc" /etc/bash.bashrc
-sudo install -D -o root -g root -m 644 "$laptop_install_files/sddm" /etc/pam.d/sddm
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/global.bashrc" /etc/bash.bashrc.local
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/bash.bashrc" /etc/bash.bashrc
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sddm" /etc/pam.d/sddm
 
 sudo dconf update
 sudo udevadm control --reload-rules
 sudo groupadd -r nopasswdlogin || true
 sudo usermod -a -G video elmeri
 sudo usermod -a -G nopasswdlogin elmeri
-sudo systemctl enable --now NetworkManager bluetooth syncthing@elmeri tlp upower
+sudo systemctl enable --now NetworkManager bluetooth tlp upower
 systemctl --user enable --now ssh-agent.service
 systemctl --user daemon-reload
