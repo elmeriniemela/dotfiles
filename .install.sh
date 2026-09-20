@@ -2,17 +2,19 @@
 set -euxo pipefail
 
 sudo pacman -S --needed git reflector vim
-export DOTFILESCMD=(/usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME")
+dotfiles() {
+    /usr/bin/git --git-dir="$HOME/.dotfiles/" --work-tree="$HOME" "$@"
+}
 
 if [[ -d "$HOME/.dotfiles" ]]; then
-    "${DOTFILESCMD[@]}" pull
+    dotfiles pull
 else
     git clone --bare https://github.com/elmeriniemela/dotfiles.git "$HOME/.dotfiles"
 fi
 
-"${DOTFILESCMD[@]}" checkout
-"${DOTFILESCMD[@]}" config --local status.showUntrackedFiles no
-"${DOTFILESCMD[@]}" submodule update --init --recursive
+dotfiles checkout
+dotfiles config --local status.showUntrackedFiles no
+dotfiles submodule update --init --recursive
 
 rm -f ~/.bashrc
 rm -f ~/.bash_profile
