@@ -183,7 +183,7 @@ aur_packages=(
     blueberry               # Bluetooth configuration UI.
     acpilight               # Backlight control utility.
     xautolock               # Automatically lock inactive X11 sessions.
-    archlinux-logout-git    # Arch Linux logout scripts.
+    arcolinux-logout        # Arch Linux logout scripts.
     wkhtmltopdf-bin         # HTML-to-PDF converter.
 )
 yay -S --noconfirm --needed "${aur_packages[@]}"
