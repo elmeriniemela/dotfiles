@@ -15,6 +15,12 @@ Boot into desktop, then
 bash <(curl -fsSL https://eniemela.fi/api-v1/laptop-install.sh)
 ```
 
+If the Chaotic-AUR CDN returns HTTP 503, replace it with the geo mirror and rerun the installer:
+
+```bash
+sed -i 's|https://cdn-mirror\.chaotic\.cx|https://geo-mirror.chaotic.cx|g' .install.sh
+```
+
 ## Test the installer with QEMU
 
 Install QEMU on Arch Linux:

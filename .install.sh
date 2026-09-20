@@ -25,19 +25,13 @@ rm -f ~/.bash_profile
 sudo rm -f /root/.bash_profile
 sudo rm -f /root/.bashrc
 
-if [[ ! -f /etc/pacman.d/chaotic-mirrorlist ]]; then
-    sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
-    sudo pacman-key --lsign-key 3056513887B78AEB
-    sudo pacman -U --noconfirm \
-        'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' \
-        'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
-fi
-
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/pacman.conf" /etc/pacman.conf
-
 sudo sed -i '/^#en_US.UTF-8/s/^#//g' /etc/locale.gen
 sudo sed -i '/^#fi_FI.UTF-8/s/^#//g' /etc/locale.gen
 sudo locale-gen
+sudo groupadd -r nopasswdlogin || true
+sudo usermod -a -G video elmeri
+sudo usermod -a -G nopasswdlogin elmeri
+
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/wheel_group" /etc/sudoers.d/wheel_group
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/vconsole.conf" /etc/vconsole.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/locale.conf" /etc/locale.conf
@@ -177,6 +171,16 @@ laptop_packages=(
     yay                             # Install the AUR package helper.
 )
 
+if [[ ! -f /etc/pacman.d/chaotic-mirrorlist ]]; then
+    sudo pacman-key --recv-key 3056513887B78AEB --keyserver keyserver.ubuntu.com
+    sudo pacman-key --lsign-key 3056513887B78AEB
+    sudo pacman -U --noconfirm \
+        'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-keyring.pkg.tar.zst' \
+        'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
+fi
+
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/pacman.conf" /etc/pacman.conf
+
 sudo reflector \
   --age 24 \
   --completion-percent 100 \
@@ -206,9 +210,6 @@ sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sddm" /etc/
 
 sudo dconf update
 sudo udevadm control --reload-rules
-sudo groupadd -r nopasswdlogin || true
-sudo usermod -a -G video elmeri
-sudo usermod -a -G nopasswdlogin elmeri
 sudo systemctl enable cronie NetworkManager bluetooth tlp upower sddm
 systemctl --user enable ssh-agent.service
 systemctl --user daemon-reload
