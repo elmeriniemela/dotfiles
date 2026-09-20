@@ -104,7 +104,7 @@ laptop_packages=(
     thunar                          # File manager.
     thunar-archive-plugin           # Archive integration for Thunar.
     thunar-volman                   # Volume management for Thunar.
-    pavucontrol                     # PulseAudio/PipeWire volume control.
+    pwvucontrol                     # PulseAudio/PipeWire volume control.
     mermaid-cli                     # Render Mermaid diagrams.
     thunderbird                     # Email client.
     veracrypt                       # Encrypted-volume manager.
