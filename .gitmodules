@@ -1,3 +1,9 @@
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim
+[submodule ".config/bootstrap-linux"]
+	path = .config/bootstrap-linux
+	url = https://github.com/elmeriniemela/bootstrap-linux.git
+[submodule ".config/awesome"]
+	path = .config/awesome
+	url = https://github.com/elmeriniemela/awesome-config.git
