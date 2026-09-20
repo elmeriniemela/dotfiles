@@ -81,6 +81,7 @@ laptop_packages=(
     rofi-calc                       # Calculator mode for Rofi.
     picom                           # X11 compositor.
     signal-desktop                  # Signal desktop client.
+    sddm                            # The Simple Desktop Display Manager.
     udisks2                         # Disk and removable-media service.
     gvfs                            # Virtual filesystem support.
     udiskie                         # Automatic removable-media mounting.
@@ -214,6 +215,6 @@ sudo udevadm control --reload-rules
 sudo groupadd -r nopasswdlogin || true
 sudo usermod -a -G video elmeri
 sudo usermod -a -G nopasswdlogin elmeri
-sudo systemctl enable --now cronie NetworkManager bluetooth tlp upower
-systemctl --user enable --now ssh-agent.service
+sudo systemctl enable cronie NetworkManager bluetooth tlp upower sddm
+systemctl --user enable ssh-agent.service
 systemctl --user daemon-reload
