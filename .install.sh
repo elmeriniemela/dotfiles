@@ -179,6 +179,8 @@ sudo reflector \
 
 sudo pacman -Syy --noconfirm --needed "${laptop_packages[@]}"
 
+sudo systemctl enable --now systemd-timesyncd
+
 aur_packages=(
     blueberry               # Bluetooth configuration UI.
     acpilight               # Backlight control utility.
@@ -212,6 +214,6 @@ sudo udevadm control --reload-rules
 sudo groupadd -r nopasswdlogin || true
 sudo usermod -a -G video elmeri
 sudo usermod -a -G nopasswdlogin elmeri
-sudo systemctl enable --now cronie systemd-timesyncd NetworkManager bluetooth tlp upower
+sudo systemctl enable --now cronie NetworkManager bluetooth tlp upower
 systemctl --user enable --now ssh-agent.service
 systemctl --user daemon-reload
