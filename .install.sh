@@ -18,7 +18,7 @@ dotfiles() {
 }
 
 if [[ -d "$HOME/.dotfiles" ]]; then
-    dotfiles pull
+    dotfiles pull --rebase --autostash
 else
     git clone --bare https://github.com/elmeriniemela/dotfiles.git "$HOME/.dotfiles"
 fi
