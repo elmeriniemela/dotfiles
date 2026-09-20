@@ -1,6 +1,16 @@
 #!/usr/bin/bash
 set -euxo pipefail
 
+sudo -v
+(
+    set +x
+    while sleep 60; do
+        sudo -n -v || exit
+    done
+) &
+sudo_keepalive_pid=$!
+trap 'kill "$sudo_keepalive_pid" 2>/dev/null || true' EXIT
+
 sudo systemctl enable --now systemd-timesyncd
 sudo pacman -S --needed git reflector vim
 dotfiles() {
