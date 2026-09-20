@@ -16,6 +16,7 @@
     "terminal.integrated.fontSize": 13,
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.allowChords": false,
+    "latex-workshop.latex.build.fromFolder": "",
     // The path of the shell that the terminal uses on Linux (default: /bin/bash). [Read more about configuring the shell](https://code.visualstudio.com/docs/editor/integrated-terminal#_configuration).
     // "terminal.integrated.defaultProfile.linux": "/home/elmeri/.config/bootstrap-linux/files/tmux-vscode.sh",
     // "terminal.integrated.shell.linux": "/home/elmeri/.config/bootstrap-linux/files/tmux-vscode.sh",
@@ -46,8 +47,6 @@
     "editor.insertSpaces": true,
     // https://stackoverflow.com/questions/30884131/remove-trailing-spaces-automatically-or-with-a-shortcut
     "files.trimTrailingWhitespace": true,
-    "latex-workshop.chktex.enabled": true,
-    "latex-workshop.view.pdf.viewer": "tab",
     "emmet.showExpandedAbbreviation": "never",
     // When opening a file, `editor.tabSize` and `editor.insertSpaces`
     // will be detected based on the file contents. Set to false to keep
@@ -102,42 +101,6 @@
         "**/*.fdb_latexmk": true,
         "**/*.aux": true,
     },
-    // "latex-workshop.latex.magic.args": [
-    //     "-synctex=1",
-    //     "-interaction=nonstopmode",
-    //     "-file-line-error",
-    //     "--shell-escape",
-    //     "%DOC%"
-    // ],
-    "latex-workshop.latex.tools": [{
-        "name": "latexmk",
-        "command": "latexmk",
-        "args": [
-            "-xelatex",
-            "-synctex=1",
-            "-interaction=nonstopmode",
-            "-file-line-error",
-            "%DOC%"
-        ]
-    }],
-    // "latex-workshop.latex.tools": [
-    //     {
-    //         "name": "latexmk",
-    //         "command": "latexmk",
-    //         "args": [
-    //             "-xelatex",
-    //             "-synctex=1",
-    //             "-interaction=nonstopmode",
-    //             "-file-line-error",
-    //             "-f",
-    //             "-pdf",
-    //             "-outdir=%OUTDIR%",
-    //             "--shell-escape",
-    //             "%DOC%"
-    //         ],
-    //         "env": {}
-    //     },
-    // ],
     "minify.html": {
         "caseSensitive": false,
         "collapseBooleanAttributes": true,
@@ -183,16 +146,6 @@
     },
     "csv-preview.separator": ";",
     // "files.autoGuessEncoding":true,
-
-    "[latex]": {
-        "editor.formatOnPaste": false,
-        "editor.suggestSelection": "recentlyUsedByPrefix",
-        // "files.encoding": "iso88591",
-    },
-
-    "workbench.editorAssociations": {
-        "*.pdf": "latex-workshop-pdf-hook"
-    },
     "[cpp]": {
         "editor.defaultFormatter": "ms-vscode.cpptools"
     },
@@ -208,7 +161,6 @@
         "markdown": false,
         "scminput": false,
         "yaml": false,
-        "latex": false,
         "sql": false
     },
     "terminal.integrated.enableMultiLinePasteWarning": false,

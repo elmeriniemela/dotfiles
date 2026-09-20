@@ -1,6 +1,4 @@
 {
-    "enableTelemetry": false,
-    "toolPermission": "always-proceed",
     "permissions": {
         "allow": [
             "command(*)"
@@ -10,7 +8,11 @@
             "command(pip)"
         ]
     },
-    "trustedWorkspaces": [
-        "/home/elmeri/Odoo/src/19/deploy-manager"
-    ]
+    "statusLine": {
+        "type": "",
+        "command": "",
+        "enabled": true
+    },
+    "toolPermission": "always-proceed",
+    "trustedWorkspaces": []
 }
