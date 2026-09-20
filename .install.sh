@@ -202,6 +202,7 @@ sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/dconf/local
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sudo" /etc/pam.d/sudo
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/polkit-1" /etc/pam.d/polkit-1
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/i3lock" /etc/pam.d/i3lock
+sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/lxlock" /usr/local/bin/lxlock
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/ssh-agent-fprint-askpass.conf" /etc/systemd/user/ssh-agent.service.d/fprint-askpass.conf
 sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/ssh-askpass-fprint" /usr/local/bin/ssh-askpass-fprint
 # This must remain root-owned because every interactive root shell sources it.

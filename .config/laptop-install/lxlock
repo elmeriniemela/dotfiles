@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/bin/betterlockscreen -l dim -- --time-str='%H:%M'
