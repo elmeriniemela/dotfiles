@@ -217,9 +217,13 @@ sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/lxlock" /us
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/ssh-agent-fprint-askpass.conf" /etc/systemd/user/ssh-agent.service.d/fprint-askpass.conf
 sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/ssh-askpass-fprint" /usr/local/bin/ssh-askpass-fprint
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sddm" /etc/pam.d/sddm
+sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/portable4t-syncthing-hook" /usr/local/bin/portable4t-syncthing-hook
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/portable4t-udisks-events.service" /etc/systemd/system/portable4t-udisks-events.service
 
 sudo dconf update
 sudo udevadm control --reload-rules
+sudo systemctl daemon-reload
 sudo systemctl enable cronie NetworkManager bluetooth tlp upower sddm
+sudo systemctl enable --now portable4t-udisks-events.service
 systemctl --user enable ssh-agent.service
 systemctl --user daemon-reload

@@ -1,0 +1,11 @@
+[Unit]
+Description=Control Syncthing from Portable4T UDisks events
+Requires=udisks2.service
+After=udisks2.service
+
+[Service]
+ExecStart=/usr/bin/udiskie --no-automount --no-tray --no-notify --event-hook '/usr/local/bin/portable4t-syncthing-hook {event} {id_uuid}'
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
