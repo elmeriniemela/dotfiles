@@ -201,6 +201,8 @@ sudo reflector \
 
 sudo pacman -Syy --noconfirm --needed "${laptop_packages[@]}"
 
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/10-bluetooth.conf" /etc/tlp.d/10-bluetooth.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/btusb.conf" /etc/modprobe.d/btusb.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/backlight.rules" /etc/udev/rules.d/backlight.rules
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/hosts" /etc/hosts
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/30-touchpad.conf" /etc/X11/xorg.conf.d/30-touchpad.conf
@@ -221,6 +223,7 @@ sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/portable4t-
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/portable4t-udisks-events.service" /etc/systemd/system/portable4t-udisks-events.service
 
 sudo dconf update
+sudo mkinitcpio -P
 sudo udevadm control --reload-rules
 sudo systemctl daemon-reload
 sudo systemctl enable cronie NetworkManager bluetooth tlp upower sddm
