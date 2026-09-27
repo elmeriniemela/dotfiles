@@ -167,9 +167,9 @@ export HISTTIMEFORMAT="[%F %T] "
 # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
 export HISTFILE=~/.bash_eternal_history
 export HISTIGNORE=' *' # lines starting with ' ' will not be saved to history
-# Force prompt to write history after every command.
+# Write new history and load commands from other sessions before every prompt.
 # http://superuser.com/questions/20900/bash-history-loss
-PROMPT_COMMAND="history -a"
+PROMPT_COMMAND="history -a; history -n"
 
 [[ -r "/usr/share/bash-completion/completions/git" ]] && . "/usr/share/bash-completion/completions/git"
 
