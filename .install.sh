@@ -206,6 +206,7 @@ sudo reflector \
 sudo pacman -Syy --noconfirm --needed "${laptop_packages[@]}"
 
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/10-bluetooth.conf" /etc/tlp.d/10-bluetooth.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/10-battery.conf" /etc/tlp.d/10-battery.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/btusb.conf" /etc/modprobe.d/btusb.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/backlight.rules" /etc/udev/rules.d/backlight.rules
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/hosts" /etc/hosts
