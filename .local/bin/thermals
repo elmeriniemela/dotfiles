@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+# Sample CPU package thermals once every ~6s. Needs root to read energy_uj.
+# Usage: sudo thermals    (Ctrl-C to stop)
+#
+# power               = package draw, averaged over the 1s window
+# throttled_ms_per_s  = milliseconds of thermal throttling in that window
+
+throttle=/sys/devices/system/cpu/cpu0/thermal_throttle/package_throttle_total_time_ms
+energy=/sys/class/powercap/intel-rapl:0/energy_uj
+
+echo "profile=$(cat /sys/firmware/acpi/platform_profile)"
+while sleep 5; do
+    a=$(cat $energy)
+    t=$(cat $throttle)
+    sleep 1
+    b=$(cat $energy)
+    u=$(cat $throttle)
+    echo "$(date +%H:%M:%S) power=$(( (b-a)/1000000 ))W temp=$(sensors 2>/dev/null | awk '/Package id 0/{print $4}') fan=$(awk '/speed/{print $2}' /proc/acpi/ibm/fan) throttled_ms_per_s=$(( u-t ))"
+done

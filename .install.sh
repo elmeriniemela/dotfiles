@@ -142,6 +142,10 @@ laptop_packages=(
     networkmanager-vpnc             # VPNC NetworkManager plugin.
     nm-connection-editor            # NetworkManager connection editor.
     arandr                          # Display-layout configuration UI.
+    intel-media-driver              # Intel VA-API driver for hardware video decode and encode.
+    vulkan-intel                    # Intel Vulkan driver.
+    libva-utils                     # VA-API diagnostics such as vainfo.
+    intel-gpu-tools                 # Intel GPU monitoring such as intel_gpu_top.
     laptop-detect                   # Detect laptop hardware.
     lxappearance                    # GTK theme configuration UI.
     upower                          # Battery and power information service.
