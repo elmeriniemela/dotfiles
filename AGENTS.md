@@ -1,5 +1,6 @@
 # Repository guidelines
 
+- Never edit the live system or any files outside of this repository directly. Instead, provide the user the manual commands needed to apply same changes to live system if they wish to do so.
 - Minimize maintained code and configuration; remove redundancy before adding tooling.
 - Keep `.install.sh` rerunnable, simple and easy to review.
 - Avoid complex logic, prefer simple commands instead of loops, if's or other special control statements.

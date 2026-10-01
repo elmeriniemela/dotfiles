@@ -149,7 +149,7 @@ laptop_packages=(
     laptop-detect                   # Detect laptop hardware.
     lxappearance                    # GTK theme configuration UI.
     upower                          # Battery and power information service.
-    visual-studio-code-bin          # Visual Studio Code binary distribution.
+    vscodium                        # Code editor (telemetry-free VS Code build).
     vlc                             # Media player.
     sshfs                           # Mount filesystems over SSH.
     sshpass                         # Non-interactive SSH password input.
