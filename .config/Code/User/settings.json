@@ -45,6 +45,7 @@
     // Insert spaces when pressing Tab. This setting is overriden
     // based on the file contents when `editor.detectIndentation` is true.
     "editor.insertSpaces": true,
+    "chat.disableAIFeatures": true,
     // https://stackoverflow.com/questions/30884131/remove-trailing-spaces-automatically-or-with-a-shortcut
     "files.trimTrailingWhitespace": true,
     "emmet.showExpandedAbbreviation": "never",
