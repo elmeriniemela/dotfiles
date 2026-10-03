@@ -1,9 +1,8 @@
-#
-# /etc/global.bashrc
-#
+# Shared interactive Bash settings installed as /etc/global.bashrc.
 
 [[ $- != *i* ]] && return
 
+# Terminal colors and prompt.
 colors() {
     local fgc bgc vals seq0
 
@@ -31,73 +30,37 @@ colors() {
     done
 }
 
-# Change the window title of X terminals
-# case ${TERM} in
-#     xterm*|rxvt*|Eterm*|aterm|kterm|gnome*|interix|konsole*)
-#         PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\007"'
-#         ;;
-#     screen*)
-#         PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
-#         ;;
-# esac
-
-use_color=true
-
-# Set colorful PS1 only on colorful terminals.
-# dircolors --print-database uses its own built-in database
-# instead of using /etc/DIR_COLORS.  Try to use the external file
-# first to take advantage of user additions.  Use internal bash
-# globbing instead of external grep binary.
-safe_term=${TERM//[^[:alnum:]]/?}   # sanitize TERM
-match_lhs=""
-[[ -f ~/.dir_colors   ]] && match_lhs="${match_lhs}$(<~/.dir_colors)"
-[[ -f /etc/DIR_COLORS ]] && match_lhs="${match_lhs}$(</etc/DIR_COLORS)"
-[[ -z ${match_lhs}    ]] \
-    && type -P dircolors >/dev/null \
-    && match_lhs=$(dircolors --print-database)
-[[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] && use_color=true
-
-if ${use_color} ; then
-    # Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-    if type -P dircolors >/dev/null ; then
-        if [[ -f ~/.dir_colors ]] ; then
-            eval $(dircolors -b ~/.dir_colors)
-        elif [[ -f /etc/DIR_COLORS ]] ; then
-            eval $(dircolors -b /etc/DIR_COLORS)
-        fi
-    fi
-
-    # https://misc.flogisoft.com/bash/tip_colors_and_formatting
-    if [ "$HOSTNAME" = homeserver ]; then
-        normalcolor='33m'
-        rootcolorrr='36m'
-    else
-        normalcolor='32m'
-        rootcolorrr='31m'
-    fi
-
-
-    if [[ ${EUID} == 0 ]] ; then
-        PS1="\[\e[1;$rootcolorrr\][\u@\h\[\e[1;37m\] \w\[\e[1;$rootcolorrr\]]\$\[\e[00m\] "
-    else
-        PS1="\[\e[1;$normalcolor\][\u@\h\[\e[1;37m\] \w\[\e[1;$normalcolor\]]\$\[\e[00m\] "
-    fi
-
-    alias ls='ls --color=auto'
-    alias grep='grep --colour=auto'
-    alias egrep='egrep --colour=auto'
-    alias fgrep='fgrep --colour=auto'
-else
-    if [[ ${EUID} == 0 ]] ; then
-        # show root@ when we don't have colors
-        PS1='\u@\h \w \$ '
-    else
-        PS1='\u@\h \w \$ '
+# Prefer the user's dircolors file over the system one.
+if type -P dircolors >/dev/null; then
+    if [[ -f ~/.dir_colors ]]; then
+        eval $(dircolors -b ~/.dir_colors)
+    elif [[ -f /etc/DIR_COLORS ]]; then
+        eval $(dircolors -b /etc/DIR_COLORS)
     fi
 fi
 
-unset use_color safe_term match_lhs sh
+# https://misc.flogisoft.com/bash/tip_colors_and_formatting
+if [ "$HOSTNAME" = homeserver ]; then
+    normalcolor='33m'
+    rootcolorrr='36m'
+else
+    normalcolor='32m'
+    rootcolorrr='31m'
+fi
 
+if [[ ${EUID} == 0 ]]; then
+    PS1="\[\e[1;$rootcolorrr\][\u@\h\[\e[1;37m\] \w\[\e[1;$rootcolorrr\]]\$\[\e[00m\] "
+else
+    PS1="\[\e[1;$normalcolor\][\u@\h\[\e[1;37m\] \w\[\e[1;$normalcolor\]]\$\[\e[00m\] "
+fi
+
+alias ls='ls --color=auto'
+alias grep='grep --colour=auto'
+alias egrep='egrep --colour=auto'
+alias fgrep='fgrep --colour=auto'
+unset sh
+
+# Interactive shell behavior.
 xhost +local:root > /dev/null 2>&1
 
 complete -cf sudo
@@ -114,7 +77,6 @@ shopt -s expand_aliases
 shopt -s histappend
 
 # Eternal bash history.
-# ---------------------
 # Undocumented feature which sets the size to "unlimited".
 # http://stackoverflow.com/questions/9457233/unlimited-bash-history
 export HISTFILESIZE=
@@ -128,6 +90,7 @@ export HISTIGNORE=' *' # lines starting with ' ' will not be saved to history
 # http://superuser.com/questions/20900/bash-history-loss
 PROMPT_COMMAND="history -a; history -n"
 
+# Git-backed dotfile repositories.
 [[ -r "/usr/share/bash-completion/completions/git" ]] && . "/usr/share/bash-completion/completions/git"
 
 dotfiles() {
@@ -142,13 +105,11 @@ server() {
 
 __git_complete server __git_main
 
-
+# Python virtual environments.
 activate() {
-    if [[ $1 == odoo* ]];
-    then
-        # ${1:4} removes 'odoo' from odoo12 leaving just the number
-        if [ -z "$2" ]
-        then
+    if [[ $1 == odoo* ]]; then
+        # ${1:4} removes 'odoo' from odoo12, leaving the version number.
+        if [ -z "$2" ]; then
             echo "Specify odoo config file i.e. odoorc.conf"
             return
         fi
@@ -157,26 +118,26 @@ activate() {
     . ~/.venv/$1/bin/activate
 }
 
-_venv_completer () {
+_venv_completer() {
     # https://askubuntu.com/questions/707610/bash-completion-for-custom-command-to-complete-static-directory-tree
     local cur
     COMPREPLY=()
     cur=${COMP_WORDS[COMP_CWORD]}
     k=0
-    i="~/.venv" # the directory from where to start
-    for j in $( compgen -f "$i/$cur" ); do # loop trough the possible completions
-        [ -d "$j" ] && j="${j}/" || j="${j} " # if its a dir add a shlash, else a space
-        COMPREPLY[k++]=${j#$i/} # remove the directory prefix from the array
+    i="~/.venv" # The directory from which to complete.
+    for j in $( compgen -f "$i/$cur" ); do
+        [ -d "$j" ] && j="${j}/" || j="${j} "
+        COMPREPLY[k++]=${j#$i/}
     done
     return 0
 }
 
 complete -o nospace -F _venv_completer activate
 
-config_pull(){(
-    set -e # Fail early
-    if [ -z "$1" ]
-    then
+# Pull and push personal configuration and data.
+config_pull() { (
+    set -e
+    if [ -z "$1" ]; then
         echo "Specify hostname"
         return
     fi
@@ -185,26 +146,11 @@ config_pull(){(
     rsync -avWPL "$1".psql_history ~/.psql_history
     rsync -avWPL "$1".python_history ~/.python_history
     rsync -avWPL "$1"VPN/ ~/VPN
-)}
+); }
 
-data_pull(){(
-    set -e # Fail early
-    if [ -z "$1" ]
-    then
-        echo "Specify hostname"
-        return
-    fi
-    rsync -avWPL "$1"Projects/ ~/Projects
-    rsync --exclude 'odoo-dbs' -avWPL "$1"Odoo/ ~/Odoo
-    rsync --exclude 'lock' -avWPL "$1".thunderbird/ ~/.thunderbird
-    rsync --exclude '*.log' -avWPL "$1".config/syncthing/ ~/.config/syncthing
-)}
-
-
-config_push(){(
-    set -e # Fail early
-    if [ -z "$1" ]
-    then
+config_push() { (
+    set -e
+    if [ -z "$1" ]; then
         echo "Specify dir"
         return
     fi
@@ -213,12 +159,23 @@ config_push(){(
     rsync -avWPL ~/.psql_history $1/.psql_history
     rsync -avWPL ~/.python_history $1/.python_history
     rsync -avWPL ~/VPN/ $1/VPN
-)}
+); }
 
-data_push(){(
-    set -e # Fail early
-    if [ -z "$1" ]
-    then
+data_pull() { (
+    set -e
+    if [ -z "$1" ]; then
+        echo "Specify hostname"
+        return
+    fi
+    rsync -avWPL "$1"Projects/ ~/Projects
+    rsync --exclude 'odoo-dbs' -avWPL "$1"Odoo/ ~/Odoo
+    rsync --exclude 'lock' -avWPL "$1".thunderbird/ ~/.thunderbird
+    rsync --exclude '*.log' -avWPL "$1".config/syncthing/ ~/.config/syncthing
+); }
+
+data_push() { (
+    set -e
+    if [ -z "$1" ]; then
         echo "Specify dir"
         return
     fi
@@ -227,14 +184,13 @@ data_push(){(
     rsync -avWPL ~/School/ $1/School
     rsync -avWPL ~/Projects/ $1/Projects
     rsync --exclude 'odoo-dbs' -avWPL ~/Odoo/ $1/Odoo
-)}
-
+); }
 
 venv() {
     python3 -m venv ~/.venv/$1 ${@:2}
 }
 
-
+# Git submodule maintenance.
 rm_submodule() {
     git submodule deinit -f -- "$1"
     rm -rf ".git/modules/a/$1"
@@ -249,46 +205,33 @@ hard_reset_submodules() {
     git submodule update --init --recursive
 }
 
-
-codex() {
+# Run AI tools without access to the SSH agent.
+_without_ssh_agent() {
     local SSH_AUTH_SOCK=""
     local SSH_AGENT_PID=""
     local GIT_SSH_COMMAND="ssh -o BatchMode=yes -o IdentityAgent=none -o IdentitiesOnly=yes -o IdentityFile=/dev/null"
 
     export SSH_AUTH_SOCK SSH_AGENT_PID GIT_SSH_COMMAND
-    command codex "$@"
+    command "$@"
 }
 
-
-agy() {
-    local SSH_AUTH_SOCK=""
-    local SSH_AGENT_PID=""
-    local GIT_SSH_COMMAND="ssh -o BatchMode=yes -o IdentityAgent=none -o IdentitiesOnly=yes -o IdentityFile=/dev/null"
-
-    export SSH_AUTH_SOCK SSH_AGENT_PID GIT_SSH_COMMAND
-    command agy "$@"
+codex() {
+    _without_ssh_agent codex "$@"
 }
 
 claude() {
-    local SSH_AUTH_SOCK=""
-    local SSH_AGENT_PID=""
-    local GIT_SSH_COMMAND="ssh -o BatchMode=yes -o IdentityAgent=none -o IdentitiesOnly=yes -o IdentityFile=/dev/null"
-
-    export SSH_AUTH_SOCK SSH_AGENT_PID GIT_SSH_COMMAND
-    command claude "$@"
+    _without_ssh_agent claude "$@"
 }
 
+agy() {
+    _without_ssh_agent agy "$@"
+}
 
 opencode() {
-    local SSH_AUTH_SOCK=""
-    local SSH_AGENT_PID=""
-    local GIT_SSH_COMMAND="ssh -o BatchMode=yes -o IdentityAgent=none -o IdentitiesOnly=yes -o IdentityFile=/dev/null"
-
-    export SSH_AUTH_SOCK SSH_AGENT_PID GIT_SSH_COMMAND
-    command opencode "$@"
+    _without_ssh_agent opencode "$@"
 }
 
-
+# Convenience aliases and user settings.
 alias cls="tput reset && clear"
 alias gitignore="cp ~/.config/odoo/.gitignore ."
 
@@ -298,6 +241,7 @@ PATH="~/.cargo/bin:~/.local/bin:$PATH"
 
 stty -ixon
 
+# Session environment.
 export ANDROID_SDK=/home/elmeri/Android/Sdk
 export VISUAL=vim
 export EDITOR=vim
