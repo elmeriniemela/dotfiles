@@ -290,9 +290,9 @@ sudo reflector \
   --save /etc/pacman.d/mirrorlist
 
 sudo pacman -Syy --noconfirm --needed "${laptop_packages[@]}"
-makepkg -D "$HOME/.config/archlinux-logout" --force --clean --syncdeps --install --noconfirm
-makepkg -D "$HOME/.config/wkhtmltopdf-bin" --force --clean --syncdeps --install --noconfirm
-makepkg -D "$HOME/.config/python310-bin" --force --clean --syncdeps --install --noconfirm
+makepkg -D "$HOME/.local/share/pkgbuilds/archlinux-logout" --force --clean --syncdeps --install --noconfirm
+makepkg -D "$HOME/.local/share/pkgbuilds/wkhtmltopdf-bin" --force --clean --syncdeps --install --noconfirm
+makepkg -D "$HOME/.local/share/pkgbuilds/python310-bin" --force --clean --syncdeps --install --noconfirm
 
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/10-bluetooth.conf" /etc/tlp.d/10-bluetooth.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/10-battery.conf" /etc/tlp.d/10-battery.conf
