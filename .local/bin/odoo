@@ -1,0 +1,170 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+show_help() {
+  cat <<EOF
+Usage:
+  $ odoo [function] [args...]
+  $ odoo [odoo-bin args...]
+  $ odoo --help
+
+Environment:
+  Odoo version:      ${ODOO_VERSION}
+  Python:            ${ODOO_VENV}/python
+  Odoo source:       ${ODOO_VERSION_DIR}/odoo
+  Enterprise source: ${ODOO_VERSION_DIR}/enterprise
+  Module directory:  ${PWD}
+  Module name:       ${ODOO_MODULE:-not set}
+  Config file:       ${ODOO_CONFIG_FILE}
+  Database:          ${ODOO_DATABASE:-not set}
+
+Supported functions:
+  upgrade
+  install
+  dropdb
+  tests [optional --no-coverage]
+  translate <lang>
+
+Default behavior:
+  Runs the Odoo server (odoo-bin) when no function is selected.
+  Unlike the other functions, this accepts optional arguments supported by odoo.
+EOF
+}
+
+ensure_odoo_env() {
+    local dir="$PWD"
+
+    while [[ "$dir" != "/" ]]; do
+        if [[ -f "$dir/odoorc.env" ]]; then
+            source $dir/odoorc.env
+            export ODOO_VENV="$HOME/.venv/odoo$ODOO_VERSION/bin"
+            export ODOO_VERSION_DIR=$HOME"/Odoo/src/${ODOO_VERSION}"
+            return 0
+        fi
+        dir="$(dirname "$dir")"
+    done
+
+    echo "Error: odoorc.env does not exist in any parent dir." >&2
+    exit 1
+}
+
+ensure_odoo_config() {
+    if [ -z "${ODOO_CONFIG_FILE:-}" ] || [ ! -f "$ODOO_CONFIG_FILE" ]; then
+        local dir="$PWD"
+        while [[ "$dir" != "/" ]]; do
+            if [[ -f "$dir/odoorc.conf" ]]; then
+                export ODOO_CONFIG_FILE="$dir/odoorc.conf"
+                export ODOO_MODULE="$(basename "$PWD")"
+                export ODOO_DB_ID="$(tmux display-message -p -t "$TMUX_PANE" '#S:#{pane_index}' | sha256sum | cut -c1-12)"
+                export ODOO_DATABASE="$ODOO_VERSION-$ODOO_MODULE-$ODOO_DB_ID"
+                if [[ ! -f "__manifest__.py" ]]; then
+                    echo "Error: __manifest__.py does not exist. $ODOO_MODULE is not an odoo module." >&2
+                    exit 1
+                fi
+                return 0
+            fi
+            dir="$(dirname "$dir")"
+        done
+        echo "Error: odoorc.conf does not exist in any parent dir." >&2
+        exit 1
+    fi
+}
+
+run_server() {
+    if [[ -z "${1:-}" || "$1" == @(server|shell|neutralize|obfuscate|populate|-u|-i) || "$1" == --* ]]; then
+        if [ -n "${ODOO_DATABASE:-}" ]; then
+            $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$"
+        else
+            $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $* --conf $ODOO_CONFIG_FILE
+        fi
+    else
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin $*
+    fi
+}
+run_upgrade() {
+    ensure_module_installed
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0
+}
+run_dropdb() {
+    dropdb $ODOO_DATABASE 2>/dev/null || :
+}
+run_install() {
+    $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" --load-language=fi_FI,en_US -i $ODOO_MODULE --stop-after-init --http-port=0
+}
+ensure_module_installed() {
+    local db_name_sql=${ODOO_DATABASE//\'/\'\'}
+    local module_name_sql=${ODOO_MODULE//\'/\'\'}
+    local db_exists
+    local module_state
+
+    db_exists="$(psql -X -d postgres -tAc "SELECT 1 FROM pg_database WHERE datname = '$db_name_sql'" 2>/dev/null || true)"
+    if [[ "$db_exists" != "1" ]]; then
+        run_install
+        return 0
+    fi
+
+    module_state="$(psql -X -d "$ODOO_DATABASE" -tAc "SELECT state FROM ir_module_module WHERE name = '$module_name_sql' LIMIT 1" 2>/dev/null || true)"
+    if [[ "$module_state" != "installed" ]]; then
+        run_install
+    fi
+}
+run_tests() {
+    ensure_module_installed
+    if [[ " $* " == *" --no-coverage "* ]]; then
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0 --test-enable --test-tags=$ODOO_MODULE
+    else
+        $ODOO_VENV/python -m coverage run --omit=__manifest__.py --source="$PWD" "$ODOO_VERSION_DIR/odoo/odoo-bin" --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0 --test-enable --test-tags=$ODOO_MODULE
+        $ODOO_VENV/python -m coverage report -m
+    fi
+}
+run_translate() {
+    run_upgrade
+    mkdir -p i18n
+    touch i18n/$1.po
+    SAVED_TSV="i18n/saved.tsv"
+    trap 'rm -rf "i18n/saved.tsv"' EXIT
+
+
+    extract_i18n.awk "i18n/$1.po" "$SAVED_TSV"
+    if (( ODOO_VERSION <= 18 )); then
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE -u $ODOO_MODULE --load-language=fi_FI --stop-after-init
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin --i18n-export=i18n/$1.po --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --modules=$ODOO_MODULE --language=fi_FI
+    else
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n loadlang --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --languages=$1
+        $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin i18n export --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE $ODOO_MODULE --languages=$1
+    fi
+    restore_i18n.awk "i18n/$1.po" "$SAVED_TSV" > "i18n/$1.po.tmp"
+    mv "i18n/$1.po.tmp" "i18n/$1.po"
+}
+
+ensure_odoo_env
+ensure_odoo_config
+
+case "${1-}" in
+  upgrade)
+    shift
+    run_upgrade "$@"
+    ;;
+  install)
+    shift
+    run_install "$@"
+    ;;
+  dropdb)
+    shift
+    run_dropdb "$@"
+    ;;
+  tests)
+    shift
+    run_tests "$@"
+    ;;
+  translate)
+    shift
+    run_translate "$@"
+    ;;
+  --help)
+    show_help
+    ;;
+  *)
+    run_server "$@"
+    ;;
+esac
