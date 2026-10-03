@@ -331,7 +331,7 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
 
-sudo systemctl enable cronie NetworkManager bluetooth stunnel tlp upower sddm ufw reflector
+sudo systemctl enable cronie NetworkManager bluetooth stunnel tlp upower sddm ufw reflector.timer
 sudo systemctl enable --now portable4t-udisks-events.service
 systemctl --user enable ssh-agent.service
 systemctl --user daemon-reload
