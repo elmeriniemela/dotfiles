@@ -223,6 +223,7 @@ sudo reflector \
 
 sudo pacman -Syy --noconfirm --needed "${laptop_packages[@]}"
 makepkg -D "$HOME/.config/archlinux-logout" --force --clean --syncdeps --install --noconfirm
+makepkg -D "$HOME/.config/wkhtmltopdf-bin" --force --clean --syncdeps --install --noconfirm
 
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/10-bluetooth.conf" /etc/tlp.d/10-bluetooth.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/10-battery.conf" /etc/tlp.d/10-battery.conf
