@@ -15,7 +15,7 @@
     "terminal.integrated.allowChords": false,
     "terminal.integrated.profiles.linux": {
         "tmux (session based on directory)": {
-            "path": "/home/elmeri/.config/bootstrap-linux/files/tmux-vscode.sh"
+            "path": "/home/elmeri/.local/bin/tmux-vscode.sh"
         }
     },
     "files.participants.timeout": 0,

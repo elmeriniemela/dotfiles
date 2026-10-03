@@ -18,11 +18,9 @@
     "terminal.integrated.allowChords": false,
     "latex-workshop.latex.build.fromFolder": "",
     // The path of the shell that the terminal uses on Linux (default: /bin/bash). [Read more about configuring the shell](https://code.visualstudio.com/docs/editor/integrated-terminal#_configuration).
-    // "terminal.integrated.defaultProfile.linux": "/home/elmeri/.config/bootstrap-linux/files/tmux-vscode.sh",
-    // "terminal.integrated.shell.linux": "/home/elmeri/.config/bootstrap-linux/files/tmux-vscode.sh",
     "terminal.integrated.profiles.linux": {
         "tmux (session based on directory)": {
-            "path": "/home/elmeri/.config/bootstrap-linux/files/tmux-vscode.sh",
+            "path": "/home/elmeri/.local/bin/tmux-vscode.sh",
             //   "args": ["-l"]
         }
     },

@@ -74,7 +74,6 @@ laptop_packages=(
     openssh                         # SSH client and server.
     openvpn                         # Personal VPN client.
     plocate                         # Fast filename search index.
-    python-colorama                 # Terminal color support for bootstrap-linux.
     ripgrep                         # Fast recursive text search.
     rtkit                           # Real-time scheduling for PipeWire.
     rsync                           # Efficient file synchronization.

@@ -16,7 +16,7 @@ monitors = [
 if not monitors:
     raise SystemExit("No connected display with an available mode")
 
-# Match `bootstrap-linux monitor`: widest display on top, others centered below.
+# Place the widest display on top and center the others below it.
 monitors.sort(key=lambda monitor: monitor[1], reverse=True)
 command = ["xrandr"]
 y = 0
