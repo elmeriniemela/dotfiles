@@ -2,6 +2,8 @@
 
 [[ $- != *i* ]] && return
 
+# Prompt and colors
+
 # Color ls output using ~/.dir_colors, falling back to /etc/DIR_COLORS.
 if type -P dircolors >/dev/null; then
     if [[ -f ~/.dir_colors ]]; then
@@ -26,11 +28,7 @@ else
     PS1="\[\e[1;$normalcolor\][\u@\h\[\e[1;37m\] \w\[\e[1;$normalcolor\]]\$\[\e[00m\] "
 fi
 
-alias ls='ls --color=auto'
-alias grep='grep --colour=auto'
-alias egrep='egrep --colour=auto'
-alias fgrep='fgrep --colour=auto'
-unset sh
+# Terminal and shell behavior
 
 # Allow local root processes to connect to this user's X server.
 xhost +local:root > /dev/null 2>&1
@@ -43,6 +41,18 @@ shopt -s checkwinsize
 
 # Expand aliases when reading commands from this interactive shell.
 shopt -s expand_aliases
+unset sh
+
+# Aliases
+
+alias ls='ls --color=auto'
+alias grep='grep --colour=auto'
+alias egrep='egrep --colour=auto'
+alias fgrep='fgrep --colour=auto'
+alias cls="tput reset && clear"
+alias gitignore="cp ~/.config/odoo/.gitignore ."
+
+# Command history
 
 # Append history on exit instead of replacing the history file.
 shopt -s histappend
@@ -56,6 +66,8 @@ export HISTFILE=~/.bash_eternal_history
 export HISTIGNORE=' *' # Ignore commands that begin with a space.
 # Save this session's new commands and read commands from other sessions.
 PROMPT_COMMAND="history -a; history -n"
+
+# Git repositories and submodules
 
 # bash_completion loads Git's completion only when Git is first completed.
 # Load it now so __git_complete can register these two Git wrappers.
@@ -72,6 +84,23 @@ server() {
 }
 
 __git_complete server __git_main
+
+# Remove a submodule or reset the working tree and all submodules.
+rm_submodule() {
+    git submodule deinit -f -- "$1"
+    rm -rf ".git/modules/a/$1"
+    git rm -rf "$1"
+}
+
+hard_reset_submodules() {
+    git clean -xfdf
+    git submodule foreach --recursive git clean -xfdf
+    git reset --hard
+    git submodule foreach --recursive git reset --hard
+    git submodule update --init --recursive
+}
+
+# Python virtual environments
 
 # Activate a named ~/.venv environment; Odoo environments also select a config.
 activate() {
@@ -102,7 +131,12 @@ _venv_completer() {
 
 complete -o nospace -F _venv_completer activate
 
-# Transfer personal configuration and data to or from another machine.
+venv() {
+    python3 -m venv ~/.venv/$1 ${@:2}
+}
+
+# Machine-to-machine transfers
+
 config_pull() { (
     set -e
     if [ -z "$1" ]; then
@@ -154,24 +188,7 @@ data_push() { (
     rsync --exclude 'odoo-dbs' -avWPL ~/Odoo/ $1/Odoo
 ); }
 
-venv() {
-    python3 -m venv ~/.venv/$1 ${@:2}
-}
-
-# Remove a submodule or reset the working tree and all submodules.
-rm_submodule() {
-    git submodule deinit -f -- "$1"
-    rm -rf ".git/modules/a/$1"
-    git rm -rf "$1"
-}
-
-hard_reset_submodules() {
-    git clean -xfdf
-    git submodule foreach --recursive git clean -xfdf
-    git reset --hard
-    git submodule foreach --recursive git reset --hard
-    git submodule update --init --recursive
-}
+# AI command wrappers
 
 # Hide the SSH agent and prevent Git from trying an identity while these tools run.
 _without_ssh_agent() {
@@ -199,12 +216,11 @@ opencode() {
     _without_ssh_agent opencode "$@"
 }
 
-# Shortcuts, personal executables, and optional per-user Bash settings.
-alias cls="tput reset && clear"
-alias gitignore="cp ~/.config/odoo/.gitignore ."
+# User settings and environment
 
 PATH="~/.cargo/bin:~/.local/bin:$PATH"
 
+# Apply per-user Bash customizations after the shared settings.
 [ -r ~/.bashrc ] && source ~/.bashrc
 
 # Let Ctrl+S and Ctrl+Q reach applications instead of pausing terminal output.
