@@ -7,11 +7,11 @@ Connect to internet via Ethernet cable.
 ```bash
 loadkeys fi
 archinstall
+# chroot after and enable sshd for remote install, then reboot
 ```
 
-Boot into desktop, then
+Reboot into the desktop, then
 ```bash
-# Run .install.sh in a child shell on a live USB environment.
 bash <(curl -fsSL https://eniemela.fi/api-v1/laptop-install.sh)
 ```
 
