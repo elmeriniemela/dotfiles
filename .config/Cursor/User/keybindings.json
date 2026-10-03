@@ -24,6 +24,13 @@
         "key": "ctrl+shift+[Equal]",
         "command": "workbench.action.terminal.toggleTerminal"
     },
+    // Keep Ctrl+S for forward history search when the terminal has focus.
+    {
+        "key": "ctrl+s",
+        "command": "workbench.action.terminal.sendSequence",
+        "when": "terminalFocus",
+        "args": { "text": "\u0013" }
+    },
 
     // {   "key": "ctrl+shift+v",
     //     "command": "-notebook.cell.pasteAbove",
