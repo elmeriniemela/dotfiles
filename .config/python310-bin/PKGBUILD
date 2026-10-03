@@ -1,0 +1,29 @@
+pkgname=python310-bin
+pkgver=3.10.21
+pkgrel=1
+pkgdesc='Prebuilt standalone CPython 3.10 interpreter'
+arch=('x86_64')
+url='https://github.com/astral-sh/python-build-standalone'
+license=('PSF-2.0')
+depends=('glibc' 'libxcrypt')
+provides=("python310=${pkgver}")
+conflicts=('python310')
+options=('!strip')
+
+_release=20260901
+source=(
+    "cpython-${pkgver}+${_release}-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz::${url}/releases/download/${_release}/cpython-${pkgver}%2B${_release}-x86_64-unknown-linux-gnu-install_only_stripped.tar.gz"
+    "LICENSE::https://raw.githubusercontent.com/python/cpython/v${pkgver}/LICENSE"
+)
+sha256sums=(
+    'a85d82bf451beea4605cecf0ad3e6cfdab833f146da8f1f82c7b7786f3ff3e3a'
+    '3b2f81fe21d181c499c59a256c8e1968455d6689d269aa85373bfb6af41da3bf'
+)
+
+package() {
+    install -d "$pkgdir/opt/python310" "$pkgdir/usr/bin"
+    cp -r "$srcdir/python/." "$pkgdir/opt/python310/"
+    ln -s ../../opt/python310/bin/python3.10 "$pkgdir/usr/bin/python3.10"
+    ln -s ../../opt/python310/bin/python3.10-config "$pkgdir/usr/bin/python3.10-config"
+    install -Dm644 "$srcdir/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}
