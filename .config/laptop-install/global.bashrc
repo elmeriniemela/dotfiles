@@ -2,35 +2,7 @@
 
 [[ $- != *i* ]] && return
 
-# Terminal colors and prompt.
-colors() {
-    local fgc bgc vals seq0
-
-    printf "Color escapes are %s\n" '\e[${value};...;${value}m'
-    printf "Values 30..37 are \e[33mforeground colors\e[m\n"
-    printf "Values 40..47 are \e[43mbackground colors\e[m\n"
-    printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
-
-    # foreground colors
-    for fgc in {30..37}; do
-        # background colors
-        for bgc in {40..47}; do
-            fgc=${fgc#37} # white
-            bgc=${bgc#40} # black
-
-            vals="${fgc:+$fgc;}${bgc}"
-            vals=${vals%%;}
-
-            seq0="${vals:+\e[${vals}m}"
-            printf "  %-9s" "${seq0:-(default)}"
-            printf " ${seq0}TEXT\e[m"
-            printf " \e[${vals:+${vals+$vals;}}1mBOLD\e[m"
-        done
-        echo; echo
-    done
-}
-
-# Prefer the user's dircolors file over the system one.
+# Color ls output using ~/.dir_colors, falling back to /etc/DIR_COLORS.
 if type -P dircolors >/dev/null; then
     if [[ -f ~/.dir_colors ]]; then
         eval $(dircolors -b ~/.dir_colors)
@@ -39,7 +11,7 @@ if type -P dircolors >/dev/null; then
     fi
 fi
 
-# https://misc.flogisoft.com/bash/tip_colors_and_formatting
+# Use different prompt colors on homeserver and for root shells.
 if [ "$HOSTNAME" = homeserver ]; then
     normalcolor='33m'
     rootcolorrr='36m'
@@ -60,37 +32,33 @@ alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
 unset sh
 
-# Interactive shell behavior.
+# Allow local root processes to connect to this user's X server.
 xhost +local:root > /dev/null 2>&1
 
+# After sudo, Tab suggests command names (-c) and filenames (-f).
 complete -cf sudo
 
-# Bash won't get SIGWINCH if another process is in the foreground.
-# Enable checkwinsize so that bash will check the terminal size when
-# it regains control.  #65623
-# http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
+# Refresh terminal dimensions after each foreground command.
 shopt -s checkwinsize
 
+# Expand aliases when reading commands from this interactive shell.
 shopt -s expand_aliases
 
-# Enable history appending instead of overwriting.  #139609
+# Append history on exit instead of replacing the history file.
 shopt -s histappend
 
-# Eternal bash history.
-# Undocumented feature which sets the size to "unlimited".
-# http://stackoverflow.com/questions/9457233/unlimited-bash-history
+# Empty sizes leave both in-memory and saved history unlimited.
 export HISTFILESIZE=
 export HISTSIZE=
 export HISTTIMEFORMAT="[%F %T] "
-# Change the file location because certain bash sessions truncate .bash_history file upon close.
-# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+# Use a separate file so other Bash sessions do not truncate this history.
 export HISTFILE=~/.bash_eternal_history
-export HISTIGNORE=' *' # lines starting with ' ' will not be saved to history
-# Write new history and load commands from other sessions before every prompt.
-# http://superuser.com/questions/20900/bash-history-loss
+export HISTIGNORE=' *' # Ignore commands that begin with a space.
+# Save this session's new commands and read commands from other sessions.
 PROMPT_COMMAND="history -a; history -n"
 
-# Git-backed dotfile repositories.
+# bash_completion loads Git's completion only when Git is first completed.
+# Load it now so __git_complete can register these two Git wrappers.
 [[ -r "/usr/share/bash-completion/completions/git" ]] && . "/usr/share/bash-completion/completions/git"
 
 dotfiles() {
@@ -105,7 +73,7 @@ server() {
 
 __git_complete server __git_main
 
-# Python virtual environments.
+# Activate a named ~/.venv environment; Odoo environments also select a config.
 activate() {
     if [[ $1 == odoo* ]]; then
         # ${1:4} removes 'odoo' from odoo12, leaving the version number.
@@ -119,7 +87,7 @@ activate() {
 }
 
 _venv_completer() {
-    # https://askubuntu.com/questions/707610/bash-completion-for-custom-command-to-complete-static-directory-tree
+    # Suggest names from ~/.venv/ after typing "activate ".
     local cur
     COMPREPLY=()
     cur=${COMP_WORDS[COMP_CWORD]}
@@ -134,7 +102,7 @@ _venv_completer() {
 
 complete -o nospace -F _venv_completer activate
 
-# Pull and push personal configuration and data.
+# Transfer personal configuration and data to or from another machine.
 config_pull() { (
     set -e
     if [ -z "$1" ]; then
@@ -190,7 +158,7 @@ venv() {
     python3 -m venv ~/.venv/$1 ${@:2}
 }
 
-# Git submodule maintenance.
+# Remove a submodule or reset the working tree and all submodules.
 rm_submodule() {
     git submodule deinit -f -- "$1"
     rm -rf ".git/modules/a/$1"
@@ -205,7 +173,7 @@ hard_reset_submodules() {
     git submodule update --init --recursive
 }
 
-# Run AI tools without access to the SSH agent.
+# Hide the SSH agent and prevent Git from trying an identity while these tools run.
 _without_ssh_agent() {
     local SSH_AUTH_SOCK=""
     local SSH_AGENT_PID=""
@@ -231,7 +199,7 @@ opencode() {
     _without_ssh_agent opencode "$@"
 }
 
-# Convenience aliases and user settings.
+# Shortcuts, personal executables, and optional per-user Bash settings.
 alias cls="tput reset && clear"
 alias gitignore="cp ~/.config/odoo/.gitignore ."
 
@@ -239,6 +207,7 @@ PATH="~/.cargo/bin:~/.local/bin:$PATH"
 
 [ -r ~/.bashrc ] && source ~/.bashrc
 
+# Let Ctrl+S and Ctrl+Q reach applications instead of pausing terminal output.
 stty -ixon
 
 # Session environment.

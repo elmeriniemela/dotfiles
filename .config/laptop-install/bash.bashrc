@@ -20,6 +20,7 @@ if [[ -z "${BASHRCSOURCED}" ]] ; then
   esac
 fi
 
+# Set up Bash completion; individual commands such as Git load on demand.
 if [[ -r /usr/share/bash-completion/bash_completion ]]; then
   . /usr/share/bash-completion/bash_completion
 fi
