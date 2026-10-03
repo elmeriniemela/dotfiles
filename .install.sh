@@ -76,6 +76,7 @@ laptop_packages=(
     plocate                         # Fast filename search index.
     python-colorama                 # Terminal color support for bootstrap-linux.
     ripgrep                         # Fast recursive text search.
+    rtkit                           # Real-time scheduling for PipeWire.
     rsync                           # Efficient file synchronization.
     syncthing                       # File synchronization service.
     tmux                            # Terminal multiplexer.
@@ -125,6 +126,10 @@ laptop_packages=(
     xdg-desktop-portal-hyprland     # Hyprland screen-sharing portal.
     papirus-icon-theme              # Icon theme.
     tumbler                         # File-manager thumbnail service.
+    libgepub                        # EPUB thumbnails for Tumbler.
+    libgsf                          # OpenDocument thumbnails for Tumbler.
+    libopenraw                      # RAW image thumbnails for Tumbler.
+    poppler-glib                    # PDF thumbnails for Tumbler.
     firefox                         # Web browser.
     ffmpegthumbnailer               # Video thumbnails for Thunar.
     flameshot                       # Screenshot tool.
@@ -185,6 +190,7 @@ laptop_packages=(
     dconf                           # GTK settings database.
     feh                             # Lightweight image viewer.
     xorg-xkill                      # Kill an X11 client interactively.
+    xorg-xsetroot                   # Set SDDM's default X11 cursor.
     xfce4-taskmanager               # Task manager for Ctrl+Shift+Esc.
     nomacs                          # Image viewer.
     gparted                         # Graphical partition editor.
