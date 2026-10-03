@@ -10,8 +10,8 @@
     addIgnoredFile = false
 [url "git@bitbucket.org:"]
     insteadOf = https://bitbucket.org/
-# [url "git@github.com:"]
-#    insteadOf = https://github.com/
+[url "git@github.com:"]
+    insteadOf = https://github.com/
 [core]
     commentChar = ";"
 [filter "lfs"]
