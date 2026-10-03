@@ -1,0 +1,30 @@
+#!/usr/bin/python3
+"""Set connected displays to their preferred modes for the SDDM greeter."""
+
+import re
+import subprocess
+
+
+output = subprocess.check_output(["xrandr", "--query"], text=True)
+monitors = [
+    (name, int(width), int(height))
+    for name, width, height in re.findall(
+        r"(?m)^([\w.-]+) connected[^\n]*\n[ \t]+(\d+)x(\d+)\b", output
+    )
+]
+
+if not monitors:
+    raise SystemExit("No connected display with an available mode")
+
+# Match `bootstrap-linux monitor`: widest display on top, others centered below.
+monitors.sort(key=lambda monitor: monitor[1], reverse=True)
+command = ["xrandr"]
+y = 0
+for index, (name, width, height) in enumerate(monitors):
+    x = (monitors[0][1] - width) // 2
+    command.extend(["--output", name, "--mode", f"{width}x{height}", "--pos", f"{x}x{y}"])
+    if index == len(monitors) - 1:
+        command.append("--primary")
+    y += height
+
+subprocess.run(command, check=True)

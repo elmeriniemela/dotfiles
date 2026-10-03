@@ -214,6 +214,7 @@ sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/hosts" /etc
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/30-touchpad.conf" /etc/X11/xorg.conf.d/30-touchpad.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/environment" /etc/environment
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/UPower.conf" /etc/UPower/UPower.conf
+sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/x-monitor-layout" /usr/local/bin/x-monitor-layout
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/awesome_sddm.conf" /etc/sddm.conf.d/awesome_sddm.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sddm-theme/Main.qml" /usr/share/sddm/themes/nocturne/Main.qml
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sddm-theme/metadata.desktop" /usr/share/sddm/themes/nocturne/metadata.desktop
