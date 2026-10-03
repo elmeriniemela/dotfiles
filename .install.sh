@@ -27,7 +27,7 @@ dotfiles checkout
 dotfiles config --local status.showUntrackedFiles no
 dotfiles submodule update --init --recursive
 
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/global.bashrc" /etc/bash.bashrc.local
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/global.bashrc" /etc/global.bashrc
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/bash.bashrc" /etc/bash.bashrc
 
 rm -f ~/.bashrc

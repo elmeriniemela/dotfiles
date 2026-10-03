@@ -23,4 +23,4 @@ fi
 if [[ -r /usr/share/bash-completion/bash_completion ]]; then
   . /usr/share/bash-completion/bash_completion
 fi
-[ -r /etc/bash.bashrc.local ] && . /etc/bash.bashrc.local
+[ -r /etc/global.bashrc ] && . /etc/global.bashrc
