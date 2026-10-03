@@ -1,0 +1,9 @@
+[SddmGreeterTheme]
+Name=Nocturne
+Description=A quiet dark login screen
+Author=elmeri
+Type=sddm-theme
+Version=1.0
+MainScript=Main.qml
+Theme-Id=nocturne
+Theme-API=2.0

@@ -215,6 +215,8 @@ sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/30-touchpad
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/environment" /etc/environment
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/UPower.conf" /etc/UPower/UPower.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/awesome_sddm.conf" /etc/sddm.conf.d/awesome_sddm.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sddm-theme/Main.qml" /usr/share/sddm/themes/nocturne/Main.qml
+sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sddm-theme/metadata.desktop" /usr/share/sddm/themes/nocturne/metadata.desktop
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/awesome-portals.conf" /etc/xdg-desktop-portal/awesome-portals.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/dconf/profile/user" /etc/dconf/profile/user
 sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/dconf/local.d/00-settings" /etc/dconf/db/local.d/00-settings
