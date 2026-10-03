@@ -51,6 +51,7 @@ alias egrep='egrep --colour=auto'
 alias fgrep='fgrep --colour=auto'
 alias cls="tput reset && clear"
 alias gitignore="cp ~/.config/odoo/.gitignore ."
+alias code="vscodium"
 
 # Command history
 
