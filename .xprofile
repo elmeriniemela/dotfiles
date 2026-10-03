@@ -7,7 +7,7 @@ if command -v dbus-update-activation-environment >/dev/null 2>&1; then
     dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP XDG_SESSION_DESKTOP
 fi
 
-# disabling energy star features
+# Disable display power management.
 xset -dpms
-# disable screensaver
-xset s off
+# Lock after one hour of inactivity.
+xset s 3600
