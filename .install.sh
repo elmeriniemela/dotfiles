@@ -27,8 +27,8 @@ dotfiles checkout
 dotfiles config --local status.showUntrackedFiles no
 dotfiles submodule update --init --recursive
 
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/global.bashrc" /etc/global.bashrc
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/bash.bashrc" /etc/bash.bashrc
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/global.bashrc" /etc/global.bashrc
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/bash.bashrc" /etc/bash.bashrc
 
 rm -f ~/.bashrc
 rm -f ~/.bash_profile
@@ -42,10 +42,10 @@ sudo groupadd -r nopasswdlogin || true
 sudo usermod -a -G video elmeri
 sudo usermod -a -G nopasswdlogin elmeri
 
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/wheel_group" /etc/sudoers.d/wheel_group
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/vconsole.conf" /etc/vconsole.conf
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/locale.conf" /etc/locale.conf
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/99-sysctl.conf" /etc/sysctl.d/99-sysctl.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/wheel_group" /etc/sudoers.d/wheel_group
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/vconsole.conf" /etc/vconsole.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/locale.conf" /etc/locale.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/99-sysctl.conf" /etc/sysctl.d/99-sysctl.conf
 
 laptop_packages=(
     7zip                            # Archive creation and extraction.
@@ -278,7 +278,7 @@ if [[ ! -f /etc/pacman.d/chaotic-mirrorlist ]]; then
         'https://cdn-mirror.chaotic.cx/chaotic-aur/chaotic-mirrorlist.pkg.tar.zst'
 fi
 
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/pacman.conf" /etc/pacman.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/pacman.conf" /etc/pacman.conf
 
 sudo reflector \
   --age 24 \
@@ -292,30 +292,30 @@ sudo pacman -Syy --noconfirm --needed "${laptop_packages[@]}"
 makepkg -D "$HOME/.config/archlinux-logout" --force --clean --syncdeps --install --noconfirm
 makepkg -D "$HOME/.config/wkhtmltopdf-bin" --force --clean --syncdeps --install --noconfirm
 
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/10-bluetooth.conf" /etc/tlp.d/10-bluetooth.conf
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/10-battery.conf" /etc/tlp.d/10-battery.conf
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/btusb.conf" /etc/modprobe.d/btusb.conf
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/backlight.rules" /etc/udev/rules.d/backlight.rules
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/hosts" /etc/hosts
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/30-touchpad.conf" /etc/X11/xorg.conf.d/30-touchpad.conf
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/environment" /etc/environment
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/UPower.conf" /etc/UPower/UPower.conf
-sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/x-monitor-layout" /usr/local/bin/x-monitor-layout
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/awesome_sddm.conf" /etc/sddm.conf.d/awesome_sddm.conf
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sddm-theme/Main.qml" /usr/share/sddm/themes/nocturne/Main.qml
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sddm-theme/metadata.desktop" /usr/share/sddm/themes/nocturne/metadata.desktop
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/awesome-portals.conf" /etc/xdg-desktop-portal/awesome-portals.conf
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/dconf/profile/user" /etc/dconf/profile/user
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/dconf/local.d/00-settings" /etc/dconf/db/local.d/00-settings
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sudo" /etc/pam.d/sudo
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/polkit-1" /etc/pam.d/polkit-1
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/i3lock" /etc/pam.d/i3lock
-sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/lxlock" /usr/local/bin/lxlock
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/ssh-agent-fprint-askpass.conf" /etc/systemd/user/ssh-agent.service.d/fprint-askpass.conf
-sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/ssh-askpass-fprint" /usr/local/bin/ssh-askpass-fprint
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/sddm" /etc/pam.d/sddm
-sudo install -D -o root -g root -m 755 "$HOME/.config/laptop-install/portable4t-syncthing-hook" /usr/local/bin/portable4t-syncthing-hook
-sudo install -D -o root -g root -m 644 "$HOME/.config/laptop-install/portable4t-udisks-events.service" /etc/systemd/system/portable4t-udisks-events.service
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/10-bluetooth.conf" /etc/tlp.d/10-bluetooth.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/10-battery.conf" /etc/tlp.d/10-battery.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/btusb.conf" /etc/modprobe.d/btusb.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/backlight.rules" /etc/udev/rules.d/backlight.rules
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/hosts" /etc/hosts
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/30-touchpad.conf" /etc/X11/xorg.conf.d/30-touchpad.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/environment" /etc/environment
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/UPower.conf" /etc/UPower/UPower.conf
+sudo install -D -o root -g root -m 755 "$HOME/.config/install/x-monitor-layout" /usr/local/bin/x-monitor-layout
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/awesome_sddm.conf" /etc/sddm.conf.d/awesome_sddm.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/sddm-theme/Main.qml" /usr/share/sddm/themes/nocturne/Main.qml
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/sddm-theme/metadata.desktop" /usr/share/sddm/themes/nocturne/metadata.desktop
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/awesome-portals.conf" /etc/xdg-desktop-portal/awesome-portals.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/dconf/profile/user" /etc/dconf/profile/user
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/dconf/local.d/00-settings" /etc/dconf/db/local.d/00-settings
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/sudo" /etc/pam.d/sudo
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/polkit-1" /etc/pam.d/polkit-1
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/i3lock" /etc/pam.d/i3lock
+sudo install -D -o root -g root -m 755 "$HOME/.config/install/lxlock" /usr/local/bin/lxlock
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/ssh-agent-fprint-askpass.conf" /etc/systemd/user/ssh-agent.service.d/fprint-askpass.conf
+sudo install -D -o root -g root -m 755 "$HOME/.config/install/ssh-askpass-fprint" /usr/local/bin/ssh-askpass-fprint
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/sddm" /etc/pam.d/sddm
+sudo install -D -o root -g root -m 755 "$HOME/.config/install/portable4t-syncthing-hook" /usr/local/bin/portable4t-syncthing-hook
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/portable4t-udisks-events.service" /etc/systemd/system/portable4t-udisks-events.service
 
 sudo dconf update
 sudo mkinitcpio -P

@@ -22,10 +22,10 @@ sudo install -d -o postgres -g postgres -m 700 /home/postgres
 sudo usermod -d /home/postgres postgres
 sudo -u postgres initdb --locale "$LANG" -E UTF8 -D /home/postgres/data
 sudo install -D -o root -g root -m 644 \
-    "$HOME/.config/laptop-install/postgresql.service" \
+    "$HOME/.config/install/postgresql.service" \
     /etc/systemd/system/postgresql.service.d/override.conf
 sudo install -o postgres -g postgres -m 644 \
-    "$HOME/.config/laptop-install/postgresql-odoo.conf" \
+    "$HOME/.config/install/postgresql-odoo.conf" \
     /home/postgres/data/odoo-tune.conf
 printf "include = 'odoo-tune.conf'\n" | sudo -u postgres tee -a /home/postgres/data/postgresql.conf >/dev/null
 sudo -u postgres postgres -D /home/postgres/data -C shared_buffers >/dev/null
