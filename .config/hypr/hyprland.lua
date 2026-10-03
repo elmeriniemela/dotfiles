@@ -8,7 +8,7 @@ hl.monitor({ output = "", mode = "preferred", position = "auto-center-up", scale
 hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto-center-down", scale = 1 })
 
 hl.config({
-    input = { kb_layout = "fi" },
+    input = { kb_layout = "fi", touchpad = { natural_scroll = true } },
     general = { gaps_in = 5, gaps_out = 10, border_size = 2, layout = "dwindle" },
     decoration = { rounding = 8 },
     animations = { enabled = false },
