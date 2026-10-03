@@ -1,5 +1,7 @@
 # dotfiles
 
+Personal dotfiles, covering system installation, AwesomeWM and Hyprland desktops, and development tools.
+
 ## Installation from Arch ISO
 
 Connect to internet via Ethernet cable.
