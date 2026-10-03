@@ -4,3 +4,6 @@
 [submodule ".config/awesome"]
 	path = .config/awesome
 	url = https://github.com/elmeriniemela/awesome-config.git
+[submodule ".config/archlinux-logout"]
+	path = .config/archlinux-logout
+	url = https://github.com/elmeriniemela/archlinux-logout.git
