@@ -281,13 +281,7 @@ fi
 
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/pacman.conf" /etc/pacman.conf
 
-sudo reflector \
-  --age 24 \
-  --completion-percent 100 \
-  --protocol https \
-  --latest 50 \
-  --sort rate \
-  --save /etc/pacman.d/mirrorlist
+sudo reflector --latest 5 --protocol https --age 12 --sort rate --save /etc/pacman.d/mirrorlist
 
 sudo pacman -Syy --noconfirm --needed "${laptop_packages[@]}"
 makepkg -D "$HOME/.local/share/pkgbuilds/archlinux-logout" --force --clean --syncdeps --install --noconfirm
@@ -337,7 +331,7 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
 
-sudo systemctl enable cronie NetworkManager bluetooth stunnel tlp upower sddm ufw
+sudo systemctl enable cronie NetworkManager bluetooth stunnel tlp upower sddm ufw reflector
 sudo systemctl enable --now portable4t-udisks-events.service
 systemctl --user enable ssh-agent.service
 systemctl --user daemon-reload
