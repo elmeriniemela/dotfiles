@@ -3,13 +3,15 @@ hl.env("XCURSOR_THEME", "Adwaita")
 hl.env("XCURSOR_SIZE", "22")
 hl.env("HYPRCURSOR_SIZE", "22")
 
--- Use each display's preferred mode, whatever monitor is connected.
-hl.monitor({ output = "", mode = "preferred", position = "auto", scale = 1 })
+-- Keep any external display above the built-in panel, regardless of connection order.
+hl.monitor({ output = "", mode = "preferred", position = "auto-center-up", scale = 1 })
+hl.monitor({ output = "eDP-1", mode = "preferred", position = "auto-center-down", scale = 1 })
 
 hl.config({
     input = { kb_layout = "fi" },
     general = { gaps_in = 5, gaps_out = 10, border_size = 2, layout = "dwindle" },
     decoration = { rounding = 8 },
+    animations = { enabled = false },
     misc = { disable_hyprland_logo = true, force_default_wallpaper = 0 },
 })
 
