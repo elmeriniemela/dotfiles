@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( $# != 1 )) || [[ ! $1 =~ ^[[:alnum:]][[:alnum:]_.-]*$ ]]; then
+    printf 'Usage: add_ssh KEY_NAME\n' >&2
+    exit 2
+fi
+
+private="$HOME/.ssh/$1"
+if [[ -e "$private" || -L "$private" || -e "$private.pub" || -L "$private.pub" ]]; then
+    printf 'SSH key already exists: %s\n' "$private" >&2
+    exit 1
+fi
+
+umask 077
+mkdir -p "$HOME/.ssh"
+ssh-keygen -t ed25519 -f "$private" -C "$1"
+xclip -selection clipboard < "$private.pub"

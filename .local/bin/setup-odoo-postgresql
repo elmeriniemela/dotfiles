@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( EUID == 0 )); then
+    printf 'Run this as your login user, not root.\n' >&2
+    exit 1
+fi
+
+: "${LANG:?Set LANG to an installed UTF-8 locale before initializing PostgreSQL}"
+sudo -v
+
+if systemctl is-active --quiet postgresql.service \
+    || sudo test -e /home/postgres \
+    || sudo test -e /var/lib/postgres/data \
+    || sudo test -e /etc/systemd/system/postgresql.service.d/override.conf; then
+    printf 'PostgreSQL already has a cluster or custom setup; leaving it unchanged.\n' >&2
+    exit 1
+fi
+
+login_user=$(id -un)
+sudo install -d -o postgres -g postgres -m 700 /home/postgres
+sudo usermod -d /home/postgres postgres
+sudo -u postgres initdb --locale "$LANG" -E UTF8 -D /home/postgres/data
+sudo install -D -o root -g root -m 644 \
+    "$HOME/.config/laptop-install/postgresql.service" \
+    /etc/systemd/system/postgresql.service.d/override.conf
+sudo install -o postgres -g postgres -m 644 \
+    "$HOME/.config/laptop-install/postgresql-odoo.conf" \
+    /home/postgres/data/odoo-tune.conf
+printf "include = 'odoo-tune.conf'\n" | sudo -u postgres tee -a /home/postgres/data/postgresql.conf >/dev/null
+sudo -u postgres postgres -D /home/postgres/data -C shared_buffers >/dev/null
+sudo systemctl daemon-reload
+sudo systemctl enable --now postgresql.service
+sudo -u postgres createuser --superuser "$login_user"
+sudo -u postgres createuser --superuser root

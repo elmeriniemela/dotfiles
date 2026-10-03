@@ -1,0 +1,9 @@
+[Service]
+
+Environment=
+Environment=PGROOT=/home/postgres
+
+PIDFile=
+PIDFile=/home/postgres/data/postmaster.pid
+
+ProtectHome=no

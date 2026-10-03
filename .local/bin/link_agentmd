@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( $# != 0 )); then
+    printf 'Usage: link_agentmd\n' >&2
+    exit 2
+fi
+
+template="${XDG_CONFIG_HOME:-$HOME/.config}/odoo/AGENTS.md"
+[[ -f "$template" ]] || { printf 'Missing template: %s\n' "$template" >&2; exit 1; }
+
+for name in AGENTS.md GEMINI.md CLAUDE.md; do
+    if [[ -e "$name" || -L "$name" ]]; then
+        if [[ ! -L "$name" || $(readlink "$name") != "$template" ]]; then
+            printf 'Already exists: %s\n' "$name" >&2
+            exit 1
+        fi
+    fi
+done
+
+for name in AGENTS.md GEMINI.md CLAUDE.md; do
+    [[ -L "$name" ]] || ln -s "$template" "$name"
+done

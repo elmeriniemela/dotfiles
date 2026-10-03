@@ -149,6 +149,62 @@ laptop_packages=(
     polkit                          # Privilege authorization framework.
     lxsession                       # Graphical Polkit authentication agent.
     postgresql                      # PostgreSQL database server.
+    chromium                        # Odoo browser tour tests.
+    libxml2                         # Odoo XML processing.
+    pgvector                        # PostgreSQL vector extension for Odoo.
+    pkgconf                         # pkg-config implementation for Odoo dependencies.
+    pwgen                           # Password generator used by Odoo setup.
+    sassc                           # Compile Odoo SCSS bundles.
+    python-asn1crypto               # ASN.1 parsing for cryptographic data.
+    python-babel                    # Locale data and message translation.
+    python-cbor2                    # CBOR encoding and decoding.
+    python-chardet                  # Text encoding detection.
+    python-cryptography             # Cryptographic primitives for Python.
+    python-dateutil                 # Date parsing and recurrence rules.
+    python-decorator                # Python function decorator helpers.
+    python-docutils                 # reStructuredText document processing.
+    python-freezegun                # Freeze time in Python tests.
+    python-gevent                   # Coroutine-based networking.
+    python-geoip2                   # GeoIP database lookups.
+    python-google-auth              # Google API authentication.
+    python-jinja                    # Jinja template rendering.
+    python-ldap                     # LDAP directory access.
+    python-lxml                     # XML and HTML parsing.
+    python-lxml-html-clean          # HTML cleaning for lxml.
+    python-magic                    # File type detection via libmagic.
+    python-numpy                    # Numerical array operations.
+    python-odfpy                    # OpenDocument file processing.
+    python-openpyxl                 # Excel XLSX file processing.
+    python-pandas                   # Tabular data analysis.
+    python-paramiko                 # SSH client library.
+    python-passlib                  # Password hashing helpers.
+    python-pdfminer                 # PDF text extraction.
+    python-phonenumbers             # Phone number parsing and validation.
+    python-pillow                   # Image processing.
+    python-pip                      # Python package installer.
+    python-polib                    # Gettext PO file processing.
+    python-psutil                   # Process and system statistics.
+    python-psycopg2                 # PostgreSQL adapter for Python.
+    python-pydot                    # Graphviz DOT graph generation.
+    python-pyopenssl                # OpenSSL bindings for Python.
+    python-pypdf2                   # PDF reading and manipulation.
+    python-qrcode                   # QR code generation.
+    python-reportlab                # PDF generation.
+    python-requests                 # HTTP client for Python.
+    python-rjsmin                   # JavaScript minification.
+    python-pytz                     # Time zone definitions for Python.
+    python-setuptools               # Python package build tools.
+    python-slugify                  # URL-friendly text slugs.
+    python-vobject                  # vCard and vCalendar parsing.
+    python-watchdog                 # Filesystem event monitoring.
+    python-werkzeug                 # WSGI and web utilities.
+    python-wheel                    # Python wheel package format.
+    python-xlrd                     # Read legacy Excel XLS files.
+    python-xlwt                     # Write legacy Excel XLS files.
+    python-xmltodict                # XML-to-dictionary conversion.
+    python-xmlsec                   # XML signatures and encryption.
+    python-xlsxwriter               # Excel XLSX file generation.
+    python-zeep                     # SOAP web service client.
     powertop                        # Power-consumption diagnostics.
     networkmanager                  # Network connection manager.
     network-manager-applet          # NetworkManager tray applet.
@@ -179,6 +235,17 @@ laptop_packages=(
     zbar                            # Barcode and QR-code reader.
     zoom                            # Video-conferencing client.
     ttf-caladea                     # Cambria-compatible font.
+    texlive-basic                   # LaTeX document toolchain.
+    texlive-latex                   # Core LaTeX macros and packages.
+    texlive-binextra                # Auxiliary TeX programs.
+    texlive-latexrecommended        # Common LaTeX extensions.
+    texlive-fontsrecommended        # Common TeX font collections.
+    texlive-fontsextra              # Additional TeX fonts.
+    texlive-xetex                   # XeTeX engine and support files.
+    texlive-luatex                  # LuaTeX engine and support files.
+    texlive-latexextra              # Additional LaTeX packages.
+    texlive-pictures                # Graphics and diagram packages.
+    texlive-bibtexextra             # Extra BibTeX styles.
     ttf-carlito                     # Calibri-compatible font.
     ttf-droid                       # Android Droid font family.
     inter-font                      # Awesome window-manager UI font.

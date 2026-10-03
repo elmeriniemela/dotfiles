@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if (( $# < 1 || $# > 2 )); then
+    printf 'Usage: odoo_venv BRANCH [PYTHON]\n' >&2
+    exit 2
+fi
+
+branch=${1%.0}
+python=${2:-python3}
+venv_dir="$HOME/.venv/odoo$branch"
+requirements="$HOME/Odoo/src/$branch/requirements.txt"
+
+if [[ ! -e "$venv_dir" && ! -L "$venv_dir" ]]; then
+    mkdir -p "$HOME/.venv"
+    "$python" -m venv --system-site-packages "$venv_dir"
+fi
+
+"$venv_dir/bin/python" -m pip install dicttoxml num2words ofxparse python-stdnum rlPyCairo
+if [[ -f "$requirements" ]]; then
+    "$venv_dir/bin/python" -m pip install -r "$requirements"
+fi
