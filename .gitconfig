@@ -1,0 +1,27 @@
+[user]
+    email = niemela.elmeri@gmail.com
+    name = Elmeri Niemelä
+    signingkey = 768CC30FB1ACCD851E1F900055C4B0EA25D7162C!
+[pull]
+    ff = only
+[init]
+    defaultBranch = master
+[advice]
+    addIgnoredFile = false
+[url "git@bitbucket.org:"]
+    insteadOf = https://bitbucket.org/
+# [url "git@github.com:"]
+#    insteadOf = https://github.com/
+[core]
+    commentChar = ";"
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+[gpg]
+    format = openpgp
+# [commit]
+#     gpgsign = true
+# [tag]
+#     gpgSign = true
