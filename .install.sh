@@ -226,6 +226,7 @@ laptop_packages=(
     sshfs                           # Mount filesystems over SSH.
     sshpass                         # Non-interactive SSH password input.
     sshuttle                        # VPN-like SSH tunnel.
+    stunnel                         # TLS tunnels for remote Bitcoin and Knots RPC.
     wireplumber                     # PipeWire policy and session manager.
     xarchiver                       # Archive manager UI.
     xclip                           # X11 clipboard command-line tool.
@@ -297,6 +298,7 @@ sudo install -D -o root -g root -m 644 "$HOME/.config/install/10-battery.conf" /
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/btusb.conf" /etc/modprobe.d/btusb.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/backlight.rules" /etc/udev/rules.d/backlight.rules
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/hosts" /etc/hosts
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/stunnel.conf" /etc/stunnel/stunnel.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/30-touchpad.conf" /etc/X11/xorg.conf.d/30-touchpad.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/environment" /etc/environment
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/UPower.conf" /etc/UPower/UPower.conf
@@ -334,7 +336,7 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
 
-sudo systemctl enable cronie NetworkManager bluetooth tlp upower sddm ufw
+sudo systemctl enable cronie NetworkManager bluetooth stunnel tlp upower sddm ufw
 sudo systemctl enable --now portable4t-udisks-events.service
 systemctl --user enable ssh-agent.service
 systemctl --user daemon-reload
