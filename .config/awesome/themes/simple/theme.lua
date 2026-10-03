@@ -1,0 +1,422 @@
+--[[
+
+     simple Awesome WM theme 2.0
+     github.com/lcpz
+
+--]]
+
+local gears = require("gears")
+local lain  = require("lain")
+local awful = require("awful")
+local wibox = require("wibox")
+local dpi   = require("beautiful.xresources").apply_dpi
+local naughty = require("naughty")
+
+
+local os = os
+local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
+
+
+local function read_file(path)
+    local file = io.open(path, "rb") -- r read mode and b binary mode
+    if not file then return nil end
+    local content = file:read "*a" -- *a or *all reads the whole file
+    file:close()
+    return content:match("^%s*(.-)%s*$")
+end
+
+local function wallpaper(s)
+    local wallpaper_path = read_file(os.getenv("HOME") .. "/.config/variety/wallpaper/wallpaper.txt")
+    if not wallpaper_path then
+        wallpaper_path = os.getenv("HOME") .. "/.config/variety/wallpaper/imgs/space.png"
+    end
+    return wallpaper_path
+end
+
+local theme                                     = {}
+theme.confdir                                   = os.getenv("HOME") .. "/.config/awesome/themes/simple"
+theme.wallpaper                                 = wallpaper
+theme.font                                      = 'Inter Regular 10'
+theme.font_bold                                 = 'Inter Bold 10'
+theme.taglist_font                              = "Inter Regular 13"
+theme.menu_bg_normal                            = "#000000"
+theme.menu_bg_focus                             = "#000000"
+theme.bg_normal                                 = "#000000"
+theme.bg_focus                                  = "#000000"
+theme.bg_urgent                                 = "#000000"
+theme.fg_normal                                 = "#aaaaaa"
+theme.fg_focus                                  = "#e4e4e4"
+theme.fg_urgent                                 = "#af1d18"
+theme.fg_minimize                               = "#ffffff"
+theme.border_width                              = dpi(1)
+theme.border_normal                             = "#1c2022"
+theme.border_focus                              = "#464646"
+theme.border_marked                             = "#3ca4d8"
+theme.menu_border_width                         = 0
+theme.menu_height                               = dpi(25)
+theme.menu_width                                = dpi(260)
+theme.menu_submenu_icon                         = theme.confdir .. "/icons/submenu.png"
+theme.menu_fg_normal                            = "#aaaaaa"
+theme.menu_fg_focus                             = "#e4e4e4"
+theme.menu_bg_normal                            = "#050505dd"
+theme.menu_bg_focus                             = "#050505dd"
+theme.awesome_icon                              = theme.confdir .. "/icons/awesome_icon_white.png"
+theme.widget_temp                               = theme.confdir .. "/icons/temp.png"
+theme.widget_uptime                             = theme.confdir .. "/icons/ac.png"
+theme.widget_cpu                                = theme.confdir .. "/icons/cpu.png"
+theme.widget_weather                            = theme.confdir .. "/icons/dish.png"
+theme.widget_fs                                 = theme.confdir .. "/icons/fs.png"
+theme.widget_mem                                = theme.confdir .. "/icons/mem.png"
+theme.notifications_enabled                     = theme.confdir .. "/icons/notification-inactive-symbolic.svg"
+theme.notifications_disabled                    = theme.confdir .. "/icons/notification-disabled-symbolic.svg"
+theme.widget_netdown                            = theme.confdir .. "/icons/net_down.png"
+theme.widget_netup                              = theme.confdir .. "/icons/net_up.png"
+theme.widget_mail                               = theme.confdir .. "/icons/mail.png"
+theme.widget_batt                               = theme.confdir .. "/icons/battery-full-charged-symbolic.svg"
+theme.widget_clock                              = theme.confdir .. "/icons/clock.png"
+theme.widget_vol                                = theme.confdir .. "/icons/audio-volume-medium-symbolic.svg"
+theme.widget_vol_muted                          = theme.confdir .. "/icons/audio-volume-muted-symbolic.svg"
+theme.widget_backlight                          = theme.confdir .. "/icons/display-brightness-symbolic.svg"
+theme.widget_mic                               = theme.confdir .. "/icons/microphone-sensitivity-high-symbolic.svg"
+theme.widget_mic_muted                         = theme.confdir .. "/icons/microphone-sensitivity-muted-symbolic.svg"
+theme.widget_music                              = theme.confdir .. "/icons/note.png"
+theme.widget_music_on                           = theme.confdir .. "/icons/note.png"
+theme.widget_music_pause                        = theme.confdir .. "/icons/pause.png"
+theme.widget_music_stop                         = theme.confdir .. "/icons/stop.png"
+theme.taglist_squares_sel                       = theme.confdir .. "/icons/square_a.png"
+theme.taglist_squares_unsel                     = theme.confdir .. "/icons/square_b.png"
+theme.tasklist_plain_task_name                  = true
+theme.tasklist_disable_icon                     = true
+theme.useless_gap                               = 3
+theme.layout_tile                               = theme.confdir .. "/icons/papirus-tile.png"
+theme.layout_tilegaps                           = theme.confdir .. "/icons/tilegaps.png"
+theme.layout_tileleft                           = theme.confdir .. "/icons/tileleft.png"
+theme.layout_tilebottom                         = theme.confdir .. "/icons/tilebottom.png"
+theme.layout_tiletop                            = theme.confdir .. "/icons/tiletop.png"
+theme.layout_fairv                              = theme.confdir .. "/icons/fairv.png"
+theme.layout_fairh                              = theme.confdir .. "/icons/fairh.png"
+theme.layout_spiral                             = theme.confdir .. "/icons/spiral.png"
+theme.layout_dwindle                            = theme.confdir .. "/icons/dwindle.png"
+theme.layout_max                                = theme.confdir .. "/icons/papirus-max.png"
+theme.layout_fullscreen                         = theme.confdir .. "/icons/fullscreen.png"
+theme.layout_magnifier                          = theme.confdir .. "/icons/magnifier.png"
+theme.layout_floating                           = theme.confdir .. "/icons/papirus-floating.png"
+theme.titlebar_close_button_normal              = theme.confdir .. "/icons/titlebar/close_normal.png"
+theme.titlebar_close_button_focus               = theme.confdir .. "/icons/titlebar/close_focus.png"
+theme.titlebar_minimize_button_normal           = theme.confdir .. "/icons/titlebar/minimize_normal.png"
+theme.titlebar_minimize_button_focus            = theme.confdir .. "/icons/titlebar/minimize_focus.png"
+theme.titlebar_ontop_button_normal_inactive     = theme.confdir .. "/icons/titlebar/ontop_normal_inactive.png"
+theme.titlebar_ontop_button_focus_inactive      = theme.confdir .. "/icons/titlebar/ontop_focus_inactive.png"
+theme.titlebar_ontop_button_normal_active       = theme.confdir .. "/icons/titlebar/ontop_normal_active.png"
+theme.titlebar_ontop_button_focus_active        = theme.confdir .. "/icons/titlebar/ontop_focus_active.png"
+theme.titlebar_sticky_button_normal_inactive    = theme.confdir .. "/icons/titlebar/sticky_normal_inactive.png"
+theme.titlebar_sticky_button_focus_inactive     = theme.confdir .. "/icons/titlebar/sticky_focus_inactive.png"
+theme.titlebar_sticky_button_normal_active      = theme.confdir .. "/icons/titlebar/sticky_normal_active.png"
+theme.titlebar_sticky_button_focus_active       = theme.confdir .. "/icons/titlebar/sticky_focus_active.png"
+theme.titlebar_floating_button_normal_inactive  = theme.confdir .. "/icons/titlebar/floating_normal_inactive.png"
+theme.titlebar_floating_button_focus_inactive   = theme.confdir .. "/icons/titlebar/floating_focus_inactive.png"
+theme.titlebar_floating_button_normal_active    = theme.confdir .. "/icons/titlebar/floating_normal_active.png"
+theme.titlebar_floating_button_focus_active     = theme.confdir .. "/icons/titlebar/floating_focus_active.png"
+theme.titlebar_maximized_button_normal_inactive = theme.confdir .. "/icons/titlebar/maximized_normal_inactive.png"
+theme.titlebar_maximized_button_focus_inactive  = theme.confdir .. "/icons/titlebar/maximized_focus_inactive.png"
+theme.titlebar_maximized_button_normal_active   = theme.confdir .. "/icons/titlebar/maximized_normal_active.png"
+theme.titlebar_maximized_button_focus_active    = theme.confdir .. "/icons/titlebar/maximized_focus_active.png"
+
+local markup = lain.util.markup
+
+-- Textclock
+os.setlocale(os.getenv("LANG")) -- to localize the clock
+local mytextclock = wibox.widget.textclock(markup("#7788af", "%A %d %B ") .. markup("#535f7a", ">") .. markup("#de5e1e", " %H:%M "))
+mytextclock.font = theme.font
+
+-- Calendar
+theme.cal = lain.widget.cal({
+    attach_to = { mytextclock },
+    notification_preset = {
+        font = "Noto Sans Mono Medium 10",
+        fg   = theme.fg_normal,
+        bg   = theme.bg_normal
+    }
+})
+
+
+
+-- Battery
+local baticon = wibox.widget.imagebox(theme.widget_batt)
+local bat = lain.widget.bat({
+    settings = function()
+        local perc = bat_now.perc ~= "N/A" and bat_now.perc .. "%" or bat_now.perc
+
+        if bat_now.ac_status == 1 then
+            perc = perc .. " plug"
+        end
+
+        widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, perc .. " "))
+    end
+})
+
+-- Active PipeWire output volume
+local volicon = wibox.widget.imagebox(theme.widget_vol)
+local volume_widget = wibox.widget.textbox()
+local mute_led = "/sys/class/leds/platform::mute/brightness"
+local output_muted
+
+local function set_mute_led(muted)
+    awful.spawn.easy_async_with_shell(
+        "printf %s " .. (muted and "1" or "0") .. " > " .. mute_led,
+        function() end
+    )
+end
+
+local _, volume_timer = awful.widget.watch(
+    "wpctl get-volume @DEFAULT_AUDIO_SINK@",
+    5,
+    function(widget, stdout)
+        local value = tonumber((stdout or ""):match("Volume:%s*([%d%.]+)"))
+        if value then
+            local level = math.floor(value * 100 + 0.5) .. "%"
+            local muted = (stdout or ""):lower():match("%[muted%]") ~= nil
+            if muted then
+                volicon.image = theme.widget_vol_muted
+            else
+                volicon.image = theme.widget_vol
+            end
+            widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, level .. " "))
+
+            if output_muted ~= muted then
+                output_muted = muted
+                set_mute_led(muted)
+            end
+        else
+            widget:set_markup("")
+        end
+    end,
+    volume_widget
+)
+
+theme.volume = {
+    widget = volume_widget,
+    update = function()
+        volume_timer:emit_signal("timeout")
+    end,
+}
+
+function theme.volume.adjust(amount)
+    awful.spawn.easy_async("wpctl set-volume @DEFAULT_AUDIO_SINK@ " .. amount, function()
+        theme.volume.update()
+    end)
+end
+
+function theme.volume.toggle()
+    awful.spawn.easy_async("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle", function()
+        theme.volume.update()
+    end)
+end
+local volbuttons = my_table.join(
+    awful.button({ }, 1,
+        function()
+            awful.spawn({ "pwvucontrol", "--tab=4" })
+        end
+    )
+)
+volicon:buttons(volbuttons)
+theme.volume.widget:buttons(volbuttons)
+
+-- Screen backlight
+local backlighticon = wibox.widget.imagebox(theme.widget_backlight)
+local backlight_widget = wibox.widget.textbox()
+local _, backlight_timer = awful.widget.watch(
+    "brightnessctl -m",
+    5,
+    function(widget, stdout)
+        local level = stdout:match("(%d+)%%")
+        if level then
+            widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, level .. "% "))
+        else
+            widget:set_markup("")
+        end
+    end,
+    backlight_widget
+)
+
+theme.backlight = {
+    widget = backlight_widget,
+    update = function()
+        backlight_timer:emit_signal("timeout")
+    end,
+}
+
+local function adjust_backlight(amount)
+    awful.spawn.easy_async_with_shell("brightnessctl set " .. amount .. " >/dev/null", function()
+        theme.backlight.update()
+    end)
+end
+
+theme.backlight.adjust = adjust_backlight
+
+local backlight_buttons = my_table.join(
+    awful.button({}, 4, function() adjust_backlight("+5%") end),
+    awful.button({}, 5, function() adjust_backlight("5%-") end)
+)
+backlighticon:buttons(backlight_buttons)
+backlight_widget:buttons(backlight_buttons)
+
+-- Active PipeWire microphone state
+local micicon = wibox.widget.imagebox(theme.widget_mic)
+local mic_volume_widget = wibox.widget.textbox()
+local micmute_led = "/sys/class/leds/platform::micmute/brightness"
+local mic_muted
+
+local function set_micmute_led(muted)
+    awful.spawn.easy_async_with_shell(
+        "printf %s " .. (muted and "1" or "0") .. " > " .. micmute_led,
+        function() end
+    )
+end
+
+local _, microphone_timer = awful.widget.watch(
+    "wpctl get-volume @DEFAULT_AUDIO_SOURCE@",
+    5,
+    function(widget, stdout)
+        local muted = (stdout or ""):lower():match("%[muted%]") ~= nil
+        local value = tonumber((stdout or ""):match("Volume:%s*([%d%.]+)"))
+        if muted then
+            micicon.image = theme.widget_mic_muted
+        else
+            micicon.image = theme.widget_mic
+        end
+
+        if value then
+            local level = math.floor(value * 100 + 0.5) .. "%"
+            widget:set_markup(markup.fontfg(theme.font, theme.fg_normal, level .. " "))
+        else
+            widget:set_markup("")
+        end
+
+        if mic_muted ~= muted then
+            mic_muted = muted
+            set_micmute_led(muted)
+        end
+    end,
+    mic_volume_widget
+)
+
+theme.microphone = {
+    update = function()
+        microphone_timer:emit_signal("timeout")
+    end,
+}
+
+function theme.microphone.toggle()
+    awful.spawn.easy_async("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle", function()
+        theme.microphone.update()
+    end)
+end
+
+local micbuttons = my_table.join(
+    awful.button({}, 1, function()
+        awful.spawn({ "pwvucontrol", "--tab=3" })
+    end)
+)
+micicon:buttons(micbuttons)
+mic_volume_widget:buttons(micbuttons)
+
+
+-- Mute/un-mute notifications
+local notifications = wibox.widget.imagebox(theme.notifications_enabled)
+notifications:buttons(my_table.join(
+    awful.button({ }, 1,
+        function()
+            naughty.toggle()
+            if naughty.is_suspended() then
+                notifications.image = theme.notifications_disabled
+            else
+                naughty.destroy_all_notifications()
+                notifications.image = theme.notifications_enabled
+            end
+        end
+    )
+))
+
+function theme.at_screen_connect(s)
+    -- If wallpaper is a function, call it with the screen
+    local wallpaper = theme.wallpaper
+    if type(wallpaper) == "function" then
+        wallpaper = wallpaper(s)
+    end
+    gears.wallpaper.maximized(wallpaper, s, true)
+
+    -- Tags
+    local tag_layout = awful.layout.layouts[1]
+    if s.geometry.width < 2000 then
+        tag_layout = awful.layout.suit.max
+    end
+    awful.tag(awful.util.tagnames, s, tag_layout)
+
+    -- Create a taglist widget
+    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+
+
+    -- Create the wibox
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = dpi(20), bg = theme.bg_normal, fg = theme.fg_normal })
+    local clock = require('widget.clock')(s)
+
+    -- Add widgets to the wibox
+    s.mywibox:setup {
+        layout = wibox.layout.align.horizontal,
+        expand = 'none',
+        { -- Left widgets
+            layout = wibox.layout.fixed.horizontal,
+            s.mytaglist,
+        },
+        clock,
+        { -- Right widgets
+            layout = wibox.layout.fixed.horizontal,
+            baticon,
+            bat.widget,
+            backlighticon,
+            theme.backlight.widget,
+            micicon,
+            mic_volume_widget,
+            volicon,
+            theme.volume.widget,
+            notifications,
+            wibox.widget.systray(),
+
+        },
+    }
+
+    -- Create the bottom wibox
+    s.mybottomwibox = awful.wibar({ position = "bottom", screen = s, border_width = 0, height = dpi(20), bg = theme.bg_normal, fg = theme.fg_normal })
+
+    s.mylauncher = awful.widget.button({ image = theme.awesome_icon })
+    s.mylauncher:buttons(my_table.join(
+        awful.button({ }, 1, function() awful.spawn("archlinux-logout") end)
+    ))
+
+    -- Create an imagebox widget which will contains an icon indicating which layout we're using.
+    -- We need one layoutbox per screen.
+    s.mylayoutbox = awful.widget.layoutbox(s)
+    s.mylayoutbox:buttons(my_table.join(
+        awful.button({ }, 1, function () awful.layout.inc( 1) end),
+        awful.button({ }, 3, function () awful.layout.inc(-1) end)
+    ))
+    -- Create a tasklist widget
+    s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
+
+    -- Add widgets to the bottom wibox
+    s.mybottomwibox:setup {
+        layout = wibox.layout.align.horizontal,
+        { -- Left widgets
+            layout = wibox.layout.fixed.horizontal,
+            s.mylauncher,
+        },
+        s.mytasklist, -- Middle widget
+        { -- Right widgets
+            layout = wibox.layout.fixed.horizontal,
+            s.mylayoutbox,
+        },
+    }
+end
+
+return theme
