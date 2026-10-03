@@ -111,6 +111,18 @@ laptop_packages=(
     wireless-regdb                  # Wireless regulatory database.
     ventoy-bin                      # Multi-ISO bootable USB creator.
     gocryptfs                       # Encrypted filesystem tool.
+    grim                            # Wayland screenshots.
+    hypridle                        # Hyprland idle and suspend locking.
+    hyprland                        # Wayland desktop session.
+    hyprlock                        # Hyprland screen locker.
+    hyprpaper                       # Hyprland wallpaper manager.
+    hyprpolkitagent                 # Wayland Polkit authentication agent.
+    qt5-wayland                     # Qt 5 Wayland support.
+    qt6-wayland                     # Qt 6 Wayland support.
+    slurp                           # Wayland screen-region selection.
+    waybar                          # Hyprland status bar and system tray.
+    wl-clipboard                    # Wayland clipboard commands.
+    xdg-desktop-portal-hyprland     # Hyprland screen-sharing portal.
     papirus-icon-theme              # Icon theme.
     tumbler                         # File-manager thumbnail service.
     firefox                         # Web browser.

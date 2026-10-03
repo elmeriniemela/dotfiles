@@ -1,0 +1,22 @@
+* {
+    font-family: Inter, sans-serif;
+    font-size: 13px;
+}
+
+window#waybar {
+    background: #0f192b;
+    color: #f3f5f9;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: #9aa9bd;
+}
+
+#workspaces button.active {
+    color: #8ce7d0;
+}
+
+#clock, #tray, #network, #pulseaudio, #battery {
+    padding: 0 9px;
+}
