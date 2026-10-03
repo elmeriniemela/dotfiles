@@ -188,6 +188,7 @@ laptop_packages=(
     dunst                           # Lightweight notification daemon.
     dconf                           # GTK settings database.
     feh                             # Lightweight image viewer.
+    ufw                             # Firewall
     xorg-xkill                      # Kill an X11 client interactively.
     xorg-xsetroot                   # Set SDDM's default X11 cursor.
     xfce4-taskmanager               # Task manager for Ctrl+Shift+Esc.
@@ -253,7 +254,20 @@ sudo dconf update
 sudo mkinitcpio -P
 sudo udevadm control --reload-rules
 sudo systemctl daemon-reload
-sudo systemctl enable cronie NetworkManager bluetooth tlp upower sddm
+
+# IPv6 local discovery is link-local multicast, not traffic from the IPv4 LAN:
+# fe80::/10 matches auto-assigned, same-link-only IPv6 source addresses (the
+# individual fe80:: address varies per device/network); ff12::8384 is
+# Syncthing's fixed local-discovery multicast group. Neither is reachable
+# from the Internet.
+sudo ufw allow in from fe80::/10 to ff12::8384 port 21027 proto udp
+sudo ufw allow from 192.168.1.0/24 to any app syncthing
+sudo ufw allow from 192.168.1.0/24 to any port 22 proto tcp
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw enable
+
+sudo systemctl enable cronie NetworkManager bluetooth tlp upower sddm ufw
 sudo systemctl enable --now portable4t-udisks-events.service
 systemctl --user enable ssh-agent.service
 systemctl --user daemon-reload
