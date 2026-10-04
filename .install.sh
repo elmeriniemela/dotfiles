@@ -146,6 +146,7 @@ laptop_packages=(
     pipewire-audio                  # PipeWire audio components.
     pipewire-pulse                  # PulseAudio compatibility layer.
     pipewire-zeroconf               # PipeWire mDNS discovery.
+    pipewire-libcamera
     polkit                          # Privilege authorization framework.
     lxsession                       # Graphical Polkit authentication agent.
     postgresql                      # PostgreSQL database server.
@@ -216,6 +217,7 @@ laptop_packages=(
     arandr                          # Display-layout configuration UI.
     intel-media-driver              # Intel VA-API driver for hardware video decode and encode.
     vulkan-intel                    # Intel Vulkan driver.
+    vulkan-tools
     libva-utils                     # VA-API diagnostics such as vainfo.
     intel-gpu-tools                 # Intel GPU monitoring such as intel_gpu_top.
     laptop-detect                   # Detect laptop hardware.
@@ -330,6 +332,9 @@ sudo ufw allow from 192.168.1.0/24 to any port 22 proto tcp
 sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw enable
+
+# https://github.com/systemd/systemd/issues/43848
+sudo systemctl mask systemd-tpm2-setup-early.service systemd-pcrproduct.service systemd-pcrlogin@.service
 
 sudo systemctl enable cronie NetworkManager bluetooth stunnel tlp upower sddm ufw reflector.timer
 sudo systemctl enable --now portable4t-udisks-events.service
