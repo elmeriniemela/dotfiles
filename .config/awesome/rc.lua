@@ -545,10 +545,17 @@ client.connect_signal("request::titlebars", function(c)
 
     -- Default
     -- buttons for the titlebar
+    local double_click_timer = gears.timer { timeout = 0.3, single_shot = true }
     local buttons = my_table.join(
         awful.button({ }, 1, function()
             c:emit_signal("request::activate", "titlebar", {raise = true})
-            awful.mouse.client.move(c)
+            if c.floating and double_click_timer.started then
+                double_click_timer:stop()
+                c.maximized = not c.maximized
+            else
+                if c.floating then double_click_timer:start() end
+                awful.mouse.client.move(c)
+            end
         end),
         awful.button({ }, 3, function()
             c:emit_signal("request::activate", "titlebar", {raise = true})
