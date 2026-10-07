@@ -4,27 +4,82 @@
 import re
 import subprocess
 
+class _Monitor():
+    def __init__(self, name, width=0, height=0, x=0, y=0, off=False):
+        self.name = name
+        self.width = int(width)
+        self.height = int(height)
+        self.x = int(x)
+        self.y = int(y)
+        self.off = off
+        self.primary = False
 
-output = subprocess.check_output(["xrandr", "--query"], text=True)
-monitors = [
-    (name, int(width), int(height))
-    for name, width, height in re.findall(
-        r"(?m)^([\w.-]+) connected[^\n]*\n[ \t]+(\d+)x(\d+)\b", output
-    )
-]
+    def __eq__(self, other):
+        return self.width == other.width
 
-if not monitors:
-    raise SystemExit("No connected display with an available mode")
+    def __ne__(self, other):
+        return self.width != other.width
 
-# Place the widest display on top and center the others below it.
-monitors.sort(key=lambda monitor: monitor[1], reverse=True)
-command = ["xrandr"]
-y = 0
-for index, (name, width, height) in enumerate(monitors):
-    x = (monitors[0][1] - width) // 2
-    command.extend(["--output", name, "--mode", f"{width}x{height}", "--pos", f"{x}x{y}"])
-    if index == len(monitors) - 1:
-        command.append("--primary")
-    y += height
+    def __gt__(self, other):
+        return self.width > other.width
 
-subprocess.run(command, check=True)
+    def __ge__(self, other):
+        return self.width >= other.width
+
+    def __lt__(self, other):
+        return self.width < other.width
+
+    def __le__(self, other):
+        return self.width <= other.width
+
+
+    def __str__(self):
+        if self.off:
+            return f'--output {self.name} --off'
+        prim_flag = ' --primary' if self.primary else ''
+        return f'--output {self.name}{prim_flag} --mode {self.width}x{self.height} --pos {self.x}x{self.y}'
+
+    def __repr__(self):
+        return f'_Monitor(name={self.name!r}, width={self.width!r}, height={self.height!r}, x={self.x!r}, y={self.y!r}, off={self.off!r})'
+
+
+output = subprocess.check_output("xrandr -q --current", shell=True, encoding='utf-8')
+connected_monitors = []
+all_monitors = []
+lines = output.splitlines()
+for i, line in enumerate(lines):
+    match = re.findall(r'^([\w-]+) connected', line)
+    if match:
+        name = match[0]
+        # 3 tries
+        for max_res_line in lines[i+1: i+4]:
+            res_match = re.findall(r'[\s]*(\d+)x(\d+)', max_res_line)
+            if res_match:
+                width, height = res_match[0]
+                monitor = _Monitor(name, width, height)
+                connected_monitors.append(monitor)
+                all_monitors.append(monitor)
+                break
+
+    disconnected = re.findall(r'^([\w-]+) disconnected', line)
+    for name in disconnected:
+        all_monitors.append(_Monitor(name, off=True))
+
+
+if len(connected_monitors) == 2:
+    # Sort with ASC
+    connected_monitors.sort(reverse=False)
+    below, above = connected_monitors
+    below.primary = True
+
+    subprocess.check_output('xrandr ' + ' '.join(str(m) for m in connected_monitors), shell=True, encoding='utf-8')
+
+    above.x = 0
+    above.y = 0
+
+
+    below.x = above.width // 2 - below.width // 2
+    below.y = above.height
+
+command = 'xrandr ' + ' '.join(str(m) for m in all_monitors)
+subprocess.check_output(command, shell=True, encoding='utf-8')
