@@ -33,6 +33,7 @@ hl.bind("SUPER + V", hl.dsp.exec_cmd("python3 ~/.config/hypr/clipboard.py"), { d
 hl.bind("SUPER + Return", hl.dsp.exec_cmd("alacritty"), { description = "Open terminal" })
 hl.bind("ALT + Return", hl.dsp.exec_cmd("alacritty"), { description = "Open terminal" })
 hl.bind("SUPER + space", hl.dsp.exec_cmd("rofi -show drun"), { description = "Open app launcher" })
+hl.bind("ALT + Tab", hl.dsp.exec_cmd("rofi -show window -kb-accept-entry '!Alt-Tab,Return' -kb-row-down 'Alt-Tab,Down' -kb-cancel 'Alt+Escape,Escape'"), { description = "Cycle open windows" })
 hl.bind("SUPER + Q", hl.dsp.exec_cmd("brave"), { description = "Open browser" })
 hl.bind("SUPER + E", hl.dsp.exec_cmd("thunar"), { description = "Open file manager" })
 hl.bind("SUPER + C", hl.dsp.exec_cmd("codium"), { description = "Open code editor" })
