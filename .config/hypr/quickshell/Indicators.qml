@@ -26,7 +26,7 @@ Row {
         visible: root.services.brightness >= 0
         icon: "assets/display-brightness-symbolic.svg"
         text: root.services.brightness + "%"
-        tooltip: "Laptop brightness · scroll to adjust by 5%"
+        tooltip: "Laptop brightness · scroll to adjust by 1%"
         property real wheelRemainder: 0
         onScrolled: event => {
             wheelRemainder += event.angleDelta.y / 120;

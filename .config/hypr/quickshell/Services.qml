@@ -34,7 +34,7 @@ Scope {
         const steps = brightnessSteps;
         brightnessSteps = 0;
         brightnessWrite.exec(["timeout", "3", "brightnessctl", "--device=intel_backlight", "set",
-            String(Math.abs(steps) * 5) + (steps > 0 ? "%+" : "%-")]);
+            String(Math.abs(steps)) + (steps > 0 ? "%+" : "%-")]);
     }
     Process {
         id: brightnessRead
