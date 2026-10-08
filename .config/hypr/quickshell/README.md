@@ -22,6 +22,7 @@ Brightness scrolling changes the laptop backlight by 5%.
 Microphone/output clicks open pwvucontrol's input/output device tabs.
 Notification click pauses Dunst; resuming discards queued notifications without deleting history.
 Tray icons pass clicks, menus, and scrolling to their applications.
+Tray icons follow the system icon theme; application-provided colors are preserved.
 
 Dependencies: Quickshell (Qt Quick Controls, PipeWire and UPower integrations),
 `brightnessctl`, `pwvucontrol`, `dunstctl`, `notify-send`, `hyprctl`, and Python/Rofi for shortcut help.
