@@ -16,7 +16,7 @@ hl.config({
 })
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("waybar")
+    hl.exec_cmd("waybar -c ~/.config/hypr/waybar.jsonc")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("dunst")
@@ -55,8 +55,13 @@ hl.bind("SUPER + CTRL + down", hl.dsp.window.resize({ x = 0, y = 20, relative = 
 
 for workspace = 1, 9 do
     hl.bind("SUPER + " .. workspace, hl.dsp.focus({ workspace = workspace }))
-    hl.bind("SUPER + SHIFT + " .. workspace, hl.dsp.window.move({ workspace = workspace }))
+    hl.bind("SUPER + SHIFT + " .. workspace, hl.dsp.window.move({ workspace = workspace, follow = false }))
+    hl.bind("SUPER + CTRL + SHIFT + " .. workspace, hl.dsp.window.move({ workspace = workspace, follow = true }))
 end
+
+hl.bind("SUPER + Tab", hl.dsp.focus({ workspace = "previous" }))
+hl.bind("SUPER + S", hl.dsp.workspace.toggle_special("scratchpad"))
+hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:scratchpad", follow = false }))
 
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true })
