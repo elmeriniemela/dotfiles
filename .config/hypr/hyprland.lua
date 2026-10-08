@@ -71,7 +71,10 @@ hl.bind("SUPER + SHIFT + S", hl.dsp.window.move({ workspace = "special:scratchpa
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(), { mouse = true, description = "Move window (hold and drag)" })
 hl.bind("SUPER + mouse:273", hl.dsp.window.resize(), { mouse = true, description = "Resize window (hold and drag)" })
 
-hl.bind("Print", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'), { description = "Copy selected screen area to clipboard" })
+hl.bind("Print", function()
+    local monitor = hl.get_active_monitor()
+    hl.exec_cmd("env QT_QPA_PLATFORM=wayland flameshot screen --number " .. (monitor and monitor.id or 0) .. " --edit")
+end, { description = "Take screenshot of active monitor with Flameshot" })
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { repeating = true, description = "Raise volume" })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { repeating = true, description = "Lower volume" })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { description = "Toggle sound mute" })
