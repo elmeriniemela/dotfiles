@@ -11,18 +11,25 @@ Rectangle {
     property color muted: "#9aa9bd"
     property color accent: "#8ce7d0"
     property bool busy: false
+    property bool fingerprintLogin: false
     property string message: ""
 
-    function login() {
+    function login(useFingerprint = false) {
         if (busy) return
         if (!username.text.trim()) {
             message = qsTr("Enter your username")
             username.forceActiveFocus()
             return
         }
-        message = qsTr("Touch the reader. Password fallback takes up to 10 seconds.")
+        if (!useFingerprint && !password.text) {
+            message = qsTr("Enter your password or choose Use fingerprint.")
+            password.forceActiveFocus()
+            return
+        }
+        fingerprintLogin = useFingerprint
+        message = useFingerprint ? qsTr("Touch the fingerprint reader.") : qsTr("Checking password…")
         busy = true
-        sddm.login(username.text.trim(), password.text, sessions.currentIndex)
+        sddm.login(username.text.trim(), useFingerprint ? "" : password.text, sessions.currentIndex)
     }
 
     Connections {
@@ -33,8 +40,11 @@ Rectangle {
         function onLoginFailed() {
             root.busy = false
             password.text = ""
-            root.message = qsTr("Sign-in failed. Try again with your fingerprint or password.")
-            password.forceActiveFocus()
+            root.message = root.fingerprintLogin
+                ? qsTr("Fingerprint not verified. Try again.")
+                : qsTr("That password didn't work. Try again.")
+            if (root.fingerprintLogin) fingerprint.forceActiveFocus()
+            else password.forceActiveFocus()
         }
     }
 
@@ -126,7 +136,7 @@ Rectangle {
     Rectangle {
         id: card
         width: Math.min(420, root.width - 40)
-        height: 454
+        height: 514
         x: root.width >= 1000 ? root.width - width - Math.max(64, root.width * 0.11) : (root.width - width) / 2
         y: (root.height - height) / 2
         radius: 22
@@ -242,7 +252,7 @@ Rectangle {
                 width: parent.width
                 height: 44
                 color: root.busy || !root.message ? root.muted : "#ffb7ba"
-                text: root.message || qsTr("Leave password empty and sign in to use your fingerprint.")
+                text: root.message || qsTr("Sign in with your password or use your fingerprint.")
                 font.family: "Inter"
                 font.pixelSize: 13
                 wrapMode: Text.WordWrap
@@ -268,6 +278,32 @@ Rectangle {
                 MouseArea { anchors.fill: parent; onClicked: root.login() }
                 Keys.onReturnPressed: root.login()
                 Keys.onEnterPressed: root.login()
+                KeyNavigation.tab: fingerprint
+            }
+
+            Item { width: 1; height: 10 }
+
+            Rectangle {
+                id: fingerprint
+                width: parent.width
+                height: 50
+                radius: 10
+                color: "#152238"
+                border.color: activeFocus ? root.accent : "#34465a"
+                opacity: root.busy ? 0.6 : 1
+
+                Text {
+                    anchors.centerIn: parent
+                    text: qsTr("Use fingerprint")
+                    color: root.ink
+                    font.family: "Inter"
+                    font.pixelSize: 15
+                    font.weight: Font.DemiBold
+                }
+
+                MouseArea { anchors.fill: parent; onClicked: root.login(true) }
+                Keys.onReturnPressed: root.login(true)
+                Keys.onEnterPressed: root.login(true)
                 KeyNavigation.tab: username
             }
         }

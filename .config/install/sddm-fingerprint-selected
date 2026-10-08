@@ -1,0 +1,8 @@
+#!/usr/bin/python3 -I
+"""Select fingerprint authentication only for an empty PAM authentication token."""
+
+import sys
+
+# pam_exec supplies the token through stdin, never argv or the environment.
+# Only return a selection status; do not print, log or persist the token.
+sys.exit(bool(sys.stdin.buffer.read()))

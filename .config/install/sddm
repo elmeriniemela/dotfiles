@@ -1,8 +1,11 @@
 #%PAM-1.0
 
-# Fingerprint first; failure, timeout or no enrolled reader falls back to password.
-# SDDM starts authentication only after Sign in (an empty password is allowed).
-auth        sufficient  pam_fprintd.so timeout=10
+# The fingerprint button submits an empty password. Nonempty passwords skip
+# exactly the next rule, regardless of whether the password is correct.
+# quiet_log suppresses the helper's expected nonzero exit on password login.
+auth        [success=ignore default=1] pam_exec.so expose_authtok quiet quiet_log /usr/local/bin/sddm-fingerprint-selected
+# Fingerprint failure ends this attempt; it must not try the password stack.
+auth        [success=done default=die] pam_fprintd.so timeout=10
 auth        include     system-login
 -auth       optional    pam_gnome_keyring.so
 -auth       optional    pam_kwallet5.so

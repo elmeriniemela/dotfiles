@@ -312,6 +312,7 @@ sudo install -D -o root -g root -m 644 "$HOME/.config/install/i3lock" /etc/pam.d
 sudo install -D -o root -g root -m 755 "$HOME/.config/install/lxlock" /usr/local/bin/lxlock
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/ssh-agent-fprint-askpass.conf" /etc/systemd/user/ssh-agent.service.d/fprint-askpass.conf
 sudo install -D -o root -g root -m 755 "$HOME/.config/install/ssh-askpass-fprint" /usr/local/bin/ssh-askpass-fprint
+sudo install -D -o root -g root -m 755 "$HOME/.config/install/sddm-fingerprint-selected" /usr/local/bin/sddm-fingerprint-selected
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/sddm" /etc/pam.d/sddm
 sudo install -D -o root -g root -m 755 "$HOME/.config/install/portable4t-syncthing-hook" /usr/local/bin/portable4t-syncthing-hook
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/portable4t-udisks-events.service" /etc/systemd/system/portable4t-udisks-events.service
