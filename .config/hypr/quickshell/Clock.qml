@@ -12,7 +12,6 @@ StatusButton {
     onCalendarOpenChanged: { if (calendarOpen) calendar.today(); }
     text: Qt.formatDateTime(date, "ddd d MMM  HH:mm")
     tooltip: calendarOpen ? "" : Qt.formatDateTime(date, "dddd, d MMMM yyyy")
-    tooltipDelay: 1000
     onClicked: event => {
         if (event.button !== Qt.LeftButton) return;
         calendarOpen = !calendarOpen;
@@ -35,7 +34,7 @@ StatusButton {
         // A focus grab dismisses the popup when another surface is clicked.
         HyprlandFocusGrab {
             active: root.calendarOpen
-            windows: [popup, root.QsWindow.window]
+            windows: [popup]
             onCleared: root.calendarOpen = false
         }
         ColumnLayout {

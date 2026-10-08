@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
 
 Rectangle {
@@ -11,7 +10,7 @@ Rectangle {
     property color textColor: Theme.foreground
     property color baseColor: "transparent"
     property int minimumWidth: 0
-    property int tooltipDelay: 600
+    Accessible.description: tooltip
     signal clicked(var mouse)
     signal scrolled(var wheel)
     implicitWidth: Math.max(minimumWidth, content.implicitWidth + 10)
@@ -49,7 +48,4 @@ Rectangle {
         onClicked: event => { if (root.available) root.clicked(event); }
         onWheel: event => { if (root.available) root.scrolled(event); }
     }
-    ToolTip.visible: mouse.containsMouse && root.tooltip !== ""
-    ToolTip.delay: root.tooltipDelay
-    ToolTip.text: root.tooltip
 }

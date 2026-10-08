@@ -6,7 +6,7 @@ Changes to QML reload automatically. Hyprland already starts this configuration.
 - `shell.qml` places one panel per monitor.
 - `Theme.qml` contains shared colors, font, and height.
 - `Workspaces.qml`, `Clock.qml`, `Indicators.qml`, and `Tray.qml` define widgets.
-- `StatusButton.qml` provides icons, text, hover/press feedback, and tooltips.
+- `StatusButton.qml` provides icons, text, hover/press feedback, and accessibility descriptions. Hover tooltips are disabled.
 - `Services.qml` shares device state and polling across all monitors.
 - `BatteryAlerts.qml` sends alerts once per discharge/charge cycle; `AlertLogic.js` holds its pure transition logic.
 
