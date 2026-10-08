@@ -61,4 +61,12 @@ Row {
         onClicked: event => { if (event.button === Qt.LeftButton) root.services.toggleNotifications(); }
     }
     Tray {}
+    StatusButton {
+        icon: "assets/system-shutdown-symbolic.svg"
+        tooltip: "Open logout menu"
+        onClicked: event => {
+            if (event.button === Qt.LeftButton)
+                Quickshell.execDetached(["archlinux-logout"]);
+        }
+    }
 }
