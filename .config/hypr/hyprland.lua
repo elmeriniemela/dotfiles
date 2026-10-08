@@ -40,7 +40,7 @@ hl.bind("SUPER + W", hl.dsp.window.close(), { description = "Close window" })
 hl.bind("SUPER + F", hl.dsp.window.float({ action = "toggle" }), { description = "Toggle floating" })
 hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle" }), { description = "Toggle fullscreen" })
 hl.bind("SUPER + L", hl.dsp.exec_cmd("loginctl lock-session"), { description = "Lock session" })
-hl.bind("SUPER + SHIFT + E", hl.dsp.exit(), { description = "Exit Hyprland session" })
+hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd("archlinux-logout"), { description = "Open logout menu" })
 hl.bind("CTRL + SHIFT + Escape", hl.dsp.exec_cmd("xfce4-taskmanager"), { description = "Open task manager" })
 
 hl.bind("SUPER + left", hl.dsp.focus({ direction = "left" }), { description = "Focus window left" })
