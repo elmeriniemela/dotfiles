@@ -13,7 +13,9 @@ Row {
             icon: modelData.icon
             tooltip: modelData.tooltipTitle + (modelData.tooltipDescription ? "\n" + modelData.tooltipDescription : "")
             onClicked: event => {
-                if (event.button === Qt.RightButton || (event.button === Qt.LeftButton && modelData.onlyMenu)) {
+                // nm-applet exports a menu but neither Activate nor the menu-only flag.
+                const menuOnly = modelData.onlyMenu || modelData.id === "nm-applet";
+                if (event.button === Qt.RightButton || (event.button === Qt.LeftButton && menuOnly)) {
                     if (modelData.hasMenu) menu.open();
                 } else if (event.button === Qt.MiddleButton) modelData.secondaryActivate();
                 else if (event.button === Qt.LeftButton) modelData.activate();

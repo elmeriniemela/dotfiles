@@ -1,3 +1,4 @@
 dotfiles
 .config/dconf/user
 .vm
+*.pyc
