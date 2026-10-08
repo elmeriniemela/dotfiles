@@ -20,22 +20,20 @@ Rectangle {
             username.forceActiveFocus()
             return
         }
-        if (!password.text) {
-            message = qsTr("Enter your password")
-            password.forceActiveFocus()
-            return
-        }
-        message = ""
+        message = qsTr("Touch the reader. Password fallback takes up to 10 seconds.")
         busy = true
         sddm.login(username.text.trim(), password.text, sessions.currentIndex)
     }
 
     Connections {
         target: sddm
+        function onInformationMessage(message) {
+            if (root.busy) root.message = message
+        }
         function onLoginFailed() {
             root.busy = false
-            root.message = qsTr("That password didn't work. Try again.")
             password.text = ""
+            root.message = qsTr("Sign-in failed. Try again with your fingerprint or password.")
             password.forceActiveFocus()
         }
     }
@@ -128,7 +126,7 @@ Rectangle {
     Rectangle {
         id: card
         width: Math.min(420, root.width - 40)
-        height: 438
+        height: 454
         x: root.width >= 1000 ? root.width - width - Math.max(64, root.width * 0.11) : (root.width - width) / 2
         y: (root.height - height) / 2
         radius: 22
@@ -191,6 +189,7 @@ Rectangle {
                     font.pixelSize: 16
                     text: userModel.lastUser || ""
                     selectByMouse: true
+                    readOnly: root.busy
                     KeyNavigation.tab: password
                     Keys.onReturnPressed: password.forceActiveFocus()
                     Keys.onEnterPressed: password.forceActiveFocus()
@@ -229,6 +228,7 @@ Rectangle {
                     font.pixelSize: 16
                     echoMode: TextInput.Password
                     selectByMouse: true
+                    readOnly: root.busy
                     KeyNavigation.tab: signIn
                     Keys.onReturnPressed: root.login()
                     Keys.onEnterPressed: root.login()
@@ -240,12 +240,12 @@ Rectangle {
 
             Text {
                 width: parent.width
-                height: 28
-                color: "#ffb7ba"
-                text: root.message
+                height: 44
+                color: root.busy || !root.message ? root.muted : "#ffb7ba"
+                text: root.message || qsTr("Leave password empty and sign in to use your fingerprint.")
                 font.family: "Inter"
                 font.pixelSize: 13
-                elide: Text.ElideRight
+                wrapMode: Text.WordWrap
                 verticalAlignment: Text.AlignVCenter
             }
 

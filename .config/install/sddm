@@ -1,5 +1,8 @@
 #%PAM-1.0
 
+# Fingerprint first; failure, timeout or no enrolled reader falls back to password.
+# SDDM starts authentication only after Sign in (an empty password is allowed).
+auth        sufficient  pam_fprintd.so timeout=10
 auth        include     system-login
 -auth       optional    pam_gnome_keyring.so
 -auth       optional    pam_kwallet5.so
