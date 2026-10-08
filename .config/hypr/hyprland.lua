@@ -33,8 +33,29 @@ hl.bind("SUPER + V", hl.dsp.exec_cmd("python3 ~/.config/hypr/clipboard.py"), { d
 hl.bind("SUPER + Return", hl.dsp.exec_cmd("alacritty"), { description = "Open terminal" })
 hl.bind("ALT + Return", hl.dsp.exec_cmd("alacritty"), { description = "Open terminal" })
 hl.bind("SUPER + space", hl.dsp.exec_cmd("rofi -show drun"), { description = "Open app launcher" })
-hl.bind("ALT + Tab", hl.dsp.window.cycle_next(), { description = "Focus next window" })
-hl.bind("ALT + SHIFT + Tab", hl.dsp.window.cycle_next({ next = false }), { description = "Focus previous window" })
+-- Cycle across regular workspaces; keep hidden scratchpad windows out of the list.
+local function cycle_window(step)
+    local windows = {}
+    for _, window in ipairs(hl.get_windows()) do
+        if not window.hidden and window.workspace and not window.workspace.name:match("^special:") then
+            table.insert(windows, window)
+        end
+    end
+    if #windows == 0 then return end
+
+    local active = hl.get_active_window()
+    local index = step > 0 and 1 or #windows
+    for i, window in ipairs(windows) do
+        if active and window.address == active.address then
+            index = (i - 1 + step) % #windows + 1
+            break
+        end
+    end
+    hl.dispatch(hl.dsp.focus({ window = windows[index] }))
+end
+
+hl.bind("ALT + Tab", function() cycle_window(1) end, { description = "Focus next window across workspaces" })
+hl.bind("ALT + SHIFT + Tab", function() cycle_window(-1) end, { description = "Focus previous window across workspaces" })
 hl.bind("SUPER + Q", hl.dsp.exec_cmd("brave"), { description = "Open browser" })
 hl.bind("SUPER + E", hl.dsp.exec_cmd("thunar"), { description = "Open file manager" })
 hl.bind("SUPER + C", hl.dsp.exec_cmd("codium"), { description = "Open code editor" })
