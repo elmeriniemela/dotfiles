@@ -117,6 +117,8 @@ laptop_packages=(
     hyprlock                        # Hyprland screen locker.
     hyprpaper                       # Hyprland wallpaper manager.
     hyprpolkitagent                 # Wayland Polkit authentication agent.
+    cliphist
+    quickshell
     qt5-wayland                     # Qt 5 Wayland support.
     qt6-wayland                     # Qt 6 Wayland support.
     slurp                           # Wayland screen-region selection.
