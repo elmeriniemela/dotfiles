@@ -9,6 +9,21 @@ Rectangle {
     implicitWidth: 350
     implicitHeight: calendar.implicitHeight + 24
     color: Theme.background
+    MouseArea {
+        anchors.fill: parent
+        z: 1
+        acceptedButtons: Qt.NoButton
+        property real remainder: 0
+        onWheel: event => {
+            remainder += event.angleDelta.y / 120;
+            const steps = Math.trunc(remainder);
+            if (steps) {
+                remainder -= steps;
+                calendar.shift(-steps);
+            }
+            event.accepted = true;
+        }
+    }
     // Keep clicks within the calendar from reaching the dismissal layer.
     MouseArea { anchors.fill: parent; acceptedButtons: Qt.AllButtons }
     Component.onCompleted: calendar.today()

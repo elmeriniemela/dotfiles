@@ -16,6 +16,7 @@ Icons in `assets/` are copied from the active Awesome theme.
 
 Workspace click switches; Super + click sends the focused window without following.
 Clock click toggles a Monday-first calendar; Escape or clicking outside on any monitor closes it.
+Scroll over the open calendar to change months: up goes back, down goes forward.
 While open, transparent input layers consume the dismissal click, including clicks on the bar.
 Brightness scrolling changes the laptop backlight by 5%.
 Microphone/output clicks open pwvucontrol's input/output device tabs.
