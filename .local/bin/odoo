@@ -114,7 +114,7 @@ run_tests() {
         $ODOO_VENV/python $ODOO_VERSION_DIR/odoo/odoo-bin --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0 --test-enable --test-tags=$ODOO_MODULE
     else
         $ODOO_VENV/python -m coverage run --omit=__manifest__.py --source="$PWD" "$ODOO_VERSION_DIR/odoo/odoo-bin" --conf $ODOO_CONFIG_FILE -d $ODOO_DATABASE --db-filter "^$ODOO_DATABASE$" -u $ODOO_MODULE --stop-after-init --http-port=0 --test-enable --test-tags=$ODOO_MODULE
-        $ODOO_VENV/python -m coverage report -m
+        $ODOO_VENV/python -m coverage report -m -i
     fi
 }
 run_translate() {
