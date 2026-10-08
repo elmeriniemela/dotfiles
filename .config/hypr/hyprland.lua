@@ -43,6 +43,16 @@ hl.bind("SUPER + right", hl.dsp.focus({ direction = "right" }))
 hl.bind("SUPER + up", hl.dsp.focus({ direction = "up" }))
 hl.bind("SUPER + down", hl.dsp.focus({ direction = "down" }))
 
+hl.bind("SUPER + SHIFT + left", hl.dsp.window.move({ direction = "left" }))
+hl.bind("SUPER + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
+hl.bind("SUPER + SHIFT + up", hl.dsp.window.move({ direction = "up" }))
+hl.bind("SUPER + SHIFT + down", hl.dsp.window.move({ direction = "down" }))
+
+hl.bind("SUPER + CTRL + left", hl.dsp.window.resize({ x = -20, y = 0, relative = true }), { repeating = true })
+hl.bind("SUPER + CTRL + right", hl.dsp.window.resize({ x = 20, y = 0, relative = true }), { repeating = true })
+hl.bind("SUPER + CTRL + up", hl.dsp.window.resize({ x = 0, y = -20, relative = true }), { repeating = true })
+hl.bind("SUPER + CTRL + down", hl.dsp.window.resize({ x = 0, y = 20, relative = true }), { repeating = true })
+
 for workspace = 1, 9 do
     hl.bind("SUPER + " .. workspace, hl.dsp.focus({ workspace = workspace }))
     hl.bind("SUPER + SHIFT + " .. workspace, hl.dsp.window.move({ workspace = workspace }))
