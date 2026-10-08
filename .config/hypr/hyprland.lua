@@ -16,7 +16,7 @@ hl.config({
 })
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("waybar -c ~/.config/hypr/waybar.jsonc")
+    hl.exec_cmd("quickshell -p ~/.config/hypr/quickshell --no-duplicate")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("dunst")
