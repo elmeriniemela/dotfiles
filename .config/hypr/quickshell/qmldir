@@ -6,5 +6,6 @@ StatusButton 1.0 StatusButton.qml
 Workspaces 1.0 Workspaces.qml
 Clock 1.0 Clock.qml
 Indicators 1.0 Indicators.qml
+Brightness 1.0 Brightness.qml
 Tray 1.0 Tray.qml
 Calendar 1.0 Calendar.qml

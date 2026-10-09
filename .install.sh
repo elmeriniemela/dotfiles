@@ -116,6 +116,7 @@ laptop_packages=(
     hyprlock                        # Hyprland screen locker.
     hyprpaper                       # Hyprland wallpaper manager.
     hyprpolkitagent                 # Wayland Polkit authentication agent.
+    hyprsunset                      # Display color temperature control.
     cliphist
     quickshell
     qt5-wayland                     # Qt 5 Wayland support.

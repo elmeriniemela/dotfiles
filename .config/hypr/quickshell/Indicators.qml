@@ -29,21 +29,7 @@ Row {
         text: root.services.batteryPercent + "%" + (root.services.plugged ? " plug" : "")
         tooltip: UPowerDeviceState.toString(root.services.battery.state)
     }
-    StatusButton {
-        visible: root.services.brightness >= 0
-        icon: "assets/display-brightness-symbolic.svg"
-        text: root.services.brightness + "%"
-        tooltip: "Laptop brightness · scroll to adjust by 1%"
-        property real wheelRemainder: 0
-        onScrolled: event => {
-            wheelRemainder += event.angleDelta.y / 120;
-            const steps = Math.trunc(wheelRemainder);
-            if (steps) {
-                wheelRemainder -= steps;
-                root.services.adjustBrightness(steps);
-            }
-        }
-    }
+    Brightness { services: root.services }
     StatusButton {
         readonly property var node: root.services.source
         available: !!node?.ready && !!node?.audio

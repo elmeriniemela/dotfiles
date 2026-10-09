@@ -15,6 +15,9 @@ Scope {
     property int brightness: -1
     property string brightnessError: "Backlight unavailable"
     property int brightnessSteps: 0
+    property int brightnessTarget: -1
+    property int temperature: -1
+    property int temperatureTarget: -1
     property var paused: null
     property string notificationError: "Dunst unavailable"
     readonly property bool notificationBusy: notificationAction.running
@@ -27,11 +30,29 @@ Scope {
     LedSync { device: "platform::micmute"; muted: root.source?.ready ? root.source.audio?.muted ?? null : null }
 
     function adjustBrightness(steps) {
+        if (brightnessTarget >= 0) {
+            setBrightness(brightnessTarget + steps);
+            return;
+        }
         brightnessSteps += steps;
         flushBrightness();
     }
+    function setBrightness(value) {
+        brightnessTarget = Math.max(1, Math.min(100, Math.round(value)));
+        brightness = brightnessTarget;
+        brightnessSteps = 0;
+        if (!brightnessThrottle.running) brightnessThrottle.start();
+    }
+    Timer { id: brightnessThrottle; interval: 50; onTriggered: root.flushBrightness() }
     function flushBrightness() {
-        if (brightnessWrite.running || brightnessSteps === 0) return;
+        if (brightnessWrite.running) return;
+        if (brightnessTarget >= 0) {
+            const target = brightnessTarget;
+            brightnessTarget = -1;
+            brightnessWrite.exec(["timeout", "3", "brightnessctl", "--device=intel_backlight", "set", target + "%"]);
+            return;
+        }
+        if (brightnessSteps === 0) return;
         const steps = brightnessSteps;
         brightnessSteps = 0;
         brightnessWrite.exec(["timeout", "3", "brightnessctl", "--device=intel_backlight", "set",
@@ -43,6 +64,7 @@ Scope {
         stdout: StdioCollector { id: brightnessOutput }
         stderr: StdioCollector { id: brightnessStderr }
         onExited: (code, status) => {
+            if (brightnessWrite.running || root.brightnessTarget >= 0 || root.brightnessSteps !== 0) return;
             const match = brightnessOutput.text.match(/,(\d+)%,/);
             root.brightness = code === 0 && match ? Number(match[1]) : -1;
             root.brightnessError = brightnessStderr.text.trim() || "Backlight unavailable";
@@ -55,8 +77,48 @@ Scope {
         onExited: (code, status) => {
             if (code !== 0) root.brightnessError = "Could not adjust backlight";
             Qt.callLater(() => {
-                if (!brightnessRead.running) brightnessRead.running = true;
                 root.flushBrightness();
+                if (!brightnessWrite.running && !brightnessRead.running) brightnessRead.running = true;
+            });
+        }
+    }
+    function setTemperature(value) {
+        temperatureTarget = Math.max(1000, Math.min(6500, Math.round(value / 100) * 100));
+        temperature = temperatureTarget;
+        if (!temperatureThrottle.running) temperatureThrottle.start();
+    }
+    Timer { id: temperatureThrottle; interval: 50; onTriggered: root.flushTemperature() }
+    function flushTemperature() {
+        if (temperatureWrite.running || temperatureTarget < 0) return;
+        const target = temperatureTarget;
+        temperatureTarget = -1;
+        temperatureWrite.exec(target === 6500
+            ? ["timeout", "3", "hyprctl", "hyprsunset", "identity"]
+            : ["timeout", "3", "hyprctl", "hyprsunset", "temperature", String(target)]);
+    }
+    Process {
+        id: temperatureRead
+        command: ["sh", "-c", "timeout 3 hyprctl hyprsunset temperature && timeout 3 hyprctl hyprsunset identity get"]
+        stdout: StdioCollector { id: temperatureOutput }
+        stderr: StdioCollector {}
+        onExited: (code, status) => {
+            if (temperatureWrite.running || root.temperatureTarget >= 0) return;
+            const values = temperatureOutput.text.trim().split(/\s+/);
+            const kelvin = Number(values[0]);
+            root.temperature = code === 0 && values.length === 2 && kelvin >= 1000 && kelvin <= 20000
+                && (values[1] === "true" || values[1] === "false")
+                ? (values[1] === "true" ? 6500 : kelvin) : -1;
+        }
+    }
+    Process {
+        id: temperatureWrite
+        stdout: StdioCollector { id: temperatureResult }
+        stderr: StdioCollector {}
+        onExited: (code, status) => {
+            if (code !== 0 || temperatureResult.text.trim() !== "ok") root.temperature = -1;
+            Qt.callLater(() => {
+                root.flushTemperature();
+                if (!temperatureWrite.running && !temperatureRead.running) temperatureRead.running = true;
             });
         }
     }
@@ -99,6 +161,7 @@ Scope {
         triggeredOnStart: true
         onTriggered: {
             if (!brightnessRead.running && !brightnessWrite.running) brightnessRead.running = true;
+            if (!temperatureRead.running && !temperatureWrite.running) temperatureRead.running = true;
             if (!notificationRead.running && !notificationAction.running) notificationRead.running = true;
             if (!recordingRead.running) recordingRead.running = true;
         }

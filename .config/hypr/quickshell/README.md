@@ -19,6 +19,12 @@ Clock click toggles a Monday-first calendar; Escape or clicking outside on any m
 Scroll over the open calendar to change months: up goes back, down goes forward.
 While open, transparent input layers consume the dismissal click, including clicks on the bar.
 Brightness scrolling changes the laptop backlight by 1%.
+Click brightness to open backlight and color-temperature sliders; Escape or an
+outside click closes the popup. Temperature ranges from 1000 K (warm) to 6500 K
+(neutral, filter disabled) and applies to all displays through hyprsunset.
+The backlight slider controls `intel_backlight` from 1–100%. Values follow the
+current session state, including changes made with brightness keys or hyprctl;
+temperature changes last until hyprsunset restarts or its next scheduled profile.
 Microphone/output clicks open pwvucontrol's input/output device tabs.
 Notification click pauses Dunst; resuming discards queued notifications without deleting history.
 Tray icons pass clicks, menus, and scrolling to their applications.
@@ -27,7 +33,7 @@ The power button at the right opens `archlinux-logout`.
 The record button runs `../screen-record.sh` to start or stop a region recording; it shows a red REC while `wf-recorder` runs.
 
 Dependencies: Quickshell (Qt Quick Controls, PipeWire and UPower integrations),
-`brightnessctl`, `pwvucontrol`, `dunstctl`, `notify-send`, `hyprctl`, `wf-recorder`/`slurp` for recording,
+`brightnessctl`, `hyprsunset`, `pwvucontrol`, `dunstctl`, `notify-send`, `hyprctl`, `wf-recorder`/`slurp` for recording,
 and Python/Rofi for shortcut help.
 The backlight device is `intel_backlight`; change it in Services.qml for other hardware.
 Mute LEDs are optional and use brightnessctl's existing device permissions; no sudo is used.
