@@ -17,13 +17,13 @@ Icons in `assets/` are copied from the active Awesome theme.
 Workspace click switches; Super + click sends the focused window without following.
 Clock click toggles a Monday-first calendar; Escape or clicking outside on any monitor closes it.
 Scroll over the open calendar to change months: up goes back, down goes forward.
-While open, transparent input layers consume the dismissal click, including clicks on the bar.
+Hyprland focus grabs dismiss dialogs on outside clicks, including the bar and other monitors.
 Brightness scrolling changes the laptop backlight by 1%.
 Battery click opens charge level, full capacity, cycles, remaining time, power
 draw/charging rate, charge limits, and the current firmware power mode. A bolt
 in the bar's battery icon indicates external power, including while holding at
 the charge limit. Battery-only operation uses a plain battery icon.
-The battery and brightness panels share `BarPopup.qml` for positioning and
+The calendar, battery and brightness panels share `BarPopup.qml` for positioning and
 Escape/outside-click dismissal. Extra battery details refresh every five seconds
 only while the panel is open; unsupported readings show “—”. TLP manages power
 policy and charge limits; the panel displays them without changing them.
