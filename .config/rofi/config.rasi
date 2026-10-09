@@ -1,8 +1,7 @@
 configuration {
-    modes: "drun,calc,window,ssh";
+    modes: "drun,window";
     show-icons: true;
     terminal: "alacritty";
-    ssh-command: "{terminal} {ssh-client} {host}";
     sidebar-mode: true;
     window-format: "{t}    {c}   {w}";
     kb-mode-next: "Shift+Right,Tab";

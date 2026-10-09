@@ -88,7 +88,6 @@ laptop_packages=(
     xdg-utils                       # Open files with default applications.
     rofi                            # Application launcher.
     tlp                             # Laptop power management.
-    rofi-calc                       # Calculator mode for Rofi.
     picom                           # X11 compositor.
     signal-desktop                  # Signal desktop client.
     sddm                            # The Simple Desktop Display Manager.
