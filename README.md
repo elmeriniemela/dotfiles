@@ -8,6 +8,12 @@ SDDM automatically logs into Hyprland on Wayland at boot. AwesomeWM on X11
 remains available in the login screen's session picker, which remembers the
 last session selected for manual login.
 
+Thunderbird's startup hook exits if its Primary Password prompt is cancelled.
+It checks the credential store after the native startup prompt; profiles without
+a Primary Password still open normally. The installer places the AutoConfig
+loader and hook in `/usr/lib/thunderbird`. This uses Thunderbird's internal APIs
+and should be checked after major Thunderbird updates.
+
 ## Installation from Arch ISO
 
 Connect to internet via Ethernet cable.

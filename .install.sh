@@ -299,6 +299,8 @@ sudo install -D -o root -g root -m 644 "$HOME/.config/install/hosts" /etc/hosts
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/stunnel.conf" /etc/stunnel/stunnel.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/30-touchpad.conf" /etc/X11/xorg.conf.d/30-touchpad.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/environment" /etc/environment
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/thunderbird-autoconfig.js" /usr/lib/thunderbird/defaults/pref/autoconfig.js
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/thunderbird.cfg" /usr/lib/thunderbird/thunderbird.cfg
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/UPower.conf" /etc/UPower/UPower.conf
 sudo install -D -o root -g root -m 755 "$HOME/.config/install/x-monitor-layout" /usr/local/bin/x-monitor-layout
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/sddm.conf" /etc/sddm.conf.d/sddm.conf
