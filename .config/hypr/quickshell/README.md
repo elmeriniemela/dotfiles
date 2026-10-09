@@ -24,7 +24,7 @@ Notification click pauses Dunst; resuming discards queued notifications without 
 Tray icons pass clicks, menus, and scrolling to their applications.
 Tray icons follow the system icon theme; application-provided colors are preserved.
 The power button at the right opens `archlinux-logout`.
-REC click runs `../screen-record.sh` to start or stop a region recording; it turns red while `wf-recorder` runs.
+The record button runs `../screen-record.sh` to start or stop a region recording; it shows a red REC while `wf-recorder` runs.
 
 Dependencies: Quickshell (Qt Quick Controls, PipeWire and UPower integrations),
 `brightnessctl`, `pwvucontrol`, `dunstctl`, `notify-send`, `hyprctl`, `wf-recorder`/`slurp` for recording,
