@@ -38,14 +38,22 @@ for binding in bindings:
     shortcut = " + ".join(keys)
     if binding["submap"]:
         shortcut = f"[{binding['submap']}] {shortcut}"
-    rows.append(f"{shortcut:<36}  {description}")
+    rows.append((shortcut, description))
 
-listing = "\n".join(rows) + "\n"
+shortcut_width = max((len(shortcut) for shortcut, _ in rows), default=0)
+listing = "\n".join(
+    f"{shortcut:<{shortcut_width}}  {description}"
+    for shortcut, description in rows
+) + "\n"
 if "--print" in sys.argv:
     print(listing, end="")
 else:
     subprocess.run(
-        ["rofi", "-dmenu", "-i", "-p", "Shortcuts", "-mesg", "Type to search · Esc to close", "-no-custom"],
+        [
+            "rofi", "-dmenu", "-i", "-p", "Shortcuts",
+            "-mesg", "Type to search · Esc to close", "-no-custom",
+            "-theme-str", 'window { width: 42em; } element-text { font: "monospace 12"; }',
+        ],
         input=listing,
         text=True,
         stdout=subprocess.DEVNULL,
