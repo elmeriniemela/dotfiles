@@ -9,7 +9,6 @@ Row {
     StatusButton {
         text: "Super + K"
         tooltip: "Show keyboard shortcuts"
-        textColor: Theme.muted
         onClicked: event => {
             if (event.button === Qt.LeftButton)
                 Quickshell.execDetached(["python3", Quickshell.env("HOME") + "/.config/hypr/keybindings.py"]);
@@ -18,7 +17,6 @@ Row {
     StatusButton {
         icon: root.services.recording ? "assets/media-record-active-symbolic.svg" : "assets/media-record-symbolic.svg"
         text: "REC"
-        textColor: root.services.recording ? Theme.urgent : Theme.foreground
         tooltip: root.services.recording ? "Stop screen recording" : "Record a screen region"
         onClicked: event => {
             if (event.button === Qt.LeftButton)
@@ -29,7 +27,6 @@ Row {
         visible: root.services.hasBattery
         icon: "assets/battery-full-charged-symbolic.svg"
         text: root.services.batteryPercent + "%" + (root.services.plugged ? " plug" : "")
-        textColor: !root.services.plugged && root.services.batteryPercent <= 15 ? Theme.urgent : Theme.foreground
         tooltip: UPowerDeviceState.toString(root.services.battery.state)
     }
     StatusButton {

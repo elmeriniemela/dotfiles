@@ -96,12 +96,12 @@ Rectangle {
                 delegate: Rectangle {
                     required property var model
                     radius: 4
-                    color: model.today ? Theme.accent : "transparent"
+                    color: model.today ? Theme.surface : "transparent"
                     opacity: model.month === monthGrid.month ? 1 : 0.3
                     Text {
                         anchors.centerIn: parent
                         text: parent.model.day
-                        color: parent.model.today ? Theme.background : Theme.foreground
+                        color: Theme.foreground
                         font.family: Theme.font
                         font.pixelSize: 13
                     }
