@@ -31,7 +31,12 @@ hl.bind("SUPER + K", hl.dsp.exec_cmd("python3 ~/.config/hypr/keybindings.py"), {
 hl.bind("SUPER + V", hl.dsp.exec_cmd("python3 ~/.config/hypr/clipboard.py"), { description = "Open clipboard history" })
 
 hl.bind("SUPER + Return", hl.dsp.exec_cmd("alacritty"), { description = "Open terminal" })
-hl.bind("ALT + Return", hl.dsp.exec_cmd("alacritty"), { description = "Open terminal" })
+hl.bind("ALT + Return", hl.dsp.exec_cmd("brave"), { description = "Open browser" })
+hl.bind("SUPER + C", hl.dsp.exec_cmd("codium"), { description = "Open VSCodium" })
+hl.bind("SUPER + E", hl.dsp.exec_cmd("thunar"), { description = "Open file manager" })
+hl.bind("SUPER + M", hl.dsp.exec_cmd("thunderbird"), { description = "Open Thunderbird" })
+hl.bind("SUPER + A", hl.dsp.exec_cmd("slack"), { description = "Open Slack" })
+hl.bind("SUPER + I", hl.dsp.exec_cmd("signal-desktop"), { description = "Open Signal" })
 hl.bind("SUPER + space", hl.dsp.exec_cmd("rofi -show drun"), { description = "Open app launcher" })
 -- Cycle across regular workspaces; keep hidden scratchpad windows out of the list.
 local function cycle_window(step)
@@ -60,9 +65,6 @@ hl.bind("SUPER + U", function()
     local window = hl.get_urgent_window()
     if window then hl.dispatch(hl.dsp.focus({ window = window })) end
 end, { description = "Focus urgent window" })
-hl.bind("SUPER + Q", hl.dsp.exec_cmd("brave"), { description = "Open browser" })
-hl.bind("SUPER + E", hl.dsp.exec_cmd("thunar"), { description = "Open file manager" })
-hl.bind("SUPER + C", hl.dsp.exec_cmd("codium"), { description = "Open code editor" })
 hl.bind("SUPER + W", hl.dsp.window.close(), { description = "Close window" })
 hl.bind("SUPER + F", hl.dsp.window.float({ action = "toggle" }), { description = "Toggle floating" })
 hl.bind("SUPER + SHIFT + F", hl.dsp.window.fullscreen({ action = "toggle" }), { description = "Toggle fullscreen" })
