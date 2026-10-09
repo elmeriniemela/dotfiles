@@ -16,9 +16,9 @@ Row {
         }
     }
     StatusButton {
-        icon: root.services.recording ? "" : "assets/media-record-symbolic.svg"
-        text: root.services.recording ? "● REC" : ""
-        textColor: Theme.urgent
+        icon: root.services.recording ? "assets/media-record-active-symbolic.svg" : "assets/media-record-symbolic.svg"
+        text: "REC"
+        textColor: root.services.recording ? Theme.urgent : Theme.foreground
         tooltip: root.services.recording ? "Stop screen recording" : "Record a screen region"
         onClicked: event => {
             if (event.button === Qt.LeftButton)
