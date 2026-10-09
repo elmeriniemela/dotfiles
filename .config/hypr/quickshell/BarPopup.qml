@@ -1,6 +1,6 @@
 pragma ComponentBehavior: Bound
 import Quickshell
-import Quickshell.Hyprland
+import Quickshell.Wayland
 import QtQuick
 
 Scope {
@@ -12,33 +12,43 @@ Scope {
     property Component content
     signal dismissed()
 
-    PopupWindow {
-        id: popup
-        anchor.window: root.anchorWindow
-        anchor.rect.x: root.anchorWindow
-            ? Math.max(12, Math.min(root.anchorWindow.width - width - 12,
-                root.anchorItem.mapToItem(root.anchorWindow.contentItem, root.anchorItem.width / 2, 0).x - width / 2)) : 12
-        anchor.rect.y: Theme.height + 4
-        implicitWidth: root.anchorWindow ? Math.min(root.popupWidth, root.anchorWindow.width - 24) : root.popupWidth
-        implicitHeight: (loader.item as Item)?.implicitHeight ?? 1
-        color: "transparent"
-        visible: root.open
-        onVisibleChanged: if (!visible && root.open) root.dismissed()
+    Variants {
+        model: Quickshell.screens
+        PanelWindow {
+            id: overlay
+            required property var modelData
+            readonly property bool popupScreen: modelData === root.anchorWindow?.screen
+            screen: modelData
+            anchors { top: true; bottom: true; left: true; right: true }
+            exclusionMode: ExclusionMode.Ignore
+            color: "transparent"
+            visible: root.open
+            WlrLayershell.layer: WlrLayer.Overlay
+            // All monitors must participate: Hyprland routes pointer input through
+            // exclusive layers before considering other windows or layers.
+            WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
 
-        Loader {
-            id: loader
-            anchors.fill: parent
-            active: root.open
-            focus: active
-            Keys.onEscapePressed: root.dismissed()
-            sourceComponent: root.content
+            Item {
+                anchors.fill: parent
+                focus: root.open
+                Keys.onEscapePressed: root.dismissed()
+
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.AllButtons
+                    onPressed: root.dismissed()
+                }
+                Loader {
+                    active: root.open && overlay.popupScreen
+                    width: Math.min(root.popupWidth, parent.width - 24)
+                    height: (item as Item)?.implicitHeight ?? 0
+                    x: Math.max(12, Math.min(parent.width - width - 12,
+                        root.anchorWindow
+                            ? root.anchorItem.mapToItem(root.anchorWindow.contentItem, root.anchorItem.width / 2, 0).x - width / 2 : 12))
+                    y: Theme.height + 4
+                    sourceComponent: root.content
+                }
+            }
         }
-    }
-
-    // Hyprland watches outside clicks globally, including other monitors and the bar.
-    HyprlandFocusGrab {
-        windows: [popup]
-        active: root.open && popup.visible
-        onCleared: if (root.open) root.dismissed()
     }
 }

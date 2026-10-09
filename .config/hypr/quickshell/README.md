@@ -1,7 +1,13 @@
 # Quickshell bar
 
 Start with `quickshell -p ~/.config/hypr/quickshell --no-duplicate`.
-Changes to QML reload automatically. Hyprland already starts this configuration.
+Changes to loaded QML files normally reload automatically. Hyprland already starts this configuration.
+If copied changes do not reload, restart the bar explicitly:
+
+```sh
+quickshell kill -p ~/.config/hypr/quickshell
+quickshell -p ~/.config/hypr/quickshell --no-duplicate --daemonize
+```
 
 - `shell.qml` places one panel per monitor.
 - `Theme.qml` contains shared colors, font, and height.
@@ -17,7 +23,9 @@ Icons in `assets/` are copied from the active Awesome theme.
 Workspace click switches; Super + click sends the focused window without following.
 Clock click toggles a Monday-first calendar; Escape or clicking outside on any monitor closes it.
 Scroll over the open calendar to change months: up goes back, down goes forward.
-Hyprland focus grabs dismiss dialogs on outside clicks, including the bar and other monitors.
+While a dialog is open, transparent input layers on every monitor consume outside clicks
+and dismiss it, including clicks on the bar. Each layer accepts keyboard focus so
+Hyprland can route clicks to it even when another monitor has an exclusive layer.
 Brightness scrolling changes the laptop backlight by 1%.
 Battery click opens charge level, full capacity, cycles, remaining time, power
 draw/charging rate, charge limits, and the current firmware power mode. A bolt
