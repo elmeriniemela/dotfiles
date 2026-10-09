@@ -302,7 +302,7 @@ sudo install -D -o root -g root -m 644 "$HOME/.config/install/30-touchpad.conf" 
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/environment" /etc/environment
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/UPower.conf" /etc/UPower/UPower.conf
 sudo install -D -o root -g root -m 755 "$HOME/.config/install/x-monitor-layout" /usr/local/bin/x-monitor-layout
-sudo install -D -o root -g root -m 644 "$HOME/.config/install/awesome_sddm.conf" /etc/sddm.conf.d/awesome_sddm.conf
+sudo install -D -o root -g root -m 644 "$HOME/.config/install/sddm.conf" /etc/sddm.conf.d/sddm.conf
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/sddm-hyprland.lua" /etc/sddm/hyprland.lua
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/sddm-theme/Main.qml" /usr/share/sddm/themes/nocturne/Main.qml
 sudo install -D -o root -g root -m 644 "$HOME/.config/install/sddm-theme/metadata.desktop" /usr/share/sddm/themes/nocturne/metadata.desktop
