@@ -56,6 +56,10 @@ end
 
 hl.bind("ALT + Tab", function() cycle_window(1) end, { description = "Focus next window across workspaces" })
 hl.bind("ALT + SHIFT + Tab", function() cycle_window(-1) end, { description = "Focus previous window across workspaces" })
+hl.bind("SUPER + U", function()
+    local window = hl.get_urgent_window()
+    if window then hl.dispatch(hl.dsp.focus({ window = window })) end
+end, { description = "Focus urgent window" })
 hl.bind("SUPER + Q", hl.dsp.exec_cmd("brave"), { description = "Open browser" })
 hl.bind("SUPER + E", hl.dsp.exec_cmd("thunar"), { description = "Open file manager" })
 hl.bind("SUPER + C", hl.dsp.exec_cmd("codium"), { description = "Open code editor" })
