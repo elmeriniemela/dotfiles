@@ -2,6 +2,12 @@
 
 Personal dotfiles, covering system installation, AwesomeWM and Hyprland desktops, and development tools.
 
+SDDM's greeter runs on Wayland using Hyprland with a Finnish keyboard layout
+and a separate minimal configuration in `/etc/sddm/hyprland.lua`.
+SDDM automatically logs into Hyprland on Wayland at boot. AwesomeWM on X11
+remains available in the login screen's session picker, which remembers the
+last session selected for manual login.
+
 ## Installation from Arch ISO
 
 Connect to internet via Ethernet cable.
