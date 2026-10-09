@@ -14,12 +14,28 @@ key_names = {
     "mouse:273": "Right mouse",
 }
 rows = []
+number_groups = {}
+for binding in bindings:
+    key = binding["key"]
+    description = binding["description"]
+    if key in "123456789" and len(key) == 1 and description.endswith(" " + key):
+        group = (binding["modmask"], binding["submap"], description[:-1])
+        number_groups.setdefault(group, set()).add(key)
+
+shown_groups = set()
 for binding in bindings:
     keys = [name for mask, name in modifiers if binding["modmask"] & mask]
     key = binding["key"] or f"Keycode {binding['keycode']}"
+    description = binding["description"] or "No description provided"
+    group = (binding["modmask"], binding["submap"], description[:-1])
+    if key in "123456789" and len(key) == 1 and number_groups.get(group) == set("123456789"):
+        if group in shown_groups:
+            continue
+        shown_groups.add(group)
+        key = "1–9"
+        description = description[:-1] + key
     keys.append(key_names.get(key, key))
     shortcut = " + ".join(keys)
-    description = binding["description"] or "No description provided"
     if binding["submap"]:
         shortcut = f"[{binding['submap']}] {shortcut}"
     rows.append(f"{shortcut:<36}  {description}")
