@@ -16,6 +16,15 @@ Row {
         }
     }
     StatusButton {
+        text: root.services.recording ? "● REC" : "REC"
+        textColor: root.services.recording ? Theme.urgent : Theme.muted
+        tooltip: root.services.recording ? "Stop screen recording" : "Record a screen region"
+        onClicked: event => {
+            if (event.button === Qt.LeftButton)
+                Quickshell.execDetached(["sh", Quickshell.env("HOME") + "/.config/hypr/screen-record.sh"]);
+        }
+    }
+    StatusButton {
         visible: root.services.hasBattery
         icon: "assets/battery-full-charged-symbolic.svg"
         text: root.services.batteryPercent + "%" + (root.services.plugged ? " plug" : "")

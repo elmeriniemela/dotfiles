@@ -24,9 +24,11 @@ Notification click pauses Dunst; resuming discards queued notifications without 
 Tray icons pass clicks, menus, and scrolling to their applications.
 Tray icons follow the system icon theme; application-provided colors are preserved.
 The power button at the right opens `archlinux-logout`.
+REC click runs `../screen-record.sh` to start or stop a region recording; it turns red while `wf-recorder` runs.
 
 Dependencies: Quickshell (Qt Quick Controls, PipeWire and UPower integrations),
-`brightnessctl`, `pwvucontrol`, `dunstctl`, `notify-send`, `hyprctl`, and Python/Rofi for shortcut help.
+`brightnessctl`, `pwvucontrol`, `dunstctl`, `notify-send`, `hyprctl`, `wf-recorder`/`slurp` for recording,
+and Python/Rofi for shortcut help.
 The backlight device is `intel_backlight`; change it in Services.qml for other hardware.
 Mute LEDs are optional and use brightnessctl's existing device permissions; no sudo is used.
 Battery alerts: low at <=15%, critical at <=5%, full on entering FullyCharged.

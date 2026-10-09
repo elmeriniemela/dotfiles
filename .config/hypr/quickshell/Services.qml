@@ -18,6 +18,7 @@ Scope {
     property var paused: null
     property string notificationError: "Dunst unavailable"
     readonly property bool notificationBusy: notificationAction.running
+    property bool recording: false
 
     SystemClock { id: clock; precision: SystemClock.Minutes }
     readonly property date date: clock.date
@@ -85,6 +86,12 @@ Scope {
             Qt.callLater(() => { if (!notificationRead.running) notificationRead.running = true; });
         }
     }
+    Process {
+        id: recordingRead
+        command: ["pgrep", "-x", "wf-recorder"]
+        stdout: StdioCollector {}
+        onExited: (code, status) => root.recording = code === 0
+    }
     Timer {
         interval: 2000
         running: true
@@ -93,6 +100,7 @@ Scope {
         onTriggered: {
             if (!brightnessRead.running && !brightnessWrite.running) brightnessRead.running = true;
             if (!notificationRead.running && !notificationAction.running) notificationRead.running = true;
+            if (!recordingRead.running) recordingRead.running = true;
         }
     }
     BatteryAlerts { battery: root.battery; available: root.hasBattery; plugged: root.plugged }
