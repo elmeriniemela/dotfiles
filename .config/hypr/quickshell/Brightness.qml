@@ -1,6 +1,4 @@
 pragma ComponentBehavior: Bound
-import Quickshell
-import Quickshell.Wayland
 import QtQuick
 import QtQuick.Controls.Basic
 import QtQuick.Layouts
@@ -54,93 +52,70 @@ StatusButton {
         }
     }
 
-    Variants {
-        model: Quickshell.screens
-        PanelWindow {
-            id: overlay
-            required property var modelData
-            readonly property bool popupScreen: modelData === root.QsWindow.window?.screen
-            screen: modelData
-            anchors { top: true; bottom: true; left: true; right: true }
-            exclusionMode: ExclusionMode.Ignore
-            color: "transparent"
-            visible: root.popupOpen
-            WlrLayershell.layer: WlrLayer.Overlay
-            WlrLayershell.keyboardFocus: popupScreen ? WlrKeyboardFocus.Exclusive : WlrKeyboardFocus.None
-
-            MouseArea {
-                anchors.fill: parent
-                acceptedButtons: Qt.AllButtons
-                onPressed: root.popupOpen = false
-            }
-            Loader {
-                active: root.popupOpen && overlay.popupScreen
-                width: Math.min(320, parent.width - 24)
-                x: Math.max(12, Math.min(parent.width - width - 12,
-                    root.QsWindow.window
-                        ? root.mapToItem(root.QsWindow.window.contentItem, root.width / 2, 0).x - width / 2 : 12))
-                y: Theme.height + 4
-                sourceComponent: Rectangle {
-                    implicitHeight: controls.implicitHeight + 32
-                    color: Theme.background
-                    radius: 8
-                    border.color: Theme.surface
-                    // Consume clicks inside the panel without dismissing it.
-                    MouseArea { anchors.fill: parent; acceptedButtons: Qt.AllButtons }
-                    ColumnLayout {
-                        id: controls
-                        anchors { fill: parent; margins: 16 }
-                        spacing: 8
-                        focus: true
-                        Keys.onEscapePressed: root.popupOpen = false
-                        Text {
-                            text: "Display"
-                            color: Theme.foreground
-                            font { family: Theme.font; pixelSize: 14; bold: true }
-                        }
-                        Text {
-                            text: brightnessSlider.enabled ? "Brightness · " + Math.round(brightnessSlider.value) + "%" : "Backlight unavailable"
-                            color: Theme.foreground
-                            font { family: Theme.font; pixelSize: 13 }
-                        }
-                        DisplaySlider {
-                            id: brightnessSlider
-                            objectName: "brightnessSlider"
-                            from: 1; to: 100; stepSize: 1
-                            enabled: root.services.brightness >= 0
-                            Accessible.name: "Brightness"
-                            Binding on value {
-                                value: Math.max(1, root.services.brightness)
-                                when: !brightnessSlider.pressed
-                                restoreMode: Binding.RestoreNone
-                            }
-                            onMoved: root.services.setBrightness(value)
-                        }
-                        Text {
-                            text: temperatureSlider.enabled
-                                ? "Color temperature · " + Math.round(temperatureSlider.value) + " K" : "Color temperature unavailable"
-                            color: Theme.foreground
-                            font { family: Theme.font; pixelSize: 13 }
-                        }
-                        DisplaySlider {
-                            id: temperatureSlider
-                            objectName: "temperatureSlider"
-                            from: 1000; to: 6500; stepSize: 100
-                            enabled: root.services.temperature >= 0
-                            Accessible.name: "Color temperature"
-                            Binding on value {
-                                value: Math.max(1000, root.services.temperature)
-                                when: !temperatureSlider.pressed
-                                restoreMode: Binding.RestoreNone
-                            }
-                            onMoved: root.services.setTemperature(value)
-                        }
-                        RowLayout {
-                            Text { text: "Warm"; color: Theme.muted; font { family: Theme.font; pixelSize: 11 } }
-                            Item { Layout.fillWidth: true }
-                            Text { text: "Neutral"; color: Theme.muted; font { family: Theme.font; pixelSize: 11 } }
-                        }
+    BarPopup {
+        anchorItem: root
+        open: root.popupOpen
+        popupWidth: 320
+        onDismissed: root.popupOpen = false
+        content: Rectangle {
+            implicitHeight: controls.implicitHeight + 32
+            color: Theme.background
+            radius: 8
+            border.color: Theme.surface
+            // Consume clicks inside the panel without dismissing it.
+            MouseArea { anchors.fill: parent; acceptedButtons: Qt.AllButtons }
+            ColumnLayout {
+                id: controls
+                anchors { fill: parent; margins: 16 }
+                spacing: 8
+                focus: true
+                Keys.onEscapePressed: root.popupOpen = false
+                Text {
+                    text: "Display"
+                    color: Theme.foreground
+                    font { family: Theme.font; pixelSize: 14; bold: true }
+                }
+                Text {
+                    text: brightnessSlider.enabled ? "Brightness · " + Math.round(brightnessSlider.value) + "%" : "Backlight unavailable"
+                    color: Theme.foreground
+                    font { family: Theme.font; pixelSize: 13 }
+                }
+                DisplaySlider {
+                    id: brightnessSlider
+                    objectName: "brightnessSlider"
+                    from: 1; to: 100; stepSize: 1
+                    enabled: root.services.brightness >= 0
+                    Accessible.name: "Brightness"
+                    Binding on value {
+                        value: Math.max(1, root.services.brightness)
+                        when: !brightnessSlider.pressed
+                        restoreMode: Binding.RestoreNone
                     }
+                    onMoved: root.services.setBrightness(value)
+                }
+                Text {
+                    text: temperatureSlider.enabled
+                        ? "Color temperature · " + Math.round(temperatureSlider.value) + " K" : "Color temperature unavailable"
+                    color: Theme.foreground
+                    font { family: Theme.font; pixelSize: 13 }
+                }
+                DisplaySlider {
+                    id: temperatureSlider
+                    objectName: "temperatureSlider"
+                    from: 1000; to: 6500; stepSize: 100
+                    enabled: root.services.temperature >= 0
+                    Accessible.name: "Color temperature"
+                    Binding on value {
+                        value: Math.max(1000, root.services.temperature)
+                        when: !temperatureSlider.pressed
+                        restoreMode: Binding.RestoreNone
+                    }
+                    onMoved: root.services.setTemperature(value)
+                }
+                RowLayout {
+                    Text { text: "Warm"; color: Theme.muted; font { family: Theme.font; pixelSize: 11 } }
+                    Item { Layout.fillWidth: true }
+                    Text { text: "Neutral"; color: Theme.muted; font { family: Theme.font; pixelSize: 11 } }
                 }
             }
         }

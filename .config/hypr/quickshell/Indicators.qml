@@ -1,5 +1,4 @@
 import Quickshell
-import Quickshell.Services.UPower
 import QtQuick
 
 Row {
@@ -23,12 +22,7 @@ Row {
                 Quickshell.execDetached(["sh", Quickshell.env("HOME") + "/.config/hypr/screen-record.sh"]);
         }
     }
-    StatusButton {
-        visible: root.services.hasBattery
-        icon: "assets/battery-full-charged-symbolic.svg"
-        text: root.services.batteryPercent + "%" + (root.services.plugged ? " plug" : "")
-        tooltip: UPowerDeviceState.toString(root.services.battery.state)
-    }
+    Battery { services: root.services }
     Brightness { services: root.services }
     StatusButton {
         readonly property var node: root.services.source

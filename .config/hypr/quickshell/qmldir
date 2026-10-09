@@ -7,5 +7,8 @@ Workspaces 1.0 Workspaces.qml
 Clock 1.0 Clock.qml
 Indicators 1.0 Indicators.qml
 Brightness 1.0 Brightness.qml
+BarPopup 1.0 BarPopup.qml
+Battery 1.0 Battery.qml
+BatteryInfo 1.0 BatteryInfo.qml
 Tray 1.0 Tray.qml
 Calendar 1.0 Calendar.qml

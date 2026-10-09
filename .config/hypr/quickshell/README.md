@@ -19,6 +19,14 @@ Clock click toggles a Monday-first calendar; Escape or clicking outside on any m
 Scroll over the open calendar to change months: up goes back, down goes forward.
 While open, transparent input layers consume the dismissal click, including clicks on the bar.
 Brightness scrolling changes the laptop backlight by 1%.
+Battery click opens charge level, full capacity, cycles, remaining time, power
+draw/charging rate, charge limits, and the current firmware power mode. A bolt
+in the bar's battery icon indicates external power, including while holding at
+the charge limit. Battery-only operation uses a plain battery icon.
+The battery and brightness panels share `BarPopup.qml` for positioning and
+Escape/outside-click dismissal. Extra battery details refresh every five seconds
+only while the panel is open; unsupported readings show “—”. TLP manages power
+policy and charge limits; the panel displays them without changing them.
 Click brightness to open backlight and color-temperature sliders; Escape or an
 outside click closes the popup. Temperature ranges from 1000 K (warm) to 6500 K
 (neutral, filter disabled) and applies to all displays through hyprsunset.
