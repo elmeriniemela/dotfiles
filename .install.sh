@@ -123,6 +123,7 @@ laptop_packages=(
     qt6-wayland                     # Qt 6 Wayland support.
     slurp                           # Wayland screen-region selection.
     waybar                          # Hyprland status bar and system tray.
+    wf-recorder                     # Wayland screen recorder.
     wl-clipboard                    # Wayland clipboard commands.
     xdg-desktop-portal-hyprland     # Hyprland screen-sharing portal.
     papirus-icon-theme              # Icon theme.
