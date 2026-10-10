@@ -16,18 +16,10 @@ hl.config({
 })
 
 hl.on("hyprland.start", function()
-    hl.exec_cmd("quickshell -p ~/.config/hypr/quickshell --no-duplicate")
-    hl.exec_cmd("hyprpaper")
-    hl.exec_cmd("hypridle")
-    hl.exec_cmd("hyprsunset")
-    hl.exec_cmd("dunst")
-    hl.exec_cmd("wl-paste --type text --watch cliphist store")
-    hl.exec_cmd("wl-paste --type image --watch cliphist store")
-    hl.exec_cmd("nm-applet")
-    hl.exec_cmd("blueman-applet")
-    hl.exec_cmd("/usr/lib/hyprpolkitagent/hyprpolkitagent")
+    hl.exec_cmd("sh ~/.config/hypr/autostart.sh")
 end)
 
+hl.bind("SUPER + R", hl.dsp.exec_cmd("sh ~/.config/hypr/restart.sh"), { description = "Reload config and restart autostart programs" })
 hl.bind("SUPER + K", hl.dsp.exec_cmd("python3 ~/.config/hypr/keybindings.py"), { description = "Show keyboard shortcuts" })
 hl.bind("SUPER + V", hl.dsp.exec_cmd("python3 ~/.config/hypr/clipboard.py"), { description = "Open clipboard history" })
 
