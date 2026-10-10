@@ -16,6 +16,7 @@
     "terminal.integrated.fontSize": 13,
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.allowChords": false,
+    "terminal.integrated.sendKeybindingsToShell": true,
     "latex-workshop.latex.build.fromFolder": "",
     // The path of the shell that the terminal uses on Linux (default: /bin/bash). [Read more about configuring the shell](https://code.visualstudio.com/docs/editor/integrated-terminal#_configuration).
     "terminal.integrated.profiles.linux": {
