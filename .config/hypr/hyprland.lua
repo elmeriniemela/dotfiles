@@ -24,7 +24,7 @@ hl.bind("SUPER + K", hl.dsp.exec_cmd("python3 ~/.config/hypr/keybindings.py"), {
 hl.bind("SUPER + V", hl.dsp.exec_cmd("python3 ~/.config/hypr/clipboard.py"), { description = "Open clipboard history" })
 
 hl.bind("SUPER + Return", hl.dsp.exec_cmd("alacritty"), { description = "Open terminal" })
-hl.bind("ALT + Return", hl.dsp.exec_cmd("brave"), { description = "Open browser" })
+hl.bind("SUPER + Q", hl.dsp.exec_cmd("brave"), { description = "Open browser" })
 hl.bind("SUPER + C", hl.dsp.exec_cmd("codium"), { description = "Open VSCodium" })
 hl.bind("SUPER + E", hl.dsp.exec_cmd("thunar"), { description = "Open file manager" })
 hl.bind("SUPER + M", hl.dsp.exec_cmd("thunderbird"), { description = "Open Thunderbird" })
