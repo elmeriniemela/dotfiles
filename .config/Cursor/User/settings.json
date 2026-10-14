@@ -13,7 +13,6 @@
     "terminal.integrated.fontSize": 13,
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.allowChords": false,
-    "terminal.integrated.middleClickBehavior": "nothing",
     "terminal.integrated.profiles.linux": {
         "tmux (session based on directory)": {
             "path": "/home/elmeri/.local/bin/tmux-vscode.sh"
