@@ -1,12 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Bash"
-    ],
-    "deny": [
-      "Bash(sudo:*)"
-    ],
-    "defaultMode": "auto"
+    "defaultMode": "bypassPermissions"
   },
   "hooks": {
     "Stop": [

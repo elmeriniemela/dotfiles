@@ -1,51 +1,12 @@
 model = "gpt-6.1-sol"
 model_reasoning_effort = "low"
 
-approval_policy = "on-request"
-approvals_reviewer = "auto_review"
+approval_policy = "never"
+sandbox_mode = "danger-full-access"
 
 model_reasoning_summary = "none"
 model_verbosity = "low"
 plan_mode_reasoning_effort = "high"
-
-[projects."/home/elmeri/Projects/dotfiles"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Projects/dotfiles/.config/archlinux-logout"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Projects/sparrow-guix"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Projects/server"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/.config/hypr"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Projects/OpenSAGE"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Odoo/src/19/tabularium"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Projects/wallet-old/src/sparrow"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Projects/rsage"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Projects/CnCGeneralsZH-Reforged"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Projects/rsage-uat"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Odoo/src/19/automated-ai-migration"]
-trust_level = "trusted"
-
-[projects."/home/elmeri/Odoo/src/19/automated-ai-migration/paletti_public_addons/sprintit_xml_export"]
-trust_level = "trusted"
 
 [tui]
 screen_reader_detection_done = true
