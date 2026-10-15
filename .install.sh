@@ -209,6 +209,7 @@ laptop_packages=(
     python-xmlsec                   # XML signatures and encryption.
     python-xlsxwriter               # Excel XLSX file generation.
     python-zeep                     # SOAP web service client.
+    python-pypdf
     powertop                        # Power-consumption diagnostics.
     networkmanager                  # Network connection manager.
     network-manager-applet          # NetworkManager tray applet.
