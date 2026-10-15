@@ -16,6 +16,9 @@
   },
   "toolPermission": "always-proceed",
   "trustedWorkspaces": [
-    "/home/elmeri/Projects/dotfiles"
+    "/home/elmeri/Projects/dotfiles",
+    "/home/elmeri/Projects/server",
+    "/home/elmeri/.config/hypr",
+    "/home/elmeri/Projects/rsage"
   ]
 }

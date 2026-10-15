@@ -4,30 +4,54 @@
       "Bash"
     ],
     "deny": [
-      "Bash(git:*)",
-      "Bash(pip:*)",
       "Bash(sudo:*)"
     ],
     "defaultMode": "auto"
   },
   "hooks": {
-    "PreToolUse": [
+    "Stop": [
       {
-        "matcher": "Bash",
         "hooks": [
           {
             "type": "command",
-            "command": "~/.claude/block-git.sh"
+            "command": "curl -fsS -d 'Claude finished/stopped' https://ntfy.sh/codex-p4lesjnnm8l55gu6yoak0oir1d-my-laptop >/dev/null 2>&1"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl -fsS -d 'Claude needs approval' https://ntfy.sh/codex-p4lesjnnm8l55gu6yoak0oir1d-my-laptop >/dev/null 2>&1"
+          }
+        ]
+      }
+    ],
+    "StopFailure": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "curl -fsS -d 'Claude stopped because of an API/usage error' https://ntfy.sh/codex-p4lesjnnm8l55gu6yoak0oir1d-my-laptop >/dev/null 2>&1"
           }
         ]
       }
     ]
   },
+  "disableArtifact": true,
   "enabledPlugins": {
     "pyright-lsp@claude-plugins-official": false,
-    "clangd-lsp@claude-plugins-official": false
+    "clangd-lsp@claude-plugins-official": false,
+    "rust-analyzer-lsp@claude-plugins-official": true
   },
   "effortLevel": "high",
+  "modelSettings": {
+    "claude-sonnet-5-5": {
+      "effortLevel": "medium"
+    }
+  },
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark",

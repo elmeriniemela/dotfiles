@@ -8,30 +8,6 @@ model_reasoning_summary = "none"
 model_verbosity = "low"
 plan_mode_reasoning_effort = "high"
 
-allow_login_shell = false
-default_permissions = "no-ssh"
-
-[features]
-shell_snapshot = false
-
-[shell_environment_policy]
-inherit = "all"
-exclude = ["SSH_AUTH_SOCK", "SSH_AGENT_PID"]
-
-[permissions.no-ssh]
-extends = ":workspace"
-
-[permissions.no-ssh.filesystem]
-"~/.ssh" = "deny"
-
-[permissions.no-ssh.workspace_roots]
-"/home/elmeri/Projects" = true
-"/home/elmeri/.local/share/Odoo" = true
-"/home/elmeri/Odoo/src" = true
-
-[permissions.no-ssh.network]
-enabled = true
-
 [projects."/home/elmeri/Projects/dotfiles"]
 trust_level = "trusted"
 
@@ -47,8 +23,42 @@ trust_level = "trusted"
 [projects."/home/elmeri/.config/hypr"]
 trust_level = "trusted"
 
+[projects."/home/elmeri/Projects/OpenSAGE"]
+trust_level = "trusted"
+
+[projects."/home/elmeri/Odoo/src/19/tabularium"]
+trust_level = "trusted"
+
+[projects."/home/elmeri/Projects/wallet-old/src/sparrow"]
+trust_level = "trusted"
+
+[projects."/home/elmeri/Projects/rsage"]
+trust_level = "trusted"
+
+[projects."/home/elmeri/Projects/CnCGeneralsZH-Reforged"]
+trust_level = "trusted"
+
+[projects."/home/elmeri/Projects/rsage-uat"]
+trust_level = "trusted"
+
+[projects."/home/elmeri/Odoo/src/19/automated-ai-migration"]
+trust_level = "trusted"
+
+[projects."/home/elmeri/Odoo/src/19/automated-ai-migration/paletti_public_addons/sprintit_xml_export"]
+trust_level = "trusted"
+
 [tui]
 screen_reader_detection_done = true
+status_line = ["model-with-reasoning", "current-dir", "thread-name", "run-state", "context-remaining", "five-hour-limit", "weekly-limit", "used-tokens", "total-input-tokens", "total-output-tokens"]
+status_line_use_colors = true
 
 [tui.model_availability_nux]
 "gpt-6.1-sol" = 4
+
+[hooks.state]
+
+[hooks.state."/home/elmeri/.codex/hooks.json:stop:0:0"]
+trusted_hash = "sha256:ec1404d9d85817569dbbfaa82f9d80ba3dbac24fad714ad29801e23faef1fc85"
+
+[hooks.state."/home/elmeri/.codex/hooks.json:permission_request:0:0"]
+trusted_hash = "sha256:2f968d807f4161bbf9014070d7764a300846bddcf107d13bea76f1b435953a86"
