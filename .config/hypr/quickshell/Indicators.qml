@@ -47,6 +47,11 @@ Row {
             : root.services.paused ? "Notifications muted · click to discard backlog and resume" : "Notifications enabled · click to mute"
         onClicked: event => { if (event.button === Qt.LeftButton) root.services.toggleNotifications(); }
     }
+    StatusButton {
+        icon: root.services.suspendInhibited ? "assets/caffeine-cup-full.svg" : "assets/caffeine-cup-empty.svg"
+        tooltip: root.services.suspendInhibited ? "Automatic suspend disabled · click to enable" : "Automatic suspend enabled · click to disable"
+        onClicked: event => { if (event.button === Qt.LeftButton) root.services.suspendInhibited = !root.services.suspendInhibited; }
+    }
     Tray {}
     StatusButton {
         icon: "assets/system-shutdown-symbolic.svg"

@@ -43,6 +43,8 @@ current session state, including changes made with brightness keys or hyprctl;
 temperature changes last until hyprsunset restarts or its next scheduled profile.
 Microphone/output clicks open pwvucontrol's input/output device tabs.
 Notification click pauses Dunst; resuming discards queued notifications without deleting history.
+The coffee cup toggles a Wayland idle inhibitor that blocks hypridle's automatic suspend;
+screen locking still runs (`ignore_inhibit` in `../hypridle.conf`). It resets when the bar restarts.
 Tray icons pass clicks, menus, and scrolling to their applications.
 Tray icons follow the system icon theme; application-provided colors are preserved.
 The power button at the right opens `archlinux-logout`.

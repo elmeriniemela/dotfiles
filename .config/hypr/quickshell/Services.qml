@@ -22,6 +22,7 @@ Scope {
     property string notificationError: "Dunst unavailable"
     readonly property bool notificationBusy: notificationAction.running
     property bool recording: false
+    property bool suspendInhibited: false
 
     SystemClock { id: clock; precision: SystemClock.Minutes }
     readonly property date date: clock.date

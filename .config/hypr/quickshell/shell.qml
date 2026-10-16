@@ -1,5 +1,6 @@
 //@ pragma UseQApplication
 import Quickshell
+import Quickshell.Wayland
 import QtQuick
 
 ShellRoot {
@@ -14,6 +15,7 @@ ShellRoot {
             anchors { top: true; left: true; right: true }
             implicitHeight: Theme.height
             color: Theme.background
+            IdleInhibitor { window: bar; enabled: sharedServices.suspendInhibited }
 
             Item {
                 anchors { left: parent.left; leftMargin: 10; verticalCenter: parent.verticalCenter }
