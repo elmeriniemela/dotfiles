@@ -260,6 +260,8 @@ laptop_packages=(
     noto-fonts-emoji                # Emoji font support.
     discord                         # Discord desktop client.
     dunst                           # Lightweight notification daemon.
+    element-desktop                 # Matrix client.
+    gnome-keyring                   # Secret Service keyring, unlocked at login by PAM.
     dconf                           # GTK settings database.
     feh                             # Lightweight image viewer.
     ufw                             # Firewall
