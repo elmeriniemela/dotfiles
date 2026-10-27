@@ -393,3 +393,5 @@ sudo systemctl enable cronie NetworkManager bluetooth stunnel tlp upower sddm uf
 sudo systemctl enable --now portable4t-udisks-events.service
 systemctl --user enable ssh-agent.service
 systemctl --user daemon-reload
+# Last: its SSH insteadOf rules break HTTPS clones before SSH keys exist.
+install -D -m 644 "$HOME/.config/install/gitconfig" "$HOME/.gitconfig"
