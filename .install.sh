@@ -117,8 +117,8 @@ laptop_packages=(
     hyprpaper                       # Hyprland wallpaper manager.
     hyprpolkitagent                 # Wayland Polkit authentication agent.
     hyprsunset                      # Display color temperature control.
-    cliphist
-    quickshell
+    cliphist                        # Wayland clipboard history.
+    quickshell                      # QtQuick desktop shell for the Hyprland bar.
     qt5-wayland                     # Qt 5 Wayland support.
     qt6-wayland                     # Qt 6 Wayland support.
     slurp                           # Wayland screen-region selection.
@@ -149,7 +149,7 @@ laptop_packages=(
     pipewire-audio                  # PipeWire audio components.
     pipewire-pulse                  # PulseAudio compatibility layer.
     pipewire-zeroconf               # PipeWire mDNS discovery.
-    pipewire-libcamera
+    pipewire-libcamera              # libcamera webcam support for PipeWire.
     polkit                          # Privilege authorization framework.
     lxsession                       # Graphical Polkit authentication agent.
     postgresql                      # PostgreSQL database server.
@@ -209,7 +209,7 @@ laptop_packages=(
     python-xmlsec                   # XML signatures and encryption.
     python-xlsxwriter               # Excel XLSX file generation.
     python-zeep                     # SOAP web service client.
-    python-pypdf
+    python-pypdf                    # PDF reading and manipulation (pypdf).
     powertop                        # Power-consumption diagnostics.
     networkmanager                  # Network connection manager.
     network-manager-applet          # NetworkManager tray applet.
@@ -221,7 +221,7 @@ laptop_packages=(
     arandr                          # Display-layout configuration UI.
     intel-media-driver              # Intel VA-API driver for hardware video decode and encode.
     vulkan-intel                    # Intel Vulkan driver.
-    vulkan-tools
+    vulkan-tools                    # Vulkan diagnostics such as vulkaninfo.
     libva-utils                     # VA-API diagnostics such as vainfo.
     intel-gpu-tools                 # Intel GPU monitoring such as intel_gpu_top.
     laptop-detect                   # Detect laptop hardware.
@@ -275,6 +275,50 @@ laptop_packages=(
     xdg-desktop-portal              # Desktop integration portal.
     xdg-desktop-portal-gtk          # GTK portal backend.
     xss-lock                        # Idle and suspend screen locker.
+    slack-desktop                   # Slack client.
+    variety                         # Wallpaper manager.
+    xorg-xrandr                     # X11 display configuration for x-monitor-layout.
+    claude-code                     # Claude coding agent.
+    openai-codex                    # Codex coding agent.
+    opencode                        # OpenCode coding agent.
+    gemini-cli                      # Gemini coding agent.
+    keepassxc                       # Password manager.
+    btop                            # Resource monitor.
+    github-cli                      # GitHub command-line client.
+    qbittorrent                     # BitTorrent client for downloading linux ISOs.
+    wireguard-tools                 # WireGuard VPN tools.
+    nmap                            # Network scanner.
+    openbsd-netcat                  # TCP/UDP networking tool.
+    age                             # File encryption tool.
+    minisign                        # File signing and verification.
+    exfatprogs                      # exFAT filesystem tools.
+    btrfs-progs                     # Btrfs filesystem tools.
+    smartmontools                   # Disk health monitoring.
+    fwupd                           # Firmware updates.
+    zram-generator                  # Compressed RAM swap.
+    texlive-langeuropean            # European language support for LaTeX.
+    boost                           # C++ libraries.
+    capnproto                       # Cap'n Proto serialization.
+    cmake                           # C/C++ build system.
+    clang                           # C/C++ compiler.
+    llvm                            # Compiler toolchain.
+    ccache                          # Compiler cache.
+    gcovr                           # C/C++ coverage reports.
+    mingw-w64-gcc                   # Windows cross-compiler.
+    nasm                            # x86 assembler.
+    autoconf-archive                # Autoconf macros.
+    vcpkg                           # C++ package manager.
+    patchelf                        # Modify ELF binaries.
+    unifdef                         # Remove C preprocessor conditionals.
+    wine                            # Run Windows programs.
+    wine-gecko                      # HTML rendering for Wine.
+    wine-mono                       # .NET runtime for Wine.
+    qemu-desktop                    # Virtual machines.
+    podman                          # Containers.
+    rustup                          # Rust toolchain installer.
+    tor                             # Tor anonymity network.
+    perf                            # Linux performance profiler.
+    tcpdump                         # Network packet capture.
     yay                             # Install the AUR package helper.
 )
 
