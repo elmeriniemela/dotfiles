@@ -29,12 +29,6 @@ Reboot into the desktop, then
 bash <(curl -fsSL https://eniemela.fi/api-v1/laptop-install.sh)
 ```
 
-If the Chaotic-AUR CDN returns HTTP 503, replace it with the geo mirror and rerun the installer:
-
-```bash
-sed -i 's|https://cdn-mirror\.chaotic\.cx|https://geo-mirror.chaotic.cx|g' .install.sh
-```
-
 ## Test the installer with QEMU
 
 Install QEMU on Arch Linux:
@@ -129,3 +123,81 @@ sudo pacman -Syu spice-vdagent
 sudo systemctl enable --now spice-vdagentd.socket
 sudo reboot
 ```
+
+## Sandbox VM
+
+A separate VM for untrusted code and agents. Only `~/Downloads` and `~/Odoo`
+are shared from the host. Host loopback services such as PostgreSQL and
+stunnel are not reachable, and the clipboard is not shared.
+
+Create the disk and install it like the test VM above, using
+`.vm/sandbox.qcow2` as the drive. Create the user `elmeri` first so it gets
+UID 1000 and owns the shared files. Then run the laptop installer inside it.
+
+```bash
+qemu-img create -f qcow2 .vm/sandbox.qcow2 64G
+qemu-system-x86_64 \
+  -machine q35,accel=kvm \
+  -cpu host \
+  -m 8G \
+  -smp 4 \
+  -device virtio-vga \
+  -display gtk \
+  -nic user,model=virtio-net-pci \
+  -drive file=.vm/sandbox.qcow2,if=virtio,format=qcow2 \
+  -cdrom ~/Downloads/isos/archlinux-2026.10.01-x86_64.iso \
+  -boot once=d
+```
+
+Mount the shares in the guest once:
+
+```bash
+mkdir -p ~/Downloads ~/Odoo
+printf '%s\n' \
+  'downloads /home/elmeri/Downloads virtiofs defaults,nofail 0 0' \
+  'odoo /home/elmeri/Odoo virtiofs defaults,nofail 0 0' \
+  | sudo tee -a /etc/fstab
+```
+
+Shut the guest down and snapshot the clean state:
+
+```bash
+qemu-img snapshot -c clean .vm/sandbox.qcow2
+```
+
+Start the sandbox from the repository root:
+
+```bash
+/usr/lib/virtiofsd --socket-path=.vm/downloads.sock --shared-dir="$HOME/Downloads" &
+/usr/lib/virtiofsd --socket-path=.vm/odoo.sock --shared-dir="$HOME/Odoo" &
+sleep 1
+qemu-system-x86_64 \
+  -machine q35,accel=kvm \
+  -cpu host \
+  -m 8G \
+  -smp 4 \
+  -object memory-backend-memfd,id=mem,size=8G,share=on \
+  -numa node,memdev=mem \
+  -device virtio-vga \
+  -display gtk \
+  -netdev passt,id=net0,map-host-loopback=none \
+  -device virtio-net-pci,netdev=net0 \
+  -chardev socket,id=downloads,path=.vm/downloads.sock \
+  -device vhost-user-fs-pci,chardev=downloads,tag=downloads \
+  -chardev socket,id=odoo,path=.vm/odoo.sock \
+  -device vhost-user-fs-pci,chardev=odoo,tag=odoo \
+  -drive file=.vm/sandbox.qcow2,if=virtio,format=qcow2
+```
+
+The `virtiofsd` processes exit when the VM stops. Revert to the clean state
+while the VM is off:
+
+```bash
+qemu-img snapshot -a clean .vm/sandbox.qcow2
+```
+
+The guest can write to both shares. Code in the guest can change files that
+later run on the host, such as git hooks, `.git/config`, virtualenvs and
+editor settings in `~/Odoo`. Review changes before running them on the host,
+or add `--readonly` to a `virtiofsd` command. The guest can still reach the
+LAN and the Internet.
