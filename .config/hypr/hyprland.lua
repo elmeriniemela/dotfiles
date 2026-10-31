@@ -31,6 +31,25 @@ hl.bind("SUPER + M", hl.dsp.exec_cmd("thunderbird"), { description = "Open Thund
 hl.bind("SUPER + A", hl.dsp.exec_cmd("slack"), { description = "Open Slack" })
 hl.bind("SUPER + I", hl.dsp.exec_cmd("signal-desktop"), { description = "Open Signal" })
 hl.bind("SUPER + space", hl.dsp.exec_cmd("rofi -show drun"), { description = "Open app launcher" })
+
+-- Classes are compared lowercased since apps differ in how they capitalize them.
+local function focus_or_exec(class, command)
+    for _, window in ipairs(hl.get_windows()) do
+        if window.class:lower() == class then
+            hl.dispatch(hl.dsp.focus({ window = window }))
+            return
+        end
+    end
+    hl.exec_cmd(command)
+end
+
+hl.bind("ALT + Return", function() focus_or_exec("alacritty", "alacritty") end, { description = "Focus or open terminal" })
+hl.bind("ALT + Q", function() focus_or_exec("brave-browser", "brave") end, { description = "Focus or open browser" })
+hl.bind("ALT + C", function() focus_or_exec("codium", "codium") end, { description = "Focus or open VSCodium" })
+hl.bind("ALT + E", function() focus_or_exec("thunar", "thunar") end, { description = "Focus or open file manager" })
+hl.bind("ALT + M", function() focus_or_exec("thunderbird", "thunderbird") end, { description = "Focus or open Thunderbird" })
+hl.bind("ALT + A", function() focus_or_exec("slack", "slack") end, { description = "Focus or open Slack" })
+hl.bind("ALT + I", function() focus_or_exec("signal", "signal-desktop") end, { description = "Focus or open Signal" })
 -- Cycle across regular workspaces; keep hidden scratchpad windows out of the list.
 local function cycle_window(step)
     local windows = {}
