@@ -126,8 +126,8 @@ sudo reboot
 
 ## Sandbox VM
 
-A separate VM for untrusted code and agents. Only `~/Odoo/src` and
-`~/Downloads/isos` are shared from the host. Host loopback services such as
+A separate VM for untrusted code and agents. Only the directories given to
+`sandbox-vm` are shared from the host. Host loopback services such as
 PostgreSQL and stunnel are not reachable, and the clipboard is not shared.
 
 Create the disk and install it like the test VM above, using
@@ -154,7 +154,7 @@ Mount the shares in the guest once:
 ```bash
 mkdir -p ~/Odoo/src ~/Downloads/isos
 printf '%s\n' \
-  'odoo /home/elmeri/Odoo/src virtiofs defaults,nofail 0 0' \
+  'src /home/elmeri/Odoo/src virtiofs defaults,nofail 0 0' \
   'isos /home/elmeri/Downloads/isos virtiofs defaults,nofail 0 0' \
   | sudo tee -a /etc/fstab
 ```
@@ -165,28 +165,10 @@ Shut the guest down and snapshot the clean state:
 qemu-img snapshot -c clean .vm/sandbox.qcow2
 ```
 
-Start the sandbox from the repository root:
+Start the sandbox with the directories to share:
 
 ```bash
-/usr/lib/virtiofsd --socket-path=.vm/odoo.sock --shared-dir="$HOME/Odoo/src" &
-/usr/lib/virtiofsd --socket-path=.vm/isos.sock --shared-dir="$HOME/Downloads/isos" &
-sleep 1
-qemu-system-x86_64 \
-  -machine q35,accel=kvm \
-  -cpu host \
-  -m 8G \
-  -smp 4 \
-  -object memory-backend-memfd,id=mem,size=8G,share=on \
-  -numa node,memdev=mem \
-  -device virtio-vga \
-  -display gtk \
-  -netdev passt,id=net0,map-host-loopback=none \
-  -device virtio-net-pci,netdev=net0 \
-  -chardev socket,id=odoo,path=.vm/odoo.sock \
-  -device vhost-user-fs-pci,chardev=odoo,tag=odoo \
-  -chardev socket,id=isos,path=.vm/isos.sock \
-  -device vhost-user-fs-pci,chardev=isos,tag=isos \
-  -drive file=.vm/sandbox.qcow2,if=virtio,format=qcow2
+sandbox-vm ~/Odoo/src ~/Downloads/isos
 ```
 
 The `virtiofsd` processes exit when the VM stops. Revert to the clean state
@@ -204,48 +186,38 @@ Internet.
 
 ### Change the shared directories
 
-Each share uses one name, such as `odoo`, in three places:
+`sandbox-vm` shares each directory under a tag named after its last path
+component, so `~/Odoo/src` gets the tag `src`. The guest `/etc/fstab` maps
+each tag to a guest mount point. Two directories with the same last component
+cannot be shared at once.
 
-- the host `virtiofsd` command: `--socket-path=.vm/odoo.sock` and the
-  host directory in `--shared-dir`
-- the QEMU command: the `-chardev` and `-device vhost-user-fs-pci` lines
-- the guest `/etc/fstab`: the tag at the start of the line and the guest
-  mount point
-
-To share a different host directory, change `--shared-dir`. For example, share
-only the Odoo 19 sources:
+To share a different host directory, pass it to `sandbox-vm`. For example,
+share only the Odoo 19 sources:
 
 ```bash
-/usr/lib/virtiofsd --socket-path=.vm/odoo.sock --shared-dir="$HOME/Odoo/src/19" &
+sandbox-vm ~/Odoo/src/19 ~/Downloads/isos
 ```
 
-To change where the guest sees it, edit the mount point in the guest
-`/etc/fstab` with `sudoedit /etc/fstab`, create the directory and reboot the
-guest. For example, mount the Odoo 19 sources at the same path as on the host:
+Its tag is `19`, so add it to the guest `/etc/fstab` with `sudoedit /etc/fstab`,
+create the mount point and reboot the guest. For example, mount the Odoo 19
+sources at the same path as on the host:
 
 ```
-odoo /home/elmeri/Odoo/src/19 virtiofs defaults,nofail 0 0
+19 /home/elmeri/Odoo/src/19 virtiofs defaults,nofail 0 0
 ```
 
-To add a share, add all three parts with a new name. To remove one, delete its
-`virtiofsd` command and its two QEMU lines. The `nofail` option lets the guest
-boot without it.
+To stop sharing a directory, leave it out of the `sandbox-vm` arguments. The
+`nofail` option lets the guest boot without it.
 
 ### Read-only shares
 
-Add `--readonly` to the `virtiofsd` command. The host then rejects every write
-from the guest:
-
-```bash
-/usr/lib/virtiofsd --socket-path=.vm/odoo.sock --shared-dir="$HOME/Odoo/src" --readonly &
-```
+Add `--readonly` to the `virtiofsd` command in `sandbox-vm`. The host then
+rejects every write from the guest to all shares.
 
 Also use `ro` in the guest `/etc/fstab`, so guest programs see the share as
 read-only before they try to write:
 
 ```
-odoo /home/elmeri/Odoo/src virtiofs ro,nofail 0 0
+src /home/elmeri/Odoo/src virtiofs ro,nofail 0 0
 ```
 
-A read-only `~/Odoo/src` with a writable `~/Downloads/isos` gives the guest
-one place to hand files back to the host.

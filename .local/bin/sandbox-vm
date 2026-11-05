@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Usage: sandbox-vm [DIR...]
+# Each DIR is shared with the guest under the virtiofs tag $(basename DIR).
+
+vm="$HOME/.vm"
+trap 'kill $(jobs -p) 2>/dev/null' EXIT
+
+shares=()
+for dir in "$@"; do
+    tag=$(basename "$dir")
+    /usr/lib/virtiofsd --socket-path="$vm/$tag.sock" --shared-dir="$dir" &
+    shares+=(
+        -chardev "socket,id=$tag,path=$vm/$tag.sock"
+        -device "vhost-user-fs-pci,chardev=$tag,tag=$tag"
+    )
+done
+sleep 1
+
+qemu-system-x86_64 \
+    -machine q35,accel=kvm \
+    -cpu host \
+    -m 8G \
+    -smp 4 \
+    -object memory-backend-memfd,id=mem,size=8G,share=on \
+    -numa node,memdev=mem \
+    -device virtio-vga \
+    -display gtk \
+    -netdev passt,id=net0,map-host-loopback=none \
+    -device virtio-net-pci,netdev=net0 \
+    "${shares[@]}" \
+    -drive file="$vm/sandbox.qcow2",if=virtio,format=qcow2
