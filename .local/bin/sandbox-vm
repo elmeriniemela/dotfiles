@@ -27,6 +27,9 @@ qemu-system-x86_64 \
     -numa node,memdev=mem \
     -device virtio-vga \
     -display gtk \
+    -audiodev pipewire,id=snd0 \
+    -device ich9-intel-hda \
+    -device hda-output,audiodev=snd0 \
     -netdev passt,id=net0,map-host-loopback=none \
     -device virtio-net-pci,netdev=net0 \
     "${shares[@]}" \

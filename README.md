@@ -129,6 +129,7 @@ sudo reboot
 A separate VM for untrusted code and agents. Only the directories given to
 `sandbox-vm` are shared from the host. Host loopback services such as
 PostgreSQL and stunnel are not reachable, and the clipboard is not shared.
+Guest audio plays through the host's PipeWire; there is no microphone.
 
 Create the disk and install it like the test VM above, using
 `.vm/sandbox.qcow2` as the drive. Create the user `elmeri` first so it gets
