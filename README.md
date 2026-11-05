@@ -209,6 +209,21 @@ sources at the same path as on the host:
 To stop sharing a directory, leave it out of the `sandbox-vm` arguments. The
 `nofail` option lets the guest boot without it.
 
+To share a temporary directory without adding it to `/etc/fstab`, pass it to
+`sandbox-vm` and mount its tag by hand in the guest:
+
+```bash
+sandbox-vm ~/Odoo/src ~/Downloads/isos /tmp/scratch
+```
+
+```bash
+mkdir -p ~/scratch
+sudo mount -t virtiofs scratch ~/scratch
+```
+
+Add `-o ro` for a read-only mount. The mount lasts until `sudo umount ~/scratch`
+or the next guest reboot.
+
 ### Read-only shares
 
 Add `--readonly` to the `virtiofsd` command in `sandbox-vm`. The host then
