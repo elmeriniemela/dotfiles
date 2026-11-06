@@ -3,20 +3,30 @@ set -euo pipefail
 
 # Usage: sandbox-vm [DIR...]
 # Each DIR is shared with the guest under the virtiofs tag $(basename DIR).
+# virtiofsd runs as root so it can use file handles instead of one open file
+# descriptor per guest inode. Every guest UID and GID is squashed to the host
+# user, and the guest cannot create device nodes or set file capabilities.
 
 vm="$HOME/.vm"
 trap 'kill $(jobs -p) 2>/dev/null' EXIT
 
+sudo -v
 shares=()
 for dir in "$@"; do
     tag=$(basename "$dir")
-    /usr/lib/virtiofsd --socket-path="$vm/$tag.sock" --shared-dir="$dir" &
+    sudo /usr/lib/virtiofsd \
+        --socket-path="$vm/$tag.sock" \
+        --shared-dir="$dir" \
+        --translate-uid="squash-guest:0:$(id -u):4294967295" \
+        --translate-gid="squash-guest:0:$(id -g):4294967295" \
+        --modcaps=-mknod:-setfcap &
     shares+=(
         -chardev "socket,id=$tag,path=$vm/$tag.sock"
         -device "vhost-user-fs-pci,chardev=$tag,tag=$tag"
     )
 done
 sleep 1
+sudo chown "$USER" "$vm"/*.sock
 
 qemu-system-x86_64 \
     -machine q35,accel=kvm \

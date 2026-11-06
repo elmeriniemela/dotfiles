@@ -185,6 +185,12 @@ editor settings in `~/Odoo/src`. Review changes before running them on the host,
 or make the share read-only. The guest can still reach the LAN and the
 Internet.
 
+`virtiofsd` runs as root through `sudo`. As root it can use file handles, so
+large shares such as `~/Projects` do not run out of file descriptors. To limit
+what guest root can do through a share, every guest UID and GID is squashed to
+the host user, and `virtiofsd` drops the `mknod` and `setfcap` capabilities.
+A bug in `virtiofsd` could still give the guest root on the host.
+
 ### Change the shared directories
 
 `sandbox-vm` shares each directory under a tag named after its last path
