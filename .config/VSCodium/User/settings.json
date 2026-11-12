@@ -181,6 +181,16 @@
         "637a908b82398d8d99f3fc966098825e5357751222d6582323be9aff94555ec8"
     ],
     "workbench.colorTheme": "Dark Modern",
+    "xlsxViewer.showPopups": true,
+    "xlsxViewer.showScrollToTop": true,
+    "xlsxViewer.csv.firstRowIsHeader": true,
+    "xlsxViewer.csv.stickyToolbar": true,
+    "xlsxViewer.csv.stickyHeader": true,
+    "xlsxViewer.csv.autoSave": true,
+    "xlsxViewer.csv.spaciousCells": false,
+    "xlsxViewer.csv.textWrap": false,
+    "xlsxViewer.csv.separator": ",",
+    "security.workspace.trust.untrustedFiles": "open",
 
 
 }
