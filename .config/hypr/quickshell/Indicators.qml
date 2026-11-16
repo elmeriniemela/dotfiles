@@ -49,7 +49,7 @@ Row {
     }
     StatusButton {
         icon: root.services.suspendInhibited ? "assets/caffeine-cup-full.svg" : "assets/caffeine-cup-empty.svg"
-        tooltip: root.services.suspendInhibited ? "Automatic suspend disabled · click to enable" : "Automatic suspend enabled · click to disable"
+        tooltip: root.services.suspendInhibited ? "Automatic lock and suspend disabled · click to enable" : "Automatic lock and suspend enabled · click to disable"
         onClicked: event => { if (event.button === Qt.LeftButton) root.services.suspendInhibited = !root.services.suspendInhibited; }
     }
     Tray {}
