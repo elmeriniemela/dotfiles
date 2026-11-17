@@ -182,11 +182,10 @@ data_push() { (
         echo "Specify dir"
         return
     fi
-    rsync --exclude 'lock' -avWPL ~/.thunderbird/ $1/.thunderbird
-    rsync --exclude '*.log' -avWPL ~/.config/syncthing/ $1/.config/syncthing
-    rsync -avWPL ~/School/ $1/School
     rsync -avWPL ~/Projects/ $1/Projects
     rsync --exclude 'odoo-dbs' -avWPL ~/Odoo/ $1/Odoo
+    rsync --exclude 'lock' -avWPL ~/.thunderbird/ $1/.thunderbird
+    rsync --exclude '*.log' -avWPL ~/.config/syncthing/ $1/.config/syncthing
 ); }
 
 # AI command wrappers
@@ -206,7 +205,7 @@ codex() {
 }
 
 claude() {
-    _without_ssh_agent claude "$@"
+    CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 _without_ssh_agent claude "$@"
 }
 
 agy() {
