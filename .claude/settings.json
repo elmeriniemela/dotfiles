@@ -3,6 +3,9 @@
     "defaultMode": "bypassPermissions"
   },
   "model": "opus",
+  "syncClaudeAiSkills": false,
+  "syncClaudeAiPlugins": false,
+  "disableClaudeAiConnectors": true,
   "hooks": {
     "Stop": [
       {
@@ -44,7 +47,8 @@
   "effortLevel": "high",
   "modelSettings": {
     "claude-sonnet-5-5": {
-      "effortLevel": "medium"
+      "effortLevel": "medium",
+      "autoCompactWindow": 400000
     },
     "claude-opus-5-5": {
       "autoCompactWindow": 400000

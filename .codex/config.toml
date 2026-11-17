@@ -1,5 +1,5 @@
 model = "gpt-6.1-sol"
-model_reasoning_effort = "low"
+model_reasoning_effort = "high"
 
 approval_policy = "never"
 sandbox_mode = "danger-full-access"
@@ -7,6 +7,10 @@ sandbox_mode = "danger-full-access"
 model_reasoning_summary = "none"
 model_verbosity = "low"
 plan_mode_reasoning_effort = "high"
+model_auto_compact_token_limit = 80000
+
+[analytics]
+enabled = false
 
 [tui]
 screen_reader_detection_done = true
@@ -23,3 +27,6 @@ trusted_hash = "sha256:ec1404d9d85817569dbbfaa82f9d80ba3dbac24fad714ad29801e23fa
 
 [hooks.state."/home/elmeri/.codex/hooks.json:permission_request:0:0"]
 trusted_hash = "sha256:2f968d807f4161bbf9014070d7764a300846bddcf107d13bea76f1b435953a86"
+
+[notice]
+hide_rate_limit_model_nudge = true
