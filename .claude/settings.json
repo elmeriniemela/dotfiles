@@ -6,6 +6,7 @@
   "syncClaudeAiSkills": false,
   "syncClaudeAiPlugins": false,
   "disableClaudeAiConnectors": true,
+  "autoMemoryEnabled": false,
   "hooks": {
     "Stop": [
       {
